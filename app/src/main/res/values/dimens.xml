@@ -1,0 +1,22 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--USERS FIRST PAGE-->
+    <dimen name="head_textSize">20dp</dimen>
+    <dimen name="list_textSize">25dp</dimen>
+    <dimen name="list_textMargin">10dp</dimen>
+    <dimen name="list_iconSize">38dp</dimen>
+
+    <!--USERS ALL-->
+    <dimen name="actionBarTextSize">28dp</dimen>
+    <dimen name="actionBarSmallText">20dp</dimen>
+    <dimen name="actionBarImgSize">38dp</dimen>
+    <dimen name="actionBarImgMargin">10dp</dimen>
+    <!--USERS ALBUM-->
+    <!--USERS INFO-->
+    <dimen name="userInfo_ll_margin">5dp</dimen>
+    <dimen name="userInfo_tv_et_margin">2dp</dimen>
+    <dimen name="userInfo_textSize">20dp</dimen>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="@dimen/actionBarImgMargin"
+            android:src="@drawable/users_back"
+            android:layout_width="@dimen/actionBarImgSize"
+            android:layout_height="@dimen/actionBarImgSize" />
+        <TextView
+            android:text="设置"
+            android:textColor="@color/userBarBigText"
+            android:textSize="@dimen/actionBarTextSize"
+            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:background="@drawable/users_list_ll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+        <RelativeLayout
+            style="@style/listRLstyle">
+            <TextView
+                android:id="@+id/tv_userSetting_pic"
+                android:text="头像"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/listRLstyle">
+            <TextView
+                android:id="@+id/tv_userSetting_name"
+                android:text="昵称"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_userSetting_uName"
+                android:text="宝宝抱"
+                android:textSize="20dp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/listRLstyle">
+            <TextView
+                android:id="@+id/tv_userSetting_skin"
+                android:text="皮肤"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/listRLstyle">
+            <TextView
+                android:id="@+id/tv_userSetting_pwd"
+                android:text="修改密码"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

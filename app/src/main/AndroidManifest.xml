@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.think.treeuserscenter">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".UserActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UserAlbum"/>
+        <activity android:name=".UserAlbumDetail"/>
+        <activity android:name=".UserAlbumBigImg"/>
+        <activity android:name=".UserInfoManage"/>
+        <activity android:name=".UserSetting"/>
+        <!--跳转到该界面时，自动显示输入键盘-->
+        <activity
+            android:name=".UserSettingName"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".UserSettingPwd"/>
+        <activity android:name=".UserSettingHeadPic"/>
+        <activity android:name=".UserCollection"/>
+    </application>
+
+</manifest>
