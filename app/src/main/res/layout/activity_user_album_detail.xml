@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="@dimen/actionBarImgMargin"
+            android:src="@drawable/users_back"
+            android:layout_width="@dimen/actionBarImgSize"
+            android:layout_height="@dimen/actionBarImgSize" />
+        <TextView
+            android:text="照片详情"
+            android:textColor="@color/userBarBigText"
+            android:textSize="@dimen/actionBarTextSize"
+            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:id="@+id/iv_userAlbum_detail"
+        android:src="@drawable/user_default_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_userAlbum_detail"
+        android:text="孩子今天很开心\n17:09\n2016.9.3"
+        android:textSize="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

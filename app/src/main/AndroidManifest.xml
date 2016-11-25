@@ -16,6 +16,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".com.baby.babycircle.CircleMainActivity"/>
+
+        <activity android:name=".user.UserActivity"/>
+        <activity android:name=".user.UserAlbum"/>
+        <activity android:name=".user.UserAlbumBigImg"/>
+        <activity android:name=".user.UserAlbumDetail"/>
+        <activity android:name=".user.UserCollection"/>
+        <activity android:name=".user.UserInfoManage"/>
+        <activity android:name=".user.UserSetting"/>
+        <activity android:name=".user.UserSettingHeadPic"/>
+        <activity android:name=".user.UserSettingName"/>
+        <activity android:name=".user.UserSettingPwd"/>
     </application>
 
 </manifest>
