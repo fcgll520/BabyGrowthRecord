@@ -30,6 +30,8 @@
         <activity android:name=".Growth.Growth_Activity_Bron"/>
         <activity android:name=".Growth.Growth_Activity"/>
         <activity android:name=".Login.Login_Activity"/>
+        <activity android:name=".Mother.CardMessage"/>
+        <activity android:name=".Mother.MainActivity"/>
     </application>
 
 </manifest>
