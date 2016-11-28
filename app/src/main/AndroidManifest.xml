@@ -27,6 +27,8 @@
         <activity android:name=".user.UserSettingHeadPic"/>
         <activity android:name=".user.UserSettingName"/>
         <activity android:name=".user.UserSettingPwd"/>
+        <activity android:name=".Mother.MainActivity"/>
+        <activity android:name=".Mother.CardMessage"/>
     </application>
 
 </manifest>
