@@ -17,7 +17,9 @@
         </activity>
         <activity android:name=".com.baby.babycircle.CircleMainActivity"/>
 
-        <activity android:name=".user.UserActivity"/>
+        <!--<activity android:name=".user.UserActivity"/>-->
+        <activity android:name=".user.UserLogin"/>
+        <activity android:name=".user.UserRegister"/>
         <activity android:name=".user.UserAlbum"/>
         <activity android:name=".user.UserAlbumBigImg"/>
         <activity android:name=".user.UserAlbumDetail"/>
