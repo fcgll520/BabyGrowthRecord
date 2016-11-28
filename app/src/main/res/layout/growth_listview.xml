@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--标题-->
+    <TextView
+        android:id="@+id/growth_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/growth_lenth"
+        android:text="成长记录"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/growth_title"
+        android:gravity="center"
+        android:background="#63b68b"/>
+    <!--头像和姓名-->
+    <LinearLayout
+        android:id="@+id/growth_head_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/growth_title"
+        android:paddingLeft="20dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/growth_head"
+            android:layout_width="@dimen/growth_head"
+            android:layout_height="@dimen/growth_head"
+            android:src="@drawable/head_sculpture" />
+        <TextView
+            android:id="@+id/growth_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="宝宝"
+            android:textSize="@dimen/growth_title"
+            android:textColor="#646161"
+            android:layout_margin="@dimen/growth_title"/>
+    </LinearLayout>
+    <!--时间轴-->
+    <LinearLayout
+        android:id="@+id/growth_time_things"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/growth_head_name">
+        <TextView
+            android:id="@+id/growth_time_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="年"
+            android:background="#63b68b"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/growth_time_things"
+            android:gravity="center"
+            android:padding="3dp"/>
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/growth_time_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="月"
+            android:background="#63b68b"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/growth_time_things"
+            android:gravity="center"
+            android:padding="3dp"/>
+        <TextView
+            android:layout_width="2dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/growth_time_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="日"
+            android:background="#63b68b"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/growth_time_things"
+            android:gravity="center"
+            android:padding="3dp"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/growth_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>

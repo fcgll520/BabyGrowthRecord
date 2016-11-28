@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BabyGrowthRecord</string>
+    <string name="Description">BabyTree</string>
 </resources>
