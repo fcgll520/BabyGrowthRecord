@@ -19,4 +19,11 @@
     <dimen name="userInfo_ll_margin">5dp</dimen>
     <dimen name="userInfo_tv_et_margin">2dp</dimen>
     <dimen name="userInfo_textSize">20dp</dimen>
+
+    <!--GY-->
+    <dimen name="growth_title">25dp</dimen>
+    <dimen name="growth_lenth">65dp</dimen>
+    <dimen name="growth_head">80dp</dimen>
+    <dimen name="growth_padding">2dp</dimen>
+    <dimen name="growth_time_things">15dp</dimen>
 </resources>
