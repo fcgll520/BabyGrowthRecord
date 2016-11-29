@@ -37,15 +37,15 @@ public class CircleMainActivity extends AppCompatActivity {
         //5.得到、ListView对象并设置adapter
         listView.setAdapter(adapter);
         //6.点击事件
-     /*   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      /*   listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Growth_Activity.this,Growth_Activity_Bron.class);
+                if(R.id)
+                Intent intent = new Intent(CircleMainActivity.this,Growth_Activity_Bron.class);
                 intent.putExtra("index",position);
                 startActivityForResult(intent,1);
             }
         });*/
-
     }
 
     private void getDate() {
@@ -55,7 +55,5 @@ public class CircleMainActivity extends AppCompatActivity {
         circleArrayList.add(new Circle (4,"asun","来自 iphone6","今天带宝宝出去玩了",R.drawable.one,R.drawable.first,R.drawable.third));
         circleArrayList.add(new Circle (5,"asun","来自 iphone6","今天带宝宝出去玩了",R.drawable.one,R.drawable.first,R.drawable.third));
         circleArrayList.add(new Circle (6,"asun","来自 iphone6","今天带宝宝出去玩了",R.drawable.one,R.drawable.first,R.drawable.third));
-
     }
-
 }
