@@ -8,18 +8,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".BabyMainActivity" >
+        <activity android:name=".MainActivity.BabyMainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".com.baby.babycircle.CircleMainActivity"/>
+        <activity android:name=".Circle.babycircle.CircleMainActivity"/>
 
         <!--<activity android:name=".user.UserActivity"/>-->
-        <activity android:name=".user.UserLogin"/>
-        <activity android:name=".user.UserRegister"/>
+        <activity android:name=".user.UserActivity"/>
         <activity android:name=".user.UserAlbum"/>
         <activity android:name=".user.UserAlbumBigImg"/>
         <activity android:name=".user.UserAlbumDetail"/>

@@ -8,8 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context="com.baby.babygrowthrecord.com.baby.babycircle.CircleMainActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +17,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/one"
-            android:background="@drawable/circle_bgcirle"/>
+            android:background="@drawable/circle_bgcirle"
+            android:id="@+id/imagethree"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,14 +31,16 @@
                 android:layout_height="wrap_content"
                 android:text="Asum"
                 android:textSize="20dp"
-                android:paddingLeft="10dp"/>
+                android:paddingLeft="10dp"
+                android:id="@+id/friend_name"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="10分钟前  来自iphone6 plus"
                 android:textSize="10dp"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:id="@+id/friend_phone"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -50,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="今天带孩子去照相，好萌啊！"
-            android:paddingLeft="110dp"/>
+            android:paddingLeft="110dp"
+            android:id="@+id/friend_content"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,13 +63,15 @@
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@drawable/first"/>
+                android:src="@drawable/first"
+                android:id="@+id/imageone"/>
 
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@drawable/second"
-                android:layout_marginLeft="20dp"/>
+                android:layout_marginLeft="20dp"
+                android:id="@+id/imagetwo"/>
         </LinearLayout>
     </LinearLayout>
     <View
