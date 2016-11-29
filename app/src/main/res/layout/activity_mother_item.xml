@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mother_shape"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="15dp">
+    <TextView
+        android:id="@+id/Card_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="宝宝成长"
+        android:textSize="20sp"
+        android:textIsSelectable="true"/>
+
+    <ImageView
+        android:id="@+id/Card_Pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/Description"
+        android:src="@drawable/mother_pic2"
+        android:scaleType="center" />
+
+</LinearLayout>

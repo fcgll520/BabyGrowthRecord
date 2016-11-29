@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.baby.babygrowthrecord" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity.BabyMainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Circle.babycircle.CircleMainActivity"/>
+
+        <!--<activity android:name=".user.UserActivity"/>-->
+        <activity android:name=".user.UserActivity"/>
+        <activity android:name=".user.UserAlbum"/>
+        <activity android:name=".user.UserAlbumBigImg"/>
+        <activity android:name=".user.UserAlbumDetail"/>
+        <activity android:name=".user.UserCollection"/>
+        <activity android:name=".user.UserInfoManage"/>
+        <activity android:name=".user.UserSetting"/>
+        <activity android:name=".user.UserSettingHeadPic"/>
+        <activity android:name=".user.UserSettingName"/>
+        <activity android:name=".user.UserSettingPwd"/>
+        <activity android:name=".Growth.Growth_Activity_Bron"/>
+        <activity android:name=".Growth.Growth_Activity"/>
+        <activity android:name=".Login.Login_Activity"/>
+        <activity android:name=".Mother.CardMessage"/>
+        <activity android:name=".Mother.MainActivity"/>
+    </application>
+
+</manifest>

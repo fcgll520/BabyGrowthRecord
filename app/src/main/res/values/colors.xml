@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#63b68b</color>
+    <color name="colorPrimaryDark">#63b68b</color>
+    <color name="colorAccent">#63b68b</color>
+
+    <color name="userBarBigText">#fff</color>
+    <color name="userBarSmallText">#ff0000</color>
+</resources>
