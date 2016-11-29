@@ -15,7 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Circle.babycircle.CircleMainActivity"/>
 
         <!--<activity android:name=".user.UserActivity"/>-->
         <activity android:name=".user.UserActivity"/>
@@ -33,6 +32,8 @@
         <activity android:name=".Login.Login_Activity"/>
         <activity android:name=".Mother.CardMessage"/>
         <activity android:name=".Mother.MainActivity"/>
+        <activity android:name=".Circle.ImagePagerActivity"/>
+        <activity android:name=".Circle.CircleMainActivity"/>
     </application>
 
 </manifest>
