@@ -1,19 +1,13 @@
 package com.baby.babygrowthrecord.Fragment;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.example.asus.babygrowthrecord.Fragment.Frag.GrowthFragment;
-import com.example.asus.babygrowthrecord.Fragment.Frag.HelpFragment;
-import com.example.asus.babygrowthrecord.Fragment.Frag.PeopleFragment;
-import com.example.asus.babygrowthrecord.Fragment.Frag.PublishFragment;
-import com.example.asus.babygrowthrecord.Fragment.Frag.QuanziFragment;
-import com.example.asus.babygrowthrecord.Fragment.Frag.Utils;
-import com.example.asus.babygrowthrecord.R;
+import com.baby.babygrowthrecord.R;
 
 public class MainActivity extends AppCompatActivity {
 

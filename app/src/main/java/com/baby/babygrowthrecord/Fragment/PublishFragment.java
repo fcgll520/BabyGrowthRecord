@@ -8,14 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
-import com.example.asus.babygrowthrecord.R;
+import com.baby.babygrowthrecord.R;
 
 /**
  * Created by asus on 2016/11/22.
  */
 public class PublishFragment extends Fragment{
-    private ImageButton composer_btn;
+    private ImageView composer_btn;
     private ImageButton composer_img_btn;
     private View view;
     @Nullable
@@ -29,7 +30,7 @@ public class PublishFragment extends Fragment{
     public void onActivityCreated(final Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        composer_btn = (ImageButton) view.findViewById(R.id.composer_btn);
+        composer_btn = (ImageView) view.findViewById(R.id.composer_btn);
         composer_img_btn = (ImageButton) view.findViewById(R.id.composer_img_btn);
 
         composer_btn.setOnClickListener(new View.OnClickListener() {

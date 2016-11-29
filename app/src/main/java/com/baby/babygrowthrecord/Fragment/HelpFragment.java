@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baby.babygrowthrecord.R;
+
 /**
  * Created by asus on 2016/11/22.
  */
 public class HelpFragment extends Fragment{
+    private View view;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        view =  inflater.inflate(R.layout.activity_mother_main, container, false);
+        return view;
     }
 }

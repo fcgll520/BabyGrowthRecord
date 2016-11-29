@@ -15,7 +15,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:id="@+id/composer_btn"
                 android:layout_gravity="center"
                 android:src="@drawable/composer_thought"
@@ -32,7 +32,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:id="@+id/composer_btn"
                 android:layout_gravity="center"
                 android:src="@drawable/composer_camera"
@@ -50,7 +50,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:id="@+id/composer_btn"
                 android:layout_gravity="center"
                 android:src="@drawable/composer_button"
@@ -67,7 +67,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageButton
+            <ImageView
                 android:id="@+id/composer_btn"
                 android:layout_gravity="center"
                 android:src="@drawable/composer_shipin"

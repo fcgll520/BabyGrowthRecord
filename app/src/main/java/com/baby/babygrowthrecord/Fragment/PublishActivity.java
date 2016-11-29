@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.asus.babygrowthrecord.R;
+import com.baby.babygrowthrecord.R;
 
 public class PublishActivity extends AppCompatActivity {
 

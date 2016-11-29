@@ -33,6 +33,8 @@
         <activity android:name=".Login.Login_Activity"/>
         <activity android:name=".Mother.CardMessage"/>
         <activity android:name=".Mother.MainActivity"/>
+        <activity android:name=".Fragment.MainActivity"/>
+        <activity android:name=".Fragment.PublishActivity"/>
     </application>
 
 </manifest>
