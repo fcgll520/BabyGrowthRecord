@@ -3,6 +3,7 @@ package com.baby.babygrowthrecord.Growth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -19,6 +20,8 @@ public class Growth_Activity_Bron extends AppCompatActivity {
     private TextView growth_left_week;
     private TextView growth_right_duration;
     private TextView growth_right_content;
+    private ImageView growth_firstimg;
+    private ImageView growth_secondimg;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,12 @@ public class Growth_Activity_Bron extends AppCompatActivity {
             growth_right_duration.setText(growth_classes.get(a).getDuration());
             growth_right_content=(TextView)findViewById(R.id.growth_right_content);
             growth_right_content.setText(growth_classes.get(a).getContent());
+
+            growth_firstimg=(ImageView)findViewById(R.id.growth_firstimg);
+            growth_firstimg.setImageResource(growth_classes.get(a).getImg_first());
+            growth_secondimg=(ImageView)findViewById(R.id.growth_secondimg);
+            growth_secondimg.setImageResource(growth_classes.get(a).getImg_second());
+
 
         }
     }

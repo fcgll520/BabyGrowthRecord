@@ -90,7 +90,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/growth_time_things">
+        android:layout_below="@+id/growth_time_things"
+        android:layout_marginTop="20dp">
         <LinearLayout
             android:id="@+id/growth_hundred_horizontol"
             android:layout_width="match_parent"
@@ -117,7 +118,8 @@
                     android:layout_height="wrap_content"
                     android:text="周三"
                     android:textSize="@dimen/growth_time_things"
-                    android:padding="@dimen/growth_padding"/>
+                    android:padding="@dimen/growth_padding"
+                    android:layout_marginTop="10dp"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/groeth_hundred_right"
@@ -131,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3月+8天"
-                    android:textSize="@dimen/growth_time_things"
+                    android:textSize="20dp"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#2b5ae5" />
                 <TextView
@@ -139,9 +141,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。"
-                    android:textSize="@dimen/growth_time_things"
+                    android:textSize="18dp"
                     android:padding="@dimen/growth_padding"
-                    android:textColor="#494646" />
+                    android:textColor="#494646"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/growth_right_Ym"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="疫苗：卡介苗、乙肝疫苗"
+                    android:textSize="17dp"
+                    android:textColor="#d86b92"
+                    android:padding="@dimen/growth_padding"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:id="@+id/growth_right_Tz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="体重：4.1公斤"
+                    android:textSize="17dp"
+                    android:padding="@dimen/growth_padding"
+                    android:textColor="#75db81"
+                    android:layout_marginTop="5dp"/>
+                <TextView
+                    android:id="@+id/growth_right_Sg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="身高：50厘米"
+                    android:layout_marginTop="5dp"
+                    android:textSize="17dp"
+                    android:padding="@dimen/growth_padding"
+                    android:textColor="#75db81" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -149,7 +179,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingLeft="115dp">
+            android:paddingLeft="115dp"
+            android:layout_marginTop="20dp">
             <ImageView
                 android:id="@+id/growth_firstimg"
                 android:layout_width="@dimen/growth_head"
