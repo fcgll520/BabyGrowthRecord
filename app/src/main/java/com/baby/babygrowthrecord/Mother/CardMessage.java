@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.baby.babygrowthrecord.Fragment.HelpFragment;
+import com.baby.babygrowthrecord.Fragment.Utils;
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 
 public class CardMessage extends AppCompatActivity {
@@ -20,7 +23,8 @@ public class CardMessage extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(CardMessage.this,MainActivity.class);
+                Utils.flag = 4;
+                Intent intent=new Intent(CardMessage.this,BabyMainActivity.class);
                 startActivity(intent);
             }
         });

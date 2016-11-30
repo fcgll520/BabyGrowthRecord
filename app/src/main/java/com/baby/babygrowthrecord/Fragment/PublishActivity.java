@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 
 public class PublishActivity extends AppCompatActivity {
@@ -37,14 +38,13 @@ public class PublishActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                  //这里添加点击确定后的逻辑
                                 Toast.makeText(PublishActivity.this, "以保存为草稿", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(PublishActivity.this,MainActivity.class);
+                                Intent intent = new Intent(PublishActivity.this, BabyMainActivity.class);
                                 startActivity(intent);
                             }
                         });
                 builder.setNegativeButton("取消",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                Toast.makeText(PublishActivity.this, " ", Toast.LENGTH_SHORT).show();
                             }
                         });
                 builder.create().show();

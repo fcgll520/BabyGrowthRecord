@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 
 /**
@@ -45,7 +46,7 @@ public class PublishFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(getActivity(),MainActivity.class);
+                intent.setClass(getActivity(), BabyMainActivity.class);
                 startActivity(intent);
             }
         });
