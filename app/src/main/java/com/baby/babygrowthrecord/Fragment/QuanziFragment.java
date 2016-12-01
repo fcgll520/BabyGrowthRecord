@@ -1,6 +1,7 @@
 package com.baby.babygrowthrecord.Fragment;
 
-import android.app.Fragment;
+import android.app.ListFragment;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,18 +13,23 @@ import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.R;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * Created by asus on 2016/11/22.
  */
-public class QuanziFragment extends Fragment{
+public class  QuanziFragment extends ListFragment {
     private View view;
     public static final String TAG = "MainActivity";
     private FridListAdapter mAdapter;
+    public ImageLoader imageLoader = ImageLoader.getInstance();
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.activity_circle_main, container, false);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         new LoderDataTask().execute();
         return view;
     }
@@ -41,6 +47,7 @@ public class QuanziFragment extends Fragment{
         @Override
         protected void onPostExecute(MessageModle result) {
             mAdapter = new FridListAdapter(getActivity(), result.list);
+            setListAdapter(mAdapter);
         }
     }
     private String getData() {
@@ -64,4 +71,5 @@ public class QuanziFragment extends Fragment{
 
         return json;
     }
+
 }
