@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.baby.babygrowthrecord.Fragment.HelpFragment;
+import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.R;
 
 import java.util.List;
@@ -24,6 +26,7 @@ public class GoogleCardAdapter extends BaseAdapter {
         this.mContext=mContext;
         this.mCards=mCards;
     }
+
     @Override
     public int getCount()
     {
