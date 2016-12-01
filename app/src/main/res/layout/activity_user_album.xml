@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:onClick="backOnClick"
             android:layout_margin="@dimen/actionBarImgMargin"
             android:src="@drawable/users_back"
             android:layout_width="@dimen/actionBarImgSize"
@@ -24,39 +25,43 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <ScrollView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_userAlbum_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="4dp"/>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<LinearLayout-->
+            <!--android:weightSum="2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-        <LinearLayout
-            android:weightSum="2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:id="@+id/ll_userAlbum_1"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="5dp" />-->
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/ll_userAlbum_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp" />
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/ll_userAlbum_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp" />
-            <LinearLayout
-                android:orientation="vertical"
-                android:id="@+id/ll_userAlbum_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="5dp" />
-        </LinearLayout>
-    </ScrollView>
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:id="@+id/ll_userAlbum_2"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="5dp" />-->
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:id="@+id/ll_userAlbum_3"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="5dp" />-->
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
     <!--<ImageView-->
     <!--android:id="@+id/iv_userAlbum_example"-->
     <!--android:src="@drawable/user_default_child"-->

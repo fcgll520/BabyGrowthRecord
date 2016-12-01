@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:onClick="backOnClick"
             android:layout_margin="@dimen/actionBarImgMargin"
             android:src="@drawable/users_back"
             android:layout_width="@dimen/actionBarImgSize"
@@ -29,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp">
         <RelativeLayout
+            android:id="@+id/rv_userSetting_pic"
             style="@style/listRLstyle">
             <TextView
                 android:id="@+id/tv_userSetting_pic"
@@ -38,6 +40,7 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rv_userSetting_name"
             style="@style/listRLstyle">
             <TextView
                 android:id="@+id/tv_userSetting_name"
@@ -55,6 +58,7 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rv_userSetting_skin"
             style="@style/listRLstyle">
             <TextView
                 android:id="@+id/tv_userSetting_skin"
@@ -64,6 +68,7 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/rv_userSetting_pwd"
             style="@style/listRLstyle">
             <TextView
                 android:id="@+id/tv_userSetting_pwd"

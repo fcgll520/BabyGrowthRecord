@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.baby.babygrowthrecord.R;
 
@@ -59,5 +60,7 @@ public class UserSettingHeadPic extends Activity {
         }
         return super.onMenuItemSelected(featureId, item);
     }
-
+    public void backOnClick(View view){
+        finish();
+    }
 }
