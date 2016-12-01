@@ -8,7 +8,8 @@ import com.baby.babygrowthrecord.R;
 /**
  * Created by think on 2016/11/22.
  */
-public class UserSettingName extends Activity {
+public class
+ UserSettingName extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
