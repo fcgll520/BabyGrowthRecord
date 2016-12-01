@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:padding="6dp" >
 
-    <de.hdodenhof.circleimageview.CircleImageView
+   <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avator"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/empty_photo" />
+        android:src="@drawable/empty_photo"/>
 
     <TextView
         android:id="@+id/name"
@@ -30,8 +30,7 @@
         android:layout_toRightOf="@id/avator"
         android:text="content" />
 
-    <com.loveplusplus.demo.Circle.NoScrollGridView
-        
+    <com.baby.babygrowthrecord.Circle.NoScrollGridView
         android:id="@+id/gridView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,8 +40,6 @@
         android:layout_toRightOf="@id/avator"
         android:horizontalSpacing="1dp"
         android:numColumns="3"
-        
         android:visibility="gone"
         android:verticalSpacing="1dp" />
-
 </RelativeLayout>

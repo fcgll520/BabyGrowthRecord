@@ -6,9 +6,11 @@ import android.os.Bundle;
 
 import com.baby.babygrowthrecord.R;
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 public class CircleMainActivity extends ListActivity {
-
+	public ImageLoader imageLoader = ImageLoader.getInstance();
 	public static final String TAG = "MainActivity";
 	private FridListAdapter mAdapter;
 
@@ -16,7 +18,7 @@ public class CircleMainActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_circle_main);//主界面activity
-
+		imageLoader.init(ImageLoaderConfiguration.createDefault(this));
 		new LoderDataTask().execute();
 
 	}

@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.baby.babygrowthrecord.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.SimpleImageLoadingListener;
+import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 
 import photoview.PhotoViewAttacher;
 import photoview.PhotoViewAttacher.OnPhotoTapListener;
@@ -64,7 +64,8 @@ public class ImageDetailFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 		
 		
-		ImageLoader.getInstance().displayImage(mImageUrl, mImageView, new SimpleImageLoadingListener() {
+		ImageLoader.getInstance().displayImage(mImageUrl, mImageView, new SimpleImageLoadingListener()
+		{
 			@Override
 			public void onLoadingStarted(String imageUri, View view) {
 				progressBar.setVisibility(View.VISIBLE);

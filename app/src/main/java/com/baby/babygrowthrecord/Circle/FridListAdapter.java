@@ -2,6 +2,7 @@ package com.baby.babygrowthrecord.Circle;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,9 @@ public class  FridListAdapter extends BaseAdapter {
 		}
 		final Circle bean = getItem(position);
 		//加载网络图片
+		Log.d("test", "getView:img ");
 		ImageLoader.getInstance().displayImage(bean.avator, holder.avator);
+		Log.d("test", "getView:img2 ");
 		holder.name.setText(bean.name);
 		holder.content.setText(bean.content);
 		if(bean.urls!=null&&bean.urls.length>0){
