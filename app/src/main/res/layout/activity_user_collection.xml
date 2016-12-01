@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:onClick="backOnClick"
             android:layout_margin="@dimen/actionBarImgMargin"
             android:src="@drawable/users_back"
             android:layout_width="@dimen/actionBarImgSize"
@@ -25,9 +26,15 @@
     <android.support.v7.widget.SearchView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ImageView
-        android:id="@+id/iv_userAlbum_example"
-        android:src="@drawable/user_default_child"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ListView
+        android:id="@+id/lv_userCollection"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="70"
+        android:divider="@null"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:dividerHeight="15dp"
+        >
+    </ListView>
 </LinearLayout>

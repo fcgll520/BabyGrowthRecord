@@ -17,20 +17,11 @@
             android:layout_width="@dimen/actionBarImgSize"
             android:layout_height="@dimen/actionBarImgSize" />
         <TextView
-            android:text="修改密码"
+            android:text="用户登录"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
             android:layout_marginTop="@dimen/actionBarImgMargin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="保存"
-            android:textColor="@color/userBarSmallText"
-            android:textSize="@dimen/actionBarSmallText"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
-            android:layout_marginRight="@dimen/actionBarImgMargin"
-            android:gravity="right"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
@@ -43,13 +34,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="原\t密\t码"
+                android:text="用户名"
                 android:textSize="@dimen/userInfo_textSize"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"/>
             <EditText
-                android:id="@+id/et_userSetting_originPwd"
+                android:id="@+id/et_userLogin_uName"
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,40 +50,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="密\t\t\t\t码"
+                android:text="密\t\t码"
                 android:textSize="@dimen/userInfo_textSize"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"/>
             <EditText
-                android:id="@+id/et_userSetting_pwd"
+                android:id="@+id/et_userLogin_pwd"
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="确认密码"
-                android:textSize="@dimen/userInfo_textSize"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"/>
-            <EditText
-                android:id="@+id/et_userSetting_confirmPwd"
-                android:background="@android:drawable/editbox_background_normal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
-        </LinearLayout>
-        <LinearLayout
+            android:layout_margin="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
-                android:id="@+id/btn_userSetting_pwdCancel"
-                android:layout_margin="10dp"
+                android:id="@+id/btn_userLogin_cancel"
+                android:layout_margin="20dp"
                 android:text="取消"
                 android:textColor="#fff"
                 android:textSize="23dp"
@@ -101,9 +77,9 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <Button
-                android:id="@+id/btn_userSetting_pwdSave"
-                android:layout_margin="10dp"
-                android:text="保存"
+                android:id="@+id/btn_userLogin_login"
+                android:layout_margin="20dp"
+                android:text="登录"
                 android:textColor="#fff"
                 android:textSize="23dp"
                 android:background="@color/colorPrimaryDark"

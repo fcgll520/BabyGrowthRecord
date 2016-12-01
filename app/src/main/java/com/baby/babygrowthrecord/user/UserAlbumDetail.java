@@ -30,5 +30,7 @@ public class UserAlbumDetail extends Activity {
             }
         });
     }
-
+    public void backOnClick(View view){
+        finish();
+    }
 }

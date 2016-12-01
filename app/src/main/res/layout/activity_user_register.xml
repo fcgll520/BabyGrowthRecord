@@ -16,94 +16,90 @@
             android:layout_width="@dimen/actionBarImgSize"
             android:layout_height="@dimen/actionBarImgSize" />
         <TextView
-            android:text="宝宝信息管理"
+            android:text="注册新用户"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
             android:layout_marginTop="@dimen/actionBarImgMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <TextView
-            android:text="保存"
-            android:textColor="@color/userBarSmallText"
-            android:textSize="@dimen/actionBarSmallText"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
-            android:layout_marginRight="@dimen/actionBarImgMargin"
-            android:gravity="right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_margin="30dp"
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="宝宝昵称"
+                android:text="用\t户\t名"
                 android:textSize="@dimen/userInfo_textSize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
             <EditText
-                android:id="@+id/et_userInfo_name"
+                android:id="@+id/et_userRegister_uName"
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+                android:layout_margin="5dp" />
         </LinearLayout>
         <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="年\t\t\t\t龄"
+                android:text="密\t\t\t\t码"
                 android:textSize="@dimen/userInfo_textSize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
             <EditText
-                android:id="@+id/et_userInfo_age"
+                android:id="@+id/et_userRegister_pwd"
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+                android:layout_margin="5dp" />
         </LinearLayout>
         <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
-                android:text="身\t\t\t\t高"
+                android:text="确认密码"
                 android:textSize="@dimen/userInfo_textSize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"/>
             <EditText
-                android:id="@+id/et_userInfo_height"
+                android:id="@+id/et_userRegister_confirmPwd"
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+                android:layout_margin="5dp" />
         </LinearLayout>
         <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:text="体\t\t\t\t重"
-                android:textSize="@dimen/userInfo_textSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-            <EditText
-                android:id="@+id/et_userInfo_weight"
-                android:background="@android:drawable/editbox_background_normal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
+            <Button
+                android:id="@+id/btn_userRegister_cancel"
+                android:layout_margin="10dp"
+                android:text="取消"
+                android:textColor="#fff"
+                android:textSize="23dp"
+                android:background="#99BEB7"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btn_userRegister_register"
+                android:layout_margin="10dp"
+                android:text="注册"
+                android:textColor="#fff"
+                android:textSize="23dp"
+                android:background="@color/colorPrimaryDark"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
