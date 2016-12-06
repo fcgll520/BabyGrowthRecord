@@ -10,19 +10,11 @@
 
 
     <!--USERS SETTING LIST-->
-    <style name="listLLstyle">
-        <item name="android:background">@drawable/users_list_ll</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">10dp</item>
-        <item name="android:padding">1dp</item>
-    </style>
     <style name="listRLstyle">
         <item name="android:background">@drawable/users_list_rl</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">5dp</item>
+        <item name="android:padding">8dp</item>
     </style>
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
