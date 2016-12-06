@@ -15,6 +15,8 @@ import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.user.UserAlbum;
 import com.baby.babygrowthrecord.user.UserCollection;
 import com.baby.babygrowthrecord.user.UserInfoManage;
+import com.baby.babygrowthrecord.user.UserLogin;
+import com.baby.babygrowthrecord.user.UserRegister;
 import com.baby.babygrowthrecord.user.UserSetting;
 import com.baby.babygrowthrecord.user.UserSettingHeadPic;
 import com.baby.babygrowthrecord.user.UserSettingName;
@@ -29,6 +31,8 @@ public class PeopleFragment extends Fragment{
     private CircleImageView ivHeadPic;
     private TextView tvUname;
     private TextView tvBabyAge;
+    private TextView tvLogin;
+    private TextView tvRegister;
 
     private RelativeLayout rlAlbum;
     private RelativeLayout rlInfoManage;
@@ -54,6 +58,14 @@ public class PeopleFragment extends Fragment{
                     break;
                 case R.id.tv_user_babyAge:
                     i.setClass(getActivity(), UserInfoManage.class);
+                    startActivity(i);
+                    break;
+                case R.id.tv_user_login:
+                    i.setClass(getActivity(), UserLogin.class);
+                    startActivity(i);
+                    break;
+                case R.id.tv_user_register:
+                    i.setClass(getActivity(), UserRegister.class);
                     startActivity(i);
                     break;
                 case R.id.rl_user_album:
@@ -104,6 +116,8 @@ public class PeopleFragment extends Fragment{
         ivHeadPic = (CircleImageView) view.findViewById(R.id.img_circlePic);
         tvUname = (TextView) view.findViewById(R.id.tv_user_uName);
         tvBabyAge = (TextView) view.findViewById(R.id.tv_user_babyAge);
+        tvLogin=(TextView)view.findViewById(R.id.tv_user_login);
+        tvRegister=(TextView)view.findViewById(R.id.tv_user_register);
 
         rlAlbum=(RelativeLayout)view.findViewById(R.id.rl_user_album);
         rlInfoManage=(RelativeLayout)view.findViewById(R.id.rl_user_infoMange);
@@ -119,6 +133,8 @@ public class PeopleFragment extends Fragment{
         ivHeadPic.setOnClickListener(myClickListener);
         tvUname.setOnClickListener(myClickListener);
         tvBabyAge.setOnClickListener(myClickListener);
+        tvLogin.setOnClickListener(myClickListener);
+        tvRegister.setOnClickListener(myClickListener);
 
         rlAlbum.setOnClickListener(myClickListener);
         rlInfoManage.setOnClickListener(myClickListener);
