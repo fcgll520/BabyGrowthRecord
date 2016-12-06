@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.baby.babygrowthrecord.Fragment.HelpFragment;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -53,8 +54,9 @@ public class GoogleCardAdapter extends BaseAdapter {
         mHolder.Card_Title=(TextView)mView.findViewById(R.id.Card_Title);
         mHolder.Card_Title.setText(mCards.get(Index).getDescription());
         mHolder.Card_Pic=(ImageView)mView.findViewById(R.id.Card_Pic);
-        //记住啊，这里是setImageResource()方法，不是setBackgroundResource(),否则图像会变形啊
-        mHolder.Card_Pic.setImageResource(mCards.get(Index).getDrawable());
+
+        ImageLoader imageLoader=ImageLoader.getInstance();
+        imageLoader.displayImage("http://10.7.88.67:8080"+mCards.get(Index).getDrawable(),mHolder.Card_Pic);
         return mView;
     }
 
