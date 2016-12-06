@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/tree">
 
+    <ImageView
+        android:onClick="backOnClick"
+        android:layout_margin="10dp"
+        android:src="@drawable/users_back"
+        android:layout_width="@dimen/actionBarImgSize"
+        android:layout_height="@dimen/actionBarImgSize" />
+
     <LinearLayout
         android:id="@+id/login_ll"
         android:layout_width="match_parent"
