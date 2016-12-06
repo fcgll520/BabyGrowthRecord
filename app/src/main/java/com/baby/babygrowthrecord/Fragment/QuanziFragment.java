@@ -8,18 +8,33 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.R;
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by asus on 2016/11/22.
@@ -30,6 +45,8 @@ public class  QuanziFragment extends ListFragment {
     private FridListAdapter mAdapter;
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private Context context;
+    final String urlStr = "http://192.168.1.111:8080";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,9 +62,62 @@ public class  QuanziFragment extends ListFragment {
         protected MessageModle doInBackground(Void... params) {
 
             Gson gson = new Gson();
-
-            MessageModle msg = gson.fromJson(getData(), MessageModle.class);
-            return msg;
+            try {
+                URL url=new URL(urlStr+"/circle/test");
+                HttpURLConnection connection=(HttpURLConnection)url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+                //获取JSon串
+                InputStream is=connection.getInputStream();
+                byte[]b=new byte[2048];
+                String s="";
+                int a;
+                while ((a=is.read(b))!=-1){
+                    String temp=new String(b);
+                    s=s+temp;
+                }
+                Log.e("s:",s);
+                //解析JSon串
+                JSONArray array=new JSONArray(s);
+                int []id=new int[array.length()];
+                String []avator=new String[array.length()];
+                String []name=new String[array.length()];
+                String []content=new String[array.length()];
+                String []urls=new String[array.length()];
+                JSONObject object;
+                for (int i=0;i<array.length();i++){
+                    try {
+                        object=array.getJSONObject(i);
+                        id[i]=object.optInt("cir_id");
+                        avator[i]="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
+                        name[i]=object.optString("friend_name");
+                        content[i]=object.optString("friend_content");
+                        urls[i]=urlStr+object.optString("friend_photo");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                String circle="";
+                for (int i=0;i<id.length;i++){
+                    String split="";
+                    if (i!=0){
+                       split=",";
+                    }
+                    circle=circle+split+"{\"id\":"+id[i]+",\"avator\":\""+avator[i]+"\",\"name\":\""+name[i]+"\",\"content\":\""
+                            +content[i]+"\",\"urls\":[\""+urls[i]+"\"]}";
+                }
+                String str = "{\"code\":200,\"msg\":\"ok\",list:["+circle+"]}";
+                Log.e("str:",str);
+                MessageModle msg = gson.fromJson(str, MessageModle.class);
+                return msg;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return null;
         }
 
         @Override
@@ -56,27 +126,7 @@ public class  QuanziFragment extends ListFragment {
             setListAdapter(mAdapter);
         }
     }
-    private String getData() {
-        // 模拟网络获取数据
-        String json = "{\"code\":200,\"msg\":\"ok\",list:["
-                + "{\"id\":110,\"avator\":\"http://www.poluoluo.com/qq/UploadFiles_7828/201611/2016110420035637.jpg\",\"name\":\"Asum\",\"content\":\"今天带宝宝出去了!\",\"urls\":[]},"
-                + "{\"id\":111,\"avator\":\"http://img5.duitang.com/uploads/item/201510/22/20151022092355_Mdz8A.jpeg\",\"name\":\"Smile\",\"content\":\"孩子今天笑的很开心\","
-                + "  \"urls\":[\"http://img4.imgtn.bdimg.com/it/u=749491705,2277709209&fm=11&gp=0.jpg\"]},"
 
-                + "{\"id\":114,\"avator\":\"http://tupian.enterdesk.com/2014/mxy/11/2/1/12.jpg\",\"name\":\"Sunny\",\"content\":\"宋民国很淘气\",\"urls\":["
-                + "\"http://img.qhdxw.com/hot/uploads/allimg/20161102/031238_29056.gif\","
-
-                + "\"http://img2.imgtn.bdimg.com/it/u=3973598389,3836082953&fm=21&gp=0.jpg\","
-                + "\"http://cdn.duitang.com/uploads/item/201511/08/20151108194654_8XhEC.thumb.700_0.jpeg\","
-                + "\"http://img1.imgtn.bdimg.com/it/u=133092168,2955757591&fm=21&gp=0.jpg\"]},"
-
-                + "{\"id\":112,\"avator\":\"http://p3.gexing.com/G1/M00/C1/1B/rBACE1PoOomTu2CtAAAQsALNkOA499_200x200_3.jpg?recache=20131108\",\"name\":\"lesi\",\"content\":\"宝宝可爱不可爱\",\"urls\":[\"http://cdn.duitang.com/uploads/item/201506/25/20150625212107_F8mzs.thumb.700_0.jpeg\","
-                + "\"http://i2.hdslb.com/bfs/archive/72a7a26f4615907e89deb7b3705601378eff36f7.jpg\"]},"
-
-                + "{\"id\":113,\"avator\":\"http://img2.imgtn.bdimg.com/it/u=3301021828,1789093994&fm=11&gp=0.jpg\",\"name\":\"tracy\",\"content\":\"开心\",\"urls\":[\"http://img3.duitang.com/uploads/item/201505/22/20150522191353_QKRMx.thumb.700_0.jpeg\",\"http://img2.imgtn.bdimg.com/it/u=2725582282,1665252206&fm=21&gp=0.jpg\",\"http://img3.duitang.com/uploads/item/201607/05/20160705101741_NjMXK.jpeg\"]}]}";
-
-        return json;
-    }
     public static void setColor(Activity activity, int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             // 设置状态栏透明
