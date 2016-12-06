@@ -2,6 +2,7 @@ package com.baby.babygrowthrecord.user;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,9 @@ import android.widget.LinearLayout;
 import com.baby.babygrowthrecord.R;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.ArrayList;
 
@@ -80,7 +84,7 @@ public class UserAlbumAdapter extends RecyclerView.Adapter<UserAlbumAdapter.Base
                 Glide.with(itemView.getContext())
                         .load(url)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.raw.raw_1478764276)
+                        .placeholder(R.drawable.empty_photo)
                         .crossFade()
                         .into(imageView);
             }
