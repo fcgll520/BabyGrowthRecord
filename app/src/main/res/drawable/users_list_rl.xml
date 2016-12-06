@@ -16,9 +16,9 @@
         <shape>
             <solid
                 android:color="#ffffffff"/>
-            <stroke
-                android:width="0.5dip"
-                android:color="#ffcccccc"/>
+            <!--<stroke-->
+                <!--android:width="0.5dip"-->
+                <!--android:color="#ffcccccc"/>-->
             <corners
                 android:bottomLeftRadius="0.0dip"
                 android:bottomRightRadius="0.0dip"/>
