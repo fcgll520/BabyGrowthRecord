@@ -46,15 +46,15 @@ public class ImageDetailFragment extends Fragment {
 		final View v = inflater.inflate(R.layout.activity_circle_image_detail_fragment, container, false);//图片查看界面
 		mImageView = (ImageView) v.findViewById(R.id.image);
 		mAttacher = new PhotoViewAttacher(mImageView);
-		
+
 		mAttacher.setOnPhotoTapListener(new OnPhotoTapListener() {
-			
+
 			@Override
 			public void onPhotoTap(View arg0, float arg1, float arg2) {
 				getActivity().finish();
 			}
 		});
-		
+
 		progressBar = (ProgressBar) v.findViewById(R.id.loading);
 		return v;
 	}
@@ -62,10 +62,8 @@ public class ImageDetailFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
-		
-		ImageLoader.getInstance().displayImage(mImageUrl, mImageView, new SimpleImageLoadingListener()
-		{
+
+		ImageLoader.getInstance().displayImage(mImageUrl, mImageView, new SimpleImageLoadingListener() {
 			@Override
 			public void onLoadingStarted(String imageUri, View view) {
 				progressBar.setVisibility(View.VISIBLE);
@@ -101,7 +99,7 @@ public class ImageDetailFragment extends Fragment {
 				mAttacher.update();
 			}
 		});
-		
+
 	}
 
 }
