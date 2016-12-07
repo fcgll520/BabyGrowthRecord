@@ -5,4 +5,5 @@ package com.baby.babygrowthrecord.Fragment;
  */
 public class Utils {
     public static int flag = 1;
+    public static String urlStr = "http://192.168.1.107:8080/";
 }

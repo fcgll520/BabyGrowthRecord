@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.R;
@@ -35,6 +36,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by asus on 2016/11/22.
@@ -45,7 +47,7 @@ public class  QuanziFragment extends ListFragment {
     private FridListAdapter mAdapter;
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private Context context;
-    final String urlStr = "http://192.168.1.111:8080";
+    private MessageModle result=new MessageModle();
 
     @Nullable
     @Override
@@ -53,78 +55,40 @@ public class  QuanziFragment extends ListFragment {
         view =  inflater.inflate(R.layout.activity_circle_main, container, false);
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         setColor(getActivity(), Color.parseColor("#63b68b") );
-        new LoderDataTask().execute();
+        getData();
+        mAdapter = new FridListAdapter(getActivity(), result.list);
+        setListAdapter(mAdapter);
         return view;
     }
-    class LoderDataTask extends AsyncTask<Void, Void, MessageModle> {
 
-        @Override
-        protected MessageModle doInBackground(Void... params) {
-
-            Gson gson = new Gson();
-            try {
-                URL url=new URL(urlStr+"/circle/test");
-                HttpURLConnection connection=(HttpURLConnection)url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.connect();
-                //获取JSon串
-                InputStream is=connection.getInputStream();
-                byte[]b=new byte[2048];
-                String s="";
-                int a;
-                while ((a=is.read(b))!=-1){
-                    String temp=new String(b);
-                    s=s+temp;
-                }
-                Log.e("s:",s);
-                //解析JSon串
-                JSONArray array=new JSONArray(s);
-                int []id=new int[array.length()];
-                String []avator=new String[array.length()];
-                String []name=new String[array.length()];
-                String []content=new String[array.length()];
-                String []urls=new String[array.length()];
+    public void getData(){
+        result.list=new ArrayList<>();
+        result.code=200;
+        result.msg="ok";
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(getActivity(),Utils.urlStr+"circle/test",new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
                 JSONObject object;
-                for (int i=0;i<array.length();i++){
+                String temp;
+                for (int i=0;i<response.length();i++){
                     try {
-                        object=array.getJSONObject(i);
-                        id[i]=object.optInt("cir_id");
-                        avator[i]="https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png";
-                        name[i]=object.optString("friend_name");
-                        content[i]=object.optString("friend_content");
-                        urls[i]=urlStr+object.optString("friend_photo");
+                        object=response.getJSONObject(i);
+                        if (object.getString("friend_photo").equals("null")){
+                            result.list.add(new Circle(object.getInt("cir_id"),"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
+                                    object.getString("friend_name"), object.getString("friend_content")));
+                        }else {
+                            result.list.add(new Circle(object.getInt("cir_id"),"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
+                                    object.getString("friend_name"), object.getString("friend_content"),new String[]{Utils.urlStr+object.getString("friend_photo")}));
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                String circle="";
-                for (int i=0;i<id.length;i++){
-                    String split="";
-                    if (i!=0){
-                       split=",";
-                    }
-                    circle=circle+split+"{\"id\":"+id[i]+",\"avator\":\""+avator[i]+"\",\"name\":\""+name[i]+"\",\"content\":\""
-                            +content[i]+"\",\"urls\":[\""+urls[i]+"\"]}";
-                }
-                String str = "{\"code\":200,\"msg\":\"ok\",list:["+circle+"]}";
-                Log.e("str:",str);
-                MessageModle msg = gson.fromJson(str, MessageModle.class);
-                return msg;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                setListAdapter(mAdapter);
             }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(MessageModle result) {
-            mAdapter = new FridListAdapter(getActivity(), result.list);
-            setListAdapter(mAdapter);
-        }
+        });
     }
 
     public static void setColor(Activity activity, int color) {

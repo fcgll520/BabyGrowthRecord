@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -105,6 +106,10 @@ public class PeopleFragment extends Fragment{
             }
         }
     };
+    private Boolean isLogin=false;
+    private LinearLayout llLogin;
+    private LinearLayout llUnLogin;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -112,6 +117,21 @@ public class PeopleFragment extends Fragment{
         init();
         return view;
     }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        //自动登陆,成功的话
+        autoLogin();
+        if (isLogin){
+            llLogin.setVisibility(View.VISIBLE);
+            llUnLogin.setVisibility(View.INVISIBLE);
+        }else {
+            llLogin.setVisibility(View.INVISIBLE);
+            llUnLogin.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void init(){
         ivHeadPic = (CircleImageView) view.findViewById(R.id.img_circlePic);
         tvUname = (TextView) view.findViewById(R.id.tv_user_uName);
@@ -129,6 +149,9 @@ public class PeopleFragment extends Fragment{
         tvCollection=(TextView)view.findViewById(R.id.tv_user_collect);
         tvSetting=(TextView)view.findViewById(R.id.tv_user_setting);
 
+        llLogin=(LinearLayout)view.findViewById(R.id.ll_user_hasLogin);
+        llUnLogin=(LinearLayout)view.findViewById(R.id.ll_user_unLogin);
+
         //绑定监听器
         ivHeadPic.setOnClickListener(myClickListener);
         tvUname.setOnClickListener(myClickListener);
@@ -145,5 +168,8 @@ public class PeopleFragment extends Fragment{
         tvInfoManage.setOnClickListener(myClickListener);
         tvCollection.setOnClickListener(myClickListener);
         tvSetting.setOnClickListener(myClickListener);
+    }
+    private void autoLogin(){
+
     }
 }

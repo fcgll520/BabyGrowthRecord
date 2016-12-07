@@ -36,7 +36,6 @@ public class HelpFragment extends Fragment{
     private ListView mListView;
     private List<GoogleCard> mCards=new ArrayList<GoogleCard>();
     private GoogleCardAdapter mAdapter;
-    final String url = "http://10.7.88.67:8080/essay/test";
 
     @Nullable
     @Override
@@ -67,15 +66,17 @@ public class HelpFragment extends Fragment{
         //从服务器获取信息并解析
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get(getActivity(),url,new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.urlStr+"essay/test",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 JSONObject object;
+                mCards.clear();
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
-                        GoogleCard card=new GoogleCard(object.getInt("essay_id"),object.getString("essay_title"),object.getString("essay_photo"));
+                        GoogleCard card=new GoogleCard(object.getInt("essay_id"),object.getString("essay_title"),
+                                Utils.urlStr+object.getString("essay_photo"));
                         mCards.add(card);
                     } catch (JSONException e) {
                         e.printStackTrace();

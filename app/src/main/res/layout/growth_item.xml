@@ -25,7 +25,6 @@
                     android:id="@+id/growth_left_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14.11.25"
                     android:textSize="@dimen/growth_time_things"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#494646" />
@@ -33,7 +32,6 @@
                     android:id="@+id/growth_left_week"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="周三"
                     android:textSize="@dimen/growth_time_things"
                     android:padding="@dimen/growth_padding"/>
             </LinearLayout>
@@ -48,7 +46,6 @@
                     android:id="@+id/growth_right_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3月+8天"
                     android:textSize="@dimen/growth_time_things"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#2b5ae5" />
@@ -56,7 +53,6 @@
                     android:id="@+id/growth_right_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。"
                     android:textSize="@dimen/growth_time_things"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#494646" />
@@ -71,13 +67,11 @@
             <ImageView
                 android:id="@+id/growth_firstimg"
                 android:layout_width="@dimen/growth_head"
-                android:layout_height="@dimen/growth_head"
-                android:src="@drawable/hundred_first"/>
+                android:layout_height="@dimen/growth_head"/>
             <ImageView
                 android:id="@+id/growth_secondimg"
                 android:layout_width="@dimen/growth_head"
-                android:layout_height="@dimen/growth_head"
-                android:src="@drawable/hundred_second"/>
+                android:layout_height="@dimen/growth_head"/>
         </LinearLayout>
     </LinearLayout>
 

@@ -7,7 +7,7 @@
     <dimen name="head_textSize">20dp</dimen>
     <dimen name="list_textSize">25dp</dimen>
     <dimen name="list_textMargin">10dp</dimen>
-    <dimen name="list_iconSize">38dp</dimen>
+    <dimen name="list_iconSize">30dp</dimen>
 
     <!--USERS ALL-->
     <dimen name="actionBarTextSize">28dp</dimen>

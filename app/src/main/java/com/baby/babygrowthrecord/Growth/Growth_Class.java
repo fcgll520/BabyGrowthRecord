@@ -9,10 +9,19 @@ public class Growth_Class {
     private String week;
     private String duration;
     private String content;
-    private int img_first;
-    private int img_second;
+    private String img_first;
+    private String img_second;
 
-    public Growth_Class(long id, String year, String week, String duration, String content, int img_first, int img_second) {
+    public Growth_Class(long id, String year, String week, String duration, String content, String img_first) {
+        this.id = id;
+        this.year = year;
+        this.week = week;
+        this.duration = duration;
+        this.content = content;
+        this.img_first = img_first;
+    }
+
+    public Growth_Class(long id, String year, String week, String duration, String content, String img_first, String img_second) {
         this.id = id;
         this.year = year;
         this.week = week;
@@ -62,19 +71,19 @@ public class Growth_Class {
         this.content = content;
     }
 
-    public int getImg_first() {
+    public String getImg_first() {
         return img_first;
     }
 
-    public void setImg_first(int img_first) {
+    public void setImg_first(String img_first) {
         this.img_first = img_first;
     }
 
-    public int getImg_second() {
+    public String getImg_second() {
         return img_second;
     }
 
-    public void setImg_second(int img_second) {
+    public void setImg_second(String img_second) {
         this.img_second = img_second;
     }
 }

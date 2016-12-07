@@ -56,7 +56,7 @@ public class GoogleCardAdapter extends BaseAdapter {
         mHolder.Card_Pic=(ImageView)mView.findViewById(R.id.Card_Pic);
 
         ImageLoader imageLoader=ImageLoader.getInstance();
-        imageLoader.displayImage("http://10.7.88.67:8080"+mCards.get(Index).getDrawable(),mHolder.Card_Pic);
+        imageLoader.displayImage(mCards.get(Index).getDrawable(),mHolder.Card_Pic);
         return mView;
     }
 

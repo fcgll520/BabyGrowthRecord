@@ -24,12 +24,12 @@
             android:id="@+id/growth_head"
             android:layout_width="@dimen/growth_head"
             android:layout_height="@dimen/growth_head"
-            android:src="@drawable/head_sculpture" />
+            android:src="@drawable/empty_photo" />
         <TextView
             android:id="@+id/growth_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="宝宝"
+            android:text="？？"
             android:textSize="@dimen/growth_title"
             android:textColor="#646161"
             android:layout_margin="@dimen/growth_title"/>
