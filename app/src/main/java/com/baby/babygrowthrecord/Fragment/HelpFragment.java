@@ -70,7 +70,7 @@ public class HelpFragment extends Fragment{
         //网络请求
         //从服务器获取信息并解析
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://169.254.76.180:8080/essay/test";
+        String url = Utils.StrUrl+"essay/test";
 
         client.get(getActivity(), url, new JsonHttpResponseHandler(){
             @Override
@@ -92,6 +92,7 @@ public class HelpFragment extends Fragment{
                 mListView.setAdapter(mAdapter);
             }
         });
+
         return view;
     }
 

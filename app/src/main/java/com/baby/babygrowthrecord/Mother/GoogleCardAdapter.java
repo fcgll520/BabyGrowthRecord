@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baby.babygrowthrecord.Fragment.HelpFragment;
+import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -58,7 +59,7 @@ public class GoogleCardAdapter extends BaseAdapter {
         mHolder.Card_Pic=(ImageView)mView.findViewById(R.id.Card_Pic);
         //从服务器获取图片
         ImageLoader imageLoader=ImageLoader.getInstance();
-        imageLoader.displayImage("http://169.254.76.180:8080/"+mCards.get(Index).getDrawable(),mHolder.Card_Pic);
+        imageLoader.displayImage(Utils.StrUrl+mCards.get(Index).getDrawable(),mHolder.Card_Pic);
 
        /* mHolder.Card_Pic.setImageResource(mCards.get(Index).getDrawable());*/
         return mView;

@@ -57,7 +57,7 @@ public class CardMessage extends AppCompatActivity {
         //网络请求
         //从服务器获取信息并解析
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://169.254.76.180:8080/essay/test";
+        String url =Utils.StrUrl+"essay/test";
 
         client.get(getApplicationContext(), url, new JsonHttpResponseHandler(){
             @Override
@@ -76,7 +76,7 @@ public class CardMessage extends AppCompatActivity {
 
                             //从服务器获取图片
                             ImageLoader imageLoader=ImageLoader.getInstance();
-                            imageLoader.displayImage("http://169.254.76.180:8080/"+data.getString("essay_photo"),img1);
+                            imageLoader.displayImage(Utils.StrUrl+data.getString("essay_photo"),img1);
 
                             Log.e("essay","true");
                         }

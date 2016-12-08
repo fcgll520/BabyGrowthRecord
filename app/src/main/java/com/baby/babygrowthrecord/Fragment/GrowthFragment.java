@@ -38,7 +38,7 @@ public class GrowthFragment extends Fragment{
 
         view =  inflater.inflate(R.layout.growth_listview, container, false);
         //        下拉刷新
-        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_growth);
+        //refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_growth);
         getDate();
         myAdapter = new Growth_MyAdapter(getActivity(),growth_classes);
         //3.定义item布局，使用Android内置ListView的item布局
