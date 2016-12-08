@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baby.babygrowthrecord.Fragment.Utils;
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
 import com.tencent.connect.UserInfo;
@@ -95,18 +96,18 @@ public class Login_Activity extends Activity {
         }
         mUserInfo = (TextView) findViewById(R.id.user_nickname);
         mUserLogo = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.user_logo);
-        updateLoginButton();
+        /*updateLoginButton();*/
     }
 
-    private void updateLoginButton() {
+  /*  private void updateLoginButton() {
         if (mQQAuth != null && mQQAuth.isSessionValid()) {
-           /* mNewLoginButton.setTextColor(Color.RED);
-            mNewLoginButton.setText(R.string.qq_logout);*/
+            mNewLoginButton.setTextColor(Color.RED);
+            mNewLoginButton.setText("1");
         } else {
             mNewLoginButton.setTextColor(Color.BLUE);
-            /*mNewLoginButton.setText(R.string.qq_login);*/
+            mNewLoginButton.setText("2");
         }
-    }
+    }*/
 
     private void updateUserInfo() {
         if (mQQAuth != null && mQQAuth.isSessionValid()) {
@@ -155,7 +156,7 @@ public class Login_Activity extends Activity {
             mInfo.getUserInfo(listener);
 
         } else {
-            mUserInfo.setText("");
+            /*mUserInfo.setText("");*/
             mUserInfo.setVisibility(android.view.View.GONE);
             mUserLogo.setVisibility(android.view.View.GONE);
         }
@@ -169,7 +170,7 @@ public class Login_Activity extends Activity {
                 JSONObject response = (JSONObject) msg.obj;
                 if (response.has("nickname")) {
                     try {
-                        mUserInfo.setVisibility(View.GONE);
+                        mUserInfo.setVisibility(android.view.View.VISIBLE);
                         mUserInfo.setText(response.getString("nickname"));
                     } catch (JSONException e) {
                         // TODO Auto-generated catch block
@@ -179,7 +180,7 @@ public class Login_Activity extends Activity {
             } else if (msg.what == 1) {
                 Bitmap bitmap = (Bitmap) msg.obj;
                 mUserLogo.setImageBitmap(bitmap);
-                mUserLogo.setVisibility(View.GONE);
+                mUserLogo.setVisibility(android.view.View.VISIBLE);
             }
         }
 
@@ -191,7 +192,11 @@ public class Login_Activity extends Activity {
                 @Override
                 protected void doComplete(JSONObject values) {
                     updateUserInfo();
-                    updateLoginButton();
+                    //跳转
+                    Utils.flag = 5;
+                    Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+                    startActivity(intent);
+                  /*  updateLoginButton();*/
                 }
             };
             mQQAuth.login(this, "all", listener);
@@ -201,7 +206,7 @@ public class Login_Activity extends Activity {
         } else {
             mQQAuth.logout(this);
             updateUserInfo();
-            updateLoginButton();
+            /*updateLoginButton();*/
         }
     }
 
@@ -222,8 +227,8 @@ public class Login_Activity extends Activity {
         @Override
         public void onComplete(Object response) {
             //返回的json字符
-            Util.showResultDialog(Login_Activity.this, response.toString(),
-                    "登录成功");
+            /*Util.showResultDialog(Login_Activity.this, response.toString(),
+                    "登录成功");*/
             doComplete((JSONObject) response);
         }
 
