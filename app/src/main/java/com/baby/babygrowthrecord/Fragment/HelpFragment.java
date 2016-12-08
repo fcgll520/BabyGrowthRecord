@@ -66,7 +66,7 @@ public class HelpFragment extends Fragment{
         //从服务器获取信息并解析
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get(getActivity(),Utils.urlStr+"essay/test",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"essay/test",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -76,7 +76,7 @@ public class HelpFragment extends Fragment{
                     try {
                         object=response.getJSONObject(i);
                         GoogleCard card=new GoogleCard(object.getInt("essay_id"),object.getString("essay_title"),
-                                Utils.urlStr+object.getString("essay_photo"));
+                                Utils.StrUrl+object.getString("essay_photo"));
                         mCards.add(card);
                     } catch (JSONException e) {
                         e.printStackTrace();
