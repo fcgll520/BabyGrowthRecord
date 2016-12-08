@@ -3,21 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp" >
-
-    <!--<com.baby.babygrowthrecord.PullToRefresh.RefreshableView-->
-        <!--android:id="@+id/refreshable_view"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<ListView-->
-            <!--android:id="@android:id/list"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-    <!--</com.baby.babygrowthrecord.PullToRefresh.RefreshableView>-->
-
-    <ListView
-        android:id="@android:id/list"
+    <com.baby.babygrowthrecord.PullToRefresh.RefreshableView
+        android:id="@+id/refreshable_view_circle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.baby.babygrowthrecord.PullToRefresh.RefreshableView>
 
     <TextView
         android:id="@android:id/empty"

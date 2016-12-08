@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.baby.babygrowthrecord.Mother.CardMessage;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.Mother.GoogleCardAdapter;
+import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -36,11 +37,15 @@ public class HelpFragment extends Fragment{
     private ListView mListView;
     private List<GoogleCard> mCards=new ArrayList<GoogleCard>();
     private GoogleCardAdapter mAdapter;
+    private RefreshableView refreshableView;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.activity_mother_main, container, false);
+        //下拉刷新
+        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_help);
+
         getItems();
         //获取listview
         mListView=(ListView) view.findViewById(R.id.ListView);
@@ -58,6 +63,14 @@ public class HelpFragment extends Fragment{
                 startActivity(intent);
             }
         });
+        //下拉刷新
+        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getItems();
+                refreshableView.finishRefreshing();
+            }
+        }, 0);
         return view;
     }
 

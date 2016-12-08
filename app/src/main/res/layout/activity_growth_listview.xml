@@ -86,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/refreshable_view_growth">
-        2<ListView
+        <ListView
             android:id="@+id/growth_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

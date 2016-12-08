@@ -52,7 +52,7 @@ public class Growth_MyAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (null == convertView){
-            convertView = LayoutInflater.from(context).inflate(R.layout.growth_item,null);
+            convertView = LayoutInflater.from(context).inflate(R.layout.activity_growth_item,null);
         }
 
         year = (TextView)convertView.findViewById(R.id.growth_left_year);

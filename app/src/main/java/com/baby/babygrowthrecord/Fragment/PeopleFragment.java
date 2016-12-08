@@ -7,17 +7,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baby.babygrowthrecord.Login.Login_Activity;
+import com.baby.babygrowthrecord.Login.Register_Activity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.user.UserAlbum;
 import com.baby.babygrowthrecord.user.UserCollection;
 import com.baby.babygrowthrecord.user.UserInfoManage;
-import com.baby.babygrowthrecord.user.UserLogin;
-import com.baby.babygrowthrecord.user.UserRegister;
 import com.baby.babygrowthrecord.user.UserSetting;
 import com.baby.babygrowthrecord.user.UserSettingHeadPic;
 import com.baby.babygrowthrecord.user.UserSettingName;
@@ -62,11 +61,11 @@ public class PeopleFragment extends Fragment{
                     startActivity(i);
                     break;
                 case R.id.tv_user_login:
-                    i.setClass(getActivity(), UserLogin.class);
+                    i.setClass(getActivity(), Login_Activity.class);
                     startActivity(i);
                     break;
                 case R.id.tv_user_register:
-                    i.setClass(getActivity(), UserRegister.class);
+                    i.setClass(getActivity(), Register_Activity.class);
                     startActivity(i);
                     break;
                 case R.id.rl_user_album:
