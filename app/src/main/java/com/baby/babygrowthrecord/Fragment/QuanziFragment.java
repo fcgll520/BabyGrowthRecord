@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.Circle.MessageModle;
+import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -47,7 +48,10 @@ public class  QuanziFragment extends ListFragment {
     private FridListAdapter mAdapter;
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private Context context;
-    private MessageModle result=new MessageModle();
+//    private RefreshableView refreshableView;
+    private AsyncHttpClient client=new AsyncHttpClient();
+    private ArrayList<Circle> circleList=new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -55,36 +59,49 @@ public class  QuanziFragment extends ListFragment {
         view =  inflater.inflate(R.layout.activity_circle_main, container, false);
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         setColor(getActivity(), Color.parseColor("#63b68b") );
+//        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view);
         getData();
-        mAdapter = new FridListAdapter(getActivity(), result.list);
+        mAdapter = new FridListAdapter(getActivity(), circleList);
         setListAdapter(mAdapter);
+//        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                    getData();
+//                refreshableView.finishRefreshing();
+//            }
+//        }, 0);
         return view;
     }
 
+    //获取服务器端数据
     public void getData(){
-        result.list=new ArrayList<>();
-        result.code=200;
-        result.msg="ok";
-        AsyncHttpClient client=new AsyncHttpClient();
         client.get(getActivity(),Utils.urlStr+"circle/test",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 JSONObject object;
                 String temp;
+                ArrayList<Circle> list=new ArrayList<Circle>();
+                //获取客户端头像图片路径
+
+
+                //解析Json串
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
                         if (object.getString("friend_photo").equals("null")){
-                            result.list.add(new Circle(object.getInt("cir_id"),"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
-                                    object.getString("friend_name"), object.getString("friend_content")));
+                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("friend_name"), object.getString("friend_content")));
                         }else {
-                            result.list.add(new Circle(object.getInt("cir_id"),"https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo/bd_logo1_31bdc765.png",
-                                    object.getString("friend_name"), object.getString("friend_content"),new String[]{Utils.urlStr+object.getString("friend_photo")}));
+                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("friend_name"), object.getString("friend_content"),new String[]{Utils.urlStr+object.getString("friend_photo")}));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                }
+                int k=response.length()-1;
+                for (int i=0;i<list.size()&&k>=0;i++){
+                    circleList.add(i,list.get(k));
+                    k--;
                 }
                 setListAdapter(mAdapter);
             }
