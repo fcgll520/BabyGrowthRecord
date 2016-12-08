@@ -19,7 +19,7 @@ public class Growth_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.growth_listview);
+        setContentView(R.layout.activity_growth_listview);
 
         //1.修改当前activity的布局文件，加入ListView控件设置id
         //2.定义数据源，字符串数组

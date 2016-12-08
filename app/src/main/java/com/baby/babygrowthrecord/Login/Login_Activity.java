@@ -41,13 +41,14 @@ public class Login_Activity extends Activity {
     private Tencent mTencent;
     private final String APP_ID = "1105869088";// 测试时使用，真正发布的时候要换成自己的APP_ID
     private Button login_btn;
+    private Button login_login_register;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "-->onCreate");
         // 固定竖屏
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         initViews();
 
         login_btn = (Button)findViewById(R.id.login_login_btn);
@@ -55,6 +56,15 @@ public class Login_Activity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        login_login_register=(Button)findViewById(R.id.login_login_register);
+        login_login_register.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Activity.this, Register_Activity.class);
                 startActivity(intent);
             }
         });
@@ -229,7 +239,7 @@ public class Login_Activity extends Activity {
         boolean ready = mQQAuth.isSessionValid()
                 && mQQAuth.getQQToken().getOpenId() != null;
         if (!ready)
-            Toast.makeText(context, "login and get openId first, please!",
+            Toast.makeText(context, "activity_login and get openId first, please!",
                     Toast.LENGTH_SHORT).show();
         return ready;
     }

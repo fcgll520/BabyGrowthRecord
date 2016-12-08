@@ -2,7 +2,6 @@ package com.baby.babygrowthrecord.Fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,18 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.baby.babygrowthrecord.Circle.FridListAdapter;
-import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.Growth.Growth_Activity_Bron;
 import com.baby.babygrowthrecord.Growth.Growth_Class;
 import com.baby.babygrowthrecord.Growth.Growth_MyAdapter;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
-import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -51,7 +46,7 @@ public class GrowthFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view =  inflater.inflate(R.layout.growth_listview, container, false);
+        view =  inflater.inflate(R.layout.activity_growth_listview, container, false);
         //下拉刷新
         refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_growth);
 
