@@ -1,125 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <!--标题-->
     <TextView
         android:id="@+id/growth_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/growth_lenth"
-        android:background="#63b68b"
-        android:gravity="center"
         android:text="成长记录"
         android:textColor="#ffffff"
-        android:textSize="@dimen/growth_title" />
+        android:textSize="@dimen/growth_title"
+        android:gravity="center"
+        android:background="#63b68b"/>
     <!--头像和姓名-->
     <LinearLayout
         android:id="@+id/growth_head_name"
         android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:layout_height="70dp"
+        android:layout_height="72dp"
         android:orientation="horizontal"
-=======
-        android:layout_height="wrap_content"
->>>>>>> c387466cf8d8ee8dc1466c4fca48e71a9a674759
         android:layout_below="@+id/growth_title"
-        android:orientation="horizontal"
         android:paddingLeft="20dp">
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/growth_head"
             android:layout_width="@dimen/growth_head"
             android:layout_height="@dimen/growth_head"
             android:src="@drawable/head_sculpture" />
-
         <TextView
             android:id="@+id/growth_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/growth_title"
             android:text="宝宝"
+            android:textSize="@dimen/growth_title"
             android:textColor="#646161"
-<<<<<<< HEAD
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"/>
-=======
-            android:textSize="@dimen/growth_title" />
->>>>>>> c387466cf8d8ee8dc1466c4fca48e71a9a674759
+            android:layout_margin="@dimen/growth_title"/>
     </LinearLayout>
     <!--时间轴-->
     <LinearLayout
         android:id="@+id/growth_time_things"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/growth_head_name"
-        android:orientation="horizontal">
-
+        android:orientation="horizontal"
+        android:layout_below="@+id/growth_head_name">
         <TextView
             android:id="@+id/growth_time_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#63b68b"
-            android:gravity="center"
-            android:padding="3dp"
             android:text="年"
+            android:background="#63b68b"
             android:textColor="#ffffff"
-            android:textSize="@dimen/growth_time_things" />
-
+            android:textSize="@dimen/growth_time_things"
+            android:gravity="center"
+            android:padding="3dp"/>
         <TextView
             android:layout_width="2dp"
             android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/growth_time_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#63b68b"
-            android:gravity="center"
-            android:padding="3dp"
             android:text="月"
+            android:background="#63b68b"
             android:textColor="#ffffff"
-            android:textSize="@dimen/growth_time_things" />
-
+            android:textSize="@dimen/growth_time_things"
+            android:gravity="center"
+            android:padding="3dp"/>
         <TextView
             android:layout_width="2dp"
             android:layout_height="wrap_content" />
-
         <TextView
             android:id="@+id/growth_time_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#63b68b"
-            android:gravity="center"
-            android:padding="3dp"
             android:text="日"
+            android:background="#63b68b"
             android:textColor="#ffffff"
-            android:textSize="@dimen/growth_time_things" />
+            android:textSize="@dimen/growth_time_things"
+            android:gravity="center"
+            android:padding="3dp"/>
     </LinearLayout>
-
     <com.baby.babygrowthrecord.PullToRefresh.RefreshableView
-        android:id="@+id/refreshable_view_growth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/refreshable_view_growth">
+        2<ListView
             android:id="@+id/growth_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </ListView>
     </com.baby.babygrowthrecord.PullToRefresh.RefreshableView>
-
-<<<<<<< HEAD
-=======
-        <ListView
-            android:id="@+id/growth_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
-    </com.baby.babygrowthrecord.PullToRefresh.RefreshableView>
-
->>>>>>> c387466cf8d8ee8dc1466c4fca48e71a9a674759
-
 </LinearLayout>

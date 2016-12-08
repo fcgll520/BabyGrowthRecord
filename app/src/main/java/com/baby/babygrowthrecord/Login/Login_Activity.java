@@ -1,36 +1,15 @@
 package com.baby.babygrowthrecord.Login;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-<<<<<<< HEAD
 import com.baby.babygrowthrecord.Growth.Growth_Activity;
-=======
-import com.baby.babygrowthrecord.Fragment.Utils;
->>>>>>> c387466cf8d8ee8dc1466c4fca48e71a9a674759
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
-import com.baby.babygrowthrecord.util.Util;
-import com.tencent.connect.UserInfo;
-import com.tencent.connect.auth.QQAuth;
-import com.tencent.tauth.IUiListener;
-import com.tencent.tauth.Tencent;
-import com.tencent.tauth.UiError;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by Administrator on 2016/11/24.
@@ -38,243 +17,20 @@ import org.json.JSONObject;
 public class Login_Activity extends AppCompatActivity {
 
     private Button login_btn;
-    private static final String TAG = Login_Activity.class.getName();
-    public static String mAppid;
-    private Button mNewLoginButton;
-    private TextView mUserInfo;
-    private ImageView mUserLogo;
-    public static QQAuth mQQAuth;
-    private UserInfo mInfo;
-    private Tencent mTencent;
-    private final String APP_ID = "1105869088";// 测试时使用，真正发布的时候要换成自己的APP_ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 固定竖屏
-        Log.d(TAG, "-->onCreate");
         setContentView(R.layout.login);
-        initViews();
-    }
-    @Override
-    protected void onStart() {
-        Log.d(TAG, "-->onStart");
-        final Context context = Login_Activity.this;
-        final Context ctxContext = context.getApplicationContext();
-        mAppid = APP_ID;
-        mQQAuth = QQAuth.createInstance(mAppid, ctxContext);
 
-        mTencent = Tencent.createInstance(mAppid, Login_Activity.this);
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "-->onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "-->onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d(TAG, "-->onStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "-->onDestroy");
-        super.onDestroy();
-    }
-    private void initViews() {
-
-        mNewLoginButton = (Button) findViewById(R.id.qq);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_container);
-        View.OnClickListener listener = new NewClickListener();
-        for (int i = 0; i < linearLayout.getChildCount(); i++) {
-            View view = linearLayout.getChildAt(i);
-            if (view instanceof Button) {
-                view.setOnClickListener(listener);
-            }
-        }
-        mUserInfo = (TextView) findViewById(R.id.user_nickname);
-        mUserLogo = (de.hdodenhof.circleimageview.CircleImageView) findViewById(R.id.user_logo);
-        updateLoginButton();
-    }
-
-    private void updateLoginButton() {
-        if (mQQAuth != null && mQQAuth.isSessionValid()) {
-            /*mNewLoginButton.setTextColor(Color.RED);*/
-            mNewLoginButton.setText("");
-        } else {
-           /* mNewLoginButton.setTextColor(Color.BLUE);*/
-            mNewLoginButton.setText("");
-        }
-    }
-    private void updateUserInfo() {
-        if (mQQAuth != null && mQQAuth.isSessionValid()) {
-            IUiListener listener = new IUiListener() {
-
-                @Override
-                public void onError(UiError e) {
-                    // TODO Auto-generated method stub
-
-                }
-
-                @Override
-                public void onComplete(final Object response) {
-                    Message msg = new Message();
-                    msg.obj = response;
-                    msg.what = 0;
-                    mHandler.sendMessage(msg);
-                    new Thread() {
-
-                        @Override
-                        public void run() {
-                            JSONObject json = (JSONObject) response;
-                            if (json.has("figureurl")) {
-                                Bitmap bitmap = null;
-                                try {
-                                    bitmap = Util.getbitmap(json
-                                            .getString("figureurl_qq_2"));
-                                } catch (JSONException e) {
-                                }
-                                Message msg = new Message();
-                                msg.obj = bitmap;
-                                msg.what = 1;
-                                mHandler.sendMessage(msg);
-                            }
-                        }
-
-                    }.start();
-                }
-                @Override
-                public void onCancel() {
-                }
-            };
-            mInfo = new UserInfo(this, mQQAuth.getQQToken());
-            mInfo.getUserInfo(listener);
-        } else {
-            mUserInfo.setText("");
-            mUserInfo.setVisibility(android.view.View.GONE);
-            mUserLogo.setVisibility(android.view.View.GONE);
-        }
-    }
-    Handler mHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 0) {
-                JSONObject response = (JSONObject) msg.obj;
-                if (response.has("nickname")) {
-                    try {
-                        /*mUserInfo.setVisibility(android.view.View.VISIBLE);*/
-                        mUserInfo.setText(response.getString("nickname"));
-                    } catch (JSONException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                }
-            } else if (msg.what == 1) {
-                Bitmap bitmap = (Bitmap) msg.obj;
-                mUserLogo.setImageBitmap(bitmap);
-               /* mUserLogo.setVisibility(android.view.View.VISIBLE);*/
-            }
-        }
-
-    };
-
-    private void onClickLogin() {
-        if (!mQQAuth.isSessionValid()) {
-            IUiListener listener = new BaseUiListener() {
-                @Override
-                protected void doComplete(JSONObject values) {
-                    updateUserInfo();
-                    updateLoginButton();
-                    //跳转到圈子页面
-                    Utils.flag = 5;
-                    Intent intent = new Intent(Login_Activity.this,BabyMainActivity.class);
-                    startActivity(intent);
-                }
-            };
-            mQQAuth.login(this, "all", listener);
-            // mTencent.loginWithOEM(this, "all",
-            // listener,"10000144","10000144","xxxx");
-            mTencent.login(this, "all", listener);
-        } else {
-            mQQAuth.logout(this);
-            updateUserInfo();
-            updateLoginButton();
-        }
-    }
-
-    public static boolean ready(Context context) {
-        if (mQQAuth == null) {
-            return false;
-        }
-        boolean ready = mQQAuth.isSessionValid()
-                && mQQAuth.getQQToken().getOpenId() != null;
-        if (!ready)
-            Toast.makeText(context, "login and get openId first, please!",
-                    Toast.LENGTH_SHORT).show();
-        return ready;
-    }
-
-
-    private class BaseUiListener implements IUiListener {
-
-        @Override
-        public void onComplete(Object response) {
-           /* 进行json字符串的解析并传递到数据库*/
-         /*   Util.showResultDialog(Login_Activity.this, response.toString(),
-                    "登录成功");*/
-            doComplete((JSONObject) response);
-        }
-
-        protected void doComplete(JSONObject values) {
-
-        }
-
-        @Override
-        public void onError(UiError e) {
-            Util.toastMessage(Login_Activity.this, "onError: " + e.errorDetail);
-            Util.dismissDialog();
-        }
-
-        @Override
-        public void onCancel() {
-            Util.toastMessage(Login_Activity.this, "onCancel: ");
-            Util.dismissDialog();
-        }
-    }
-
-    class NewClickListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Context context = v.getContext();
-            Class<?> cls = null;
-            switch (v.getId()) {
-                case R.id.qq:
-                    onClickLogin();
-                    return;
-            }
-            if (cls != null) {
-                Intent intent = new Intent(context, cls);
-                context.startActivity(intent);
-            }
-        }
-    }
-}
-   /* login_btn = (Button)findViewById(R.id.login_login_btn);
+        login_btn = (Button)findViewById(R.id.login_login_btn);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
                 startActivity(intent);
             }
-        });*/
+        });
+
+    }
+}
