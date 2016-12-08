@@ -21,11 +21,13 @@ public class  FridListAdapter extends BaseAdapter {
 	private ArrayList<Circle> mList;
 	private LayoutInflater mInflater;
 	private Context mContext;
+	private ArrayList<String> headList;
 	
-	public FridListAdapter(Context context, ArrayList<Circle> list) {
+	public FridListAdapter(Context context, ArrayList<Circle> list,ArrayList<String> headList) {
 		mInflater = LayoutInflater.from(context);
 		mContext=context;
 		this.mList=list;
+		this.headList=headList;
 	}
 
 	@Override
@@ -60,7 +62,13 @@ public class  FridListAdapter extends BaseAdapter {
 		final Circle bean = getItem(position);
 		//加载网络图片
 		Log.d("test", "getView:img ");
-		ImageLoader.getInstance().displayImage(bean.avator, holder.avator);
+
+		Log.e("avatorStr:",headList.toString());
+		if (headList!=null && position<headList.size() && !headList.get(position).equals("")){
+			Log.e("avator:",headList.get(position));
+			ImageLoader.getInstance().displayImage(headList.get(position), holder.avator);
+		}
+//		ImageLoader.getInstance().displayImage(bean.avator, holder.avator);
 		Log.d("test", "getView:img2 ");
 		holder.name.setText(bean.name);
 		holder.content.setText(bean.content);

@@ -88,14 +88,14 @@ public class GrowthFragment extends Fragment{
 
     public void getUserInfo(final CircleImageView head,final TextView name){
         //获取用户名和用户头像
-        client.get(getActivity(),Utils.urlStr+"user/getUserInfoById/1",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"user/getUserInfoById/1",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
                     Log.e(response.getString("set_id"),response.getString("set_name"));
                     name.setText(response.getString("set_name"));
-                    ImageLoader.getInstance().displayImage(Utils.urlStr+response.getString("set_dp"),head);
+                    ImageLoader.getInstance().displayImage(Utils.StrUrl+response.getString("set_dp"),head);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -104,7 +104,7 @@ public class GrowthFragment extends Fragment{
     }
     public void getData(){
         //获取成长记录列表
-        client.get(getActivity(),Utils.urlStr+"grow/test",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"grow/test",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -115,7 +115,7 @@ public class GrowthFragment extends Fragment{
                         object=response.getJSONObject(i);
                         growth_classes.add(new Growth_Class(object.getLong("grow_id"),object.getString("grow_year"),
                                 object.getString("grow_week"),object.getString("grow_time"),
-                                object.getString("grow_content"), Utils.urlStr+object.getString("grow_picture")));
+                                object.getString("grow_content"), Utils.StrUrl+object.getString("grow_picture")));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

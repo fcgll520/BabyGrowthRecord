@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="6dp" >
-
     <com.baby.babygrowthrecord.PullToRefresh.RefreshableView
         android:id="@+id/refreshable_view_circle"
         android:layout_width="match_parent"
