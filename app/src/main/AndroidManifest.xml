@@ -40,8 +40,7 @@
                 <!-- 100380359 100381104 222222 -->
             </intent-filter>
         </activity>
-
-        <!--<activity android:name=".user.UserActivity"/>-->
+        <activity android:name=".MainActivity.BabyMainActivity"/>
         <activity android:name=".user.UserActivity" />
         <activity android:name=".user.UserAlbum" />
         <activity android:name=".user.UserAlbumBigImg" />
@@ -54,7 +53,6 @@
         <activity android:name=".user.UserSettingPwd" />
         <activity android:name=".Growth.Growth_Activity_Bron" />
         <activity android:name=".Growth.Growth_Activity" />
-        <activity android:name=".MainActivity.BabyMainActivity" />
         <activity android:name=".Mother.CardMessage" />
         <activity android:name=".Circle.ImagePagerActivity" />
         <activity android:name=".Circle.CircleMainActivity" />
