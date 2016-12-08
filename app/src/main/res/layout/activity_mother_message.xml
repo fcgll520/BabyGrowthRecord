@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="@color/colorPrimary">
         <ImageView
             android:id="@+id/back"
@@ -23,9 +23,10 @@
             android:textSize="20dp"
             android:textColor="#ffffff"
             android:layout_gravity="center"
-            android:layout_marginLeft="140dp"/>
+            android:layout_marginLeft="125dp"/>
     </LinearLayout>
     <TextView
+        android:id="@+id/tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="纸尿裤的选择和使用"
@@ -41,16 +42,30 @@
             android:background="@drawable/mother_shape1"
             android:text="原创" />
         <TextView
-            android:layout_width="260dp"
+            android:id="@+id/tv2"
+            android:layout_width="100dp"
+            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:text="   2016-11-22      Java组成员      妈妈帮"
+            android:text="   2016-11-22"
+            android:textSize="15dp"/>
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="  Java组成员"
+            android:textSize="15dp"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="妈妈帮"
             android:textSize="15dp"/>
     </LinearLayout>
     <ImageView
+        android:id="@+id/img1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/mother_pic2"/>
+        android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/tv4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="   纸尿裤选择不当事会对宝宝健康不利，执念苦选择时应注意以下几个问题：
