@@ -51,6 +51,7 @@ public class  QuanziFragment extends ListFragment {
 //    private RefreshableView refreshableView;
     private AsyncHttpClient client=new AsyncHttpClient();
     private ArrayList<Circle> circleList=new ArrayList<>();
+    private RefreshableView refreshableView;
 
 
     @Nullable
@@ -59,17 +60,19 @@ public class  QuanziFragment extends ListFragment {
         view =  inflater.inflate(R.layout.activity_circle_main, container, false);
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         setColor(getActivity(), Color.parseColor("#63b68b") );
-//        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view);
+        //下拉刷新
+        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_circle);
         getData();
         mAdapter = new FridListAdapter(getActivity(), circleList);
         setListAdapter(mAdapter);
-//        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                    getData();
-//                refreshableView.finishRefreshing();
-//            }
-//        }, 0);
+        //下拉刷新
+        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                refreshableView.finishRefreshing();
+            }
+        }, 0);
         return view;
     }
 

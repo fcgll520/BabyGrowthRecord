@@ -19,6 +19,7 @@ import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.Growth.Growth_Activity_Bron;
 import com.baby.babygrowthrecord.Growth.Growth_Class;
 import com.baby.babygrowthrecord.Growth.Growth_MyAdapter;
+import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
@@ -39,6 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class GrowthFragment extends Fragment{
     private View view;
+    private RefreshableView refreshableView;
     private ArrayList<Growth_Class> growth_classes = new ArrayList<>();
     private ListView growth_listview;
     private Growth_MyAdapter myAdapter;
@@ -50,6 +52,9 @@ public class GrowthFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.growth_listview, container, false);
+        //下拉刷新
+        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_growth);
+
         growth_head=(CircleImageView)view.findViewById(R.id.growth_head);
         growth_name=(TextView) view.findViewById(R.id.growth_name);
         getUserInfo(growth_head,growth_name);
@@ -75,6 +80,14 @@ public class GrowthFragment extends Fragment{
                 startActivityForResult(intent,1);
             }
         });
+        //下拉刷新
+        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+                refreshableView.finishRefreshing();
+            }
+        }, 0);
         return view;
     }
 
