@@ -16,7 +16,7 @@
     <LinearLayout
         android:id="@+id/growth_head_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:layout_below="@+id/growth_title"
         android:paddingLeft="20dp">
@@ -32,7 +32,8 @@
             android:text="宝宝"
             android:textSize="@dimen/growth_title"
             android:textColor="#646161"
-            android:layout_margin="@dimen/growth_title"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
     <!--时间轴-->
     <LinearLayout
@@ -81,11 +82,18 @@
             android:gravity="center"
             android:padding="3dp"/>
     </LinearLayout>
-    <ListView
-        android:id="@+id/growth_listview"
+
+    <com.baby.babygrowthrecord.PullToRefresh.RefreshableView
+        android:id="@+id/refreshable_view_growth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <ListView
+            android:id="@+id/growth_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </ListView>
+        </ListView>
+    </com.baby.babygrowthrecord.PullToRefresh.RefreshableView>
+
 
 </LinearLayout>

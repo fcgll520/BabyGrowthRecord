@@ -22,8 +22,8 @@
 
     <!--GY-->
     <dimen name="growth_title">25dp</dimen>
-    <dimen name="growth_lenth">65dp</dimen>
-    <dimen name="growth_head">80dp</dimen>
+    <dimen name="growth_lenth">48dp</dimen>
+    <dimen name="growth_head">70dp</dimen>
     <dimen name="growth_padding">2dp</dimen>
     <dimen name="growth_time_things">15dp</dimen>
 </resources>

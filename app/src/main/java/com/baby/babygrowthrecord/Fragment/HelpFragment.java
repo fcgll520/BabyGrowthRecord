@@ -3,13 +3,13 @@ package com.baby.babygrowthrecord.Fragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceActivity;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.baby.babygrowthrecord.Mother.CardMessage;
@@ -69,7 +69,7 @@ public class HelpFragment extends Fragment{
 
         //网络请求
         //从服务器获取信息并解析
-        AsyncHttpClient client = new AsyncHttpClient();
+        AsyncHttpClient client =   new AsyncHttpClient();
         String url = "http://169.254.76.180:8080/essay/test";
 
         client.get(getActivity(), url, new JsonHttpResponseHandler(){
@@ -91,6 +91,24 @@ public class HelpFragment extends Fragment{
 
                 mListView.setAdapter(mAdapter);
             }
+            //            @Override
+//            public void onSuccess(int statusCode, PreferenceActivity.Header[] headers, JSONArray response) {
+//                super.onSuccess(statusCode, headers, response);
+//                System.out.println(response.toString());
+//                try {
+//                    for (int i=0;i<response.length();i++){
+//                        JSONObject data=response.getJSONObject(i);
+//                        GoogleCard mCard=new GoogleCard(data.getInt("essay_id"),data.getString("essay_title"),data.getString("essay_photo"));
+//                        mCards.add(mCard);
+//                        Log.e("essay","true");
+//                    }
+//                } catch (JSONException e) {
+//                    Log.e("essay","cuowu");
+//                    e.printStackTrace();
+//                }
+//
+//                mListView.setAdapter(mAdapter);
+//            }
         });
         return view;
     }
