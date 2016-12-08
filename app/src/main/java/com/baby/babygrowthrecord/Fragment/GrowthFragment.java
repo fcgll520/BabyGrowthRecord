@@ -80,7 +80,7 @@ public class GrowthFragment extends Fragment{
 
     public void getUserInfo(final CircleImageView head,final TextView name){
         //获取用户名和用户头像
-        client.get(getActivity(),Utils.urlStr+"user/testById/1",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.urlStr+"user/getUserInfoById/1",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
