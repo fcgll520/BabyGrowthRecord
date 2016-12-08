@@ -16,7 +16,7 @@
     <LinearLayout
         android:id="@+id/growth_head_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="72dp"
         android:orientation="horizontal"
         android:layout_below="@+id/growth_title"
         android:paddingLeft="20dp">
@@ -81,11 +81,14 @@
             android:gravity="center"
             android:padding="3dp"/>
     </LinearLayout>
-    <ListView
-        android:id="@+id/growth_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ListView>
-
+    <com.baby.babygrowthrecord.PullToRefresh.RefreshableView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/refreshable_view_growth">
+        2<ListView
+            android:id="@+id/growth_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </com.baby.babygrowthrecord.PullToRefresh.RefreshableView>
 </LinearLayout>

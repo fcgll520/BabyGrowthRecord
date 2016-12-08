@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.baby.babygrowthrecord.Growth.Growth_Activity;
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 
 
@@ -26,7 +27,7 @@ public class Login_Activity extends AppCompatActivity {
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login_Activity.this, Growth_Activity.class);
+                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
                 startActivity(intent);
             }
         });
