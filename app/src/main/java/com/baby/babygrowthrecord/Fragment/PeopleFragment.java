@@ -48,16 +48,21 @@ public class PeopleFragment extends Fragment{
                     i.setClass(getActivity(), UserSettingHeadPic.class);
                     startActivity(i);
                     break;
-                case R.id.tv_user_uName:
+               /* case R.id.tv_user_uName:
                     i.setClass(getActivity(), UserSettingName.class);
                     startActivity(i);
                     break;
                 case R.id.tv_user_babyAge:
                     i.setClass(getActivity(), UserInfoManage.class);
                     startActivity(i);
-                    break;
+                    break;*/
                 case R.id.rl_user_album:
                     i.setClass(getActivity(),UserAlbum.class);
+                case R.id.tv_user_collect:
+                    i.setClass(getActivity(), UserCollection.class);
+                    startActivity(i);
+                    break;
+                case R.id.tv_user_setting:
                     startActivity(i);
                     break;
                 case R.id.rl_user_infoMange:
@@ -80,16 +85,7 @@ public class PeopleFragment extends Fragment{
                     i.setClass(getActivity(),UserInfoManage.class);
                     startActivity(i);
                     break;
-                case R.id.tv_user_collect:
-                    i.setClass(getActivity(), UserCollection.class);
-                    startActivity(i);
-                    break;
-                case R.id.tv_user_setting:
-                    i.setClass(getActivity(),UserSetting.class);
-                    startActivity(i);
-                    break;
-                default:
-                    break;
+
             }
         }
     };

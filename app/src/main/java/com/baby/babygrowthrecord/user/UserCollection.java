@@ -53,7 +53,7 @@ public class UserCollection extends Activity {
     private void getItems()
     {
 
-        //第一张卡片
+       /* //第一张卡片
         GoogleCard mCard=new GoogleCard("纸尿裤的选择和使用",R.drawable.mother_item1);
         mCards.add(mCard);
 
@@ -67,7 +67,7 @@ public class UserCollection extends Activity {
 
         //第四张卡片
         GoogleCard mCard3=new GoogleCard("纸尿裤的选择和使用",R.drawable.mother_item1);
-        mCards.add(mCard3);
+        mCards.add(mCard3);*/
     }
     public void backOnClick(View view){
         finish();

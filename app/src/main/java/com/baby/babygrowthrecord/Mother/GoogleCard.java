@@ -5,11 +5,13 @@ package com.baby.babygrowthrecord.Mother;
  */
 public class GoogleCard {
 
+        private int id;
         private String mDescription;
-        private int mDrawable;
+        private String mDrawable;
 
-        public GoogleCard(String mDescription,int mDrawable)
+        public GoogleCard(int essay_id, String mDescription, String mDrawable)
         {
+            this.id=essay_id;
             this.mDescription=mDescription;
             this.mDrawable=mDrawable;
         }
@@ -24,14 +26,22 @@ public class GoogleCard {
             this.mDescription = mDescription;
         }
 
-        public int getDrawable()
+        public String getDrawable()
         {
             return mDrawable;
         }
 
-        public void setDrawable(int mDrawable)
+        public void setDrawable(String mDrawable)
         {
             this.mDrawable = mDrawable;
         }
+
+         public int getId() {
+            return id;
+         }
+
+         public void setId(int id) {
+            this.id = id;
+         }
 
 }
