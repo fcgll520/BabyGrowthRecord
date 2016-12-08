@@ -21,6 +21,7 @@ import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
+import com.baby.babygrowthrecord.util.Util;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -49,8 +50,8 @@ public class  QuanziFragment extends ListFragment {
     public ImageLoader imageLoader = ImageLoader.getInstance();
     private Context context;
 //    private RefreshableView refreshableView;
-    private AsyncHttpClient client=new AsyncHttpClient();
     private ArrayList<Circle> circleList=new ArrayList<>();
+    private ArrayList<String> headPicList=new ArrayList<>();  //头像动态数组
 
 
     @Nullable
@@ -61,7 +62,7 @@ public class  QuanziFragment extends ListFragment {
         setColor(getActivity(), Color.parseColor("#63b68b") );
 //        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view);
         getData();
-        mAdapter = new FridListAdapter(getActivity(), circleList);
+        mAdapter = new FridListAdapter(getActivity(), circleList,headPicList);
         setListAdapter(mAdapter);
 //        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
 //            @Override
@@ -75,24 +76,47 @@ public class  QuanziFragment extends ListFragment {
 
     //获取服务器端数据
     public void getData(){
-        client.get(getActivity(),Utils.urlStr+"circle/test",new JsonHttpResponseHandler(){
+        AsyncHttpClient client=new AsyncHttpClient();
+        //获取圈子中用户的头像
+        client.get(getActivity(),Utils.StrUrl+"circle/getFriendAvator",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
-                JSONObject object;
-                String temp;
-                ArrayList<Circle> list=new ArrayList<Circle>();
-                //获取客户端头像图片路径
-
-
                 //解析Json串
+                JSONObject object;
+                ArrayList<String> tempList=new ArrayList<String>();
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
-                        if (object.getString("friend_photo").equals("null")){
-                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("friend_name"), object.getString("friend_content")));
+                        tempList.add(Utils.StrUrl+object.getString("set_dp"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                int k=response.length()-1;
+                for (int i=0;i<tempList.size()&&k>=0;i++,k--){
+                    headPicList.add(i,tempList.get(k));
+                }
+                setListAdapter(mAdapter);
+            }
+        });
+        //获取动态内容
+        client.get(getActivity(),Utils.StrUrl+"circle/test",new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                //解析Json串
+                JSONObject object;
+                ArrayList<Circle> list=new ArrayList<Circle>();
+                for (int i=0;i<response.length();i++){
+                    try {
+                        object=response.getJSONObject(i);
+                        if (object.getString("friend_photo").equals("null")){      //没有照片的动态
+                            list.add(i,new Circle(object.getInt("cir_id"),"",
+                                    object.getString("friend_name"), object.getString("friend_content")));
                         }else {
-                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("friend_name"), object.getString("friend_content"),new String[]{Utils.urlStr+object.getString("friend_photo")}));
+                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("friend_name"),
+                                    object.getString("friend_content"),new String[]{Utils.StrUrl+object.getString("friend_photo")}));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
