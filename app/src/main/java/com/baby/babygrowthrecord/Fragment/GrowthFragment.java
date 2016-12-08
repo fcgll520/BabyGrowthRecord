@@ -16,6 +16,7 @@ import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.Growth.Growth_Activity_Bron;
 import com.baby.babygrowthrecord.Growth.Growth_Class;
 import com.baby.babygrowthrecord.Growth.Growth_MyAdapter;
+import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.google.gson.Gson;
 
@@ -29,10 +30,15 @@ public class GrowthFragment extends Fragment{
     private ArrayList<Growth_Class> growth_classes = new ArrayList<>();
     private ListView growth_listview;
     private Growth_MyAdapter myAdapter;
+    private RefreshableView refreshableView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         view =  inflater.inflate(R.layout.growth_listview, container, false);
+        //        下拉刷新
+        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_growth);
         getDate();
         myAdapter = new Growth_MyAdapter(getActivity(),growth_classes);
         //3.定义item布局，使用Android内置ListView的item布局
@@ -40,6 +46,14 @@ public class GrowthFragment extends Fragment{
         //4.根据数据源与item布局定义adapter
         //5.得到、ListView对象并设置adapter
         growth_listview.setAdapter(myAdapter);
+//     下拉刷新
+        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDate();
+                refreshableView.finishRefreshing();
+            }
+        }, 0);
         //6.点击事件
         growth_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
