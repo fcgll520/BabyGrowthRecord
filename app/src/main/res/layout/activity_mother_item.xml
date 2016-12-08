@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/Description"
-        android:src="@drawable/mother_pic2"
         android:scaleType="center" />
 
 </LinearLayout>

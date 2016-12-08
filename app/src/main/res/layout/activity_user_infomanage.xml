@@ -52,6 +52,7 @@
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="宝宝1号"
                 android:layout_margin="@dimen/userInfo_tv_et_margin"/>
         </LinearLayout>
         <LinearLayout
@@ -69,6 +70,7 @@
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="2个月"
                 android:layout_margin="@dimen/userInfo_tv_et_margin"/>
         </LinearLayout>
         <LinearLayout
@@ -86,6 +88,7 @@
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="40cm"
                 android:layout_margin="@dimen/userInfo_tv_et_margin"/>
         </LinearLayout>
         <LinearLayout
@@ -103,6 +106,7 @@
                 android:background="@android:drawable/editbox_background_normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="8kg"
                 android:layout_margin="@dimen/userInfo_tv_et_margin"/>
         </LinearLayout>
     </LinearLayout>
