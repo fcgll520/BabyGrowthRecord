@@ -32,7 +32,8 @@
             android:text="？？"
             android:textSize="@dimen/growth_title"
             android:textColor="#646161"
-            android:layout_margin="@dimen/growth_title"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"/>
     </LinearLayout>
     <!--时间轴-->
     <LinearLayout

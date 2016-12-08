@@ -15,7 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.baby.babygrowthrecord.Fragment.Utils;
+
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
@@ -38,6 +40,7 @@ public class Login_Activity extends Activity {
     private UserInfo mInfo;
     private Tencent mTencent;
     private final String APP_ID = "1105869088";// 测试时使用，真正发布的时候要换成自己的APP_ID
+    private Button login_btn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,15 @@ public class Login_Activity extends Activity {
         // 固定竖屏
         setContentView(R.layout.login);
         initViews();
+
+        login_btn = (Button)findViewById(R.id.login_login_btn);
+        login_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -192,7 +204,7 @@ public class Login_Activity extends Activity {
                 @Override
                 protected void doComplete(JSONObject values) {
                     updateUserInfo();
-                    //跳转
+                    //跳转到个人中心界面
                     Utils.flag = 5;
                     Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
                     startActivity(intent);
