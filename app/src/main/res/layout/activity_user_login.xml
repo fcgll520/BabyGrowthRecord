@@ -6,25 +6,6 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:onClick="backOnClick"
-            android:layout_margin="@dimen/actionBarImgMargin"
-            android:src="@drawable/users_back"
-            android:layout_width="@dimen/actionBarImgSize"
-            android:layout_height="@dimen/actionBarImgSize" />
-        <TextView
-            android:text="用户登录"
-            android:textColor="@color/userBarBigText"
-            android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
         android:orientation="vertical"
         android:layout_margin="30dp"
         android:gravity="center"
@@ -87,5 +68,25 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:onClick="backOnClick"
+            android:layout_margin="@dimen/actionBarImgMargin"
+            android:src="@drawable/users_back"
+            android:layout_width="@dimen/actionBarImgSize"
+            android:layout_height="@dimen/actionBarImgSize" />
+        <TextView
+            android:text="用户登录"
+            android:textColor="@color/userBarBigText"
+            android:textSize="@dimen/actionBarTextSize"
+            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </LinearLayout>

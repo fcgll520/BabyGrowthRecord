@@ -6,15 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".user.UserActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="150dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_circlePic"
             android:src="@drawable/user_pic"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_margin="20dp"
             android:layout_centerVertical="true"
             app:civ_border_width="1dp"
@@ -48,6 +49,7 @@
 
         </LinearLayout>
     </RelativeLayout>
+
     <LinearLayout
         android:background="@drawable/users_list_ll"
         android:orientation="vertical"
