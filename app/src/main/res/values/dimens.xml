@@ -5,15 +5,17 @@
 
     <!--USERS FIRST PAGE-->
     <dimen name="head_textSize">18dp</dimen>
-    <dimen name="list_textSize">25dp</dimen>
+    <dimen name="list_textSize">18dp</dimen>
     <dimen name="list_textMargin">10dp</dimen>
-    <dimen name="list_iconSize">30dp</dimen>
+    <dimen name="list_iconSize">20dp</dimen>
+    <dimen name="list_item_marginLeft">10dp</dimen>
 
     <!--USERS ALL-->
-    <dimen name="actionBarTextSize">28dp</dimen>
+    <dimen name="actionBarTextSize">23dp</dimen>
     <dimen name="actionBarSmallText">20dp</dimen>
     <dimen name="actionBarImgSize">38dp</dimen>
     <dimen name="actionBarImgMargin">10dp</dimen>
+    <dimen name="actionBarTextMargin">15dp</dimen>
     <!--USERS ALBUM-->
     <!--USERS INFO-->
     <dimen name="userInfo_ll_margin">5dp</dimen>

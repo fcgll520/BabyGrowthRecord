@@ -81,12 +81,13 @@ public class UserAlbumAdapter extends RecyclerView.Adapter<UserAlbumAdapter.Base
         void setData(Object data) {
             if (data !=null){
                 String url=(String)data;
-                Glide.with(itemView.getContext())
-                        .load(url)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.drawable.empty_photo)
-                        .crossFade()
-                        .into(imageView);
+                ImageLoader.getInstance().displayImage(url,imageView);
+//                Glide.with(itemView.getContext())
+//                        .load(url)
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .placeholder(R.drawable.empty_photo)
+//                        .crossFade()
+//                        .into(imageView);
             }
         }
     }
