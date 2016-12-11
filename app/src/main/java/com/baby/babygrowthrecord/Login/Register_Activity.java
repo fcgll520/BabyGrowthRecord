@@ -114,6 +114,7 @@ public class Register_Activity extends Activity {
             btn.setBackgroundColor(Color.parseColor("#B6B6D8"));
             btn.setClickable(false);
             btn.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
+
         }
 
         @Override
