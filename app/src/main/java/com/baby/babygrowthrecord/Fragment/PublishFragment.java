@@ -12,7 +12,7 @@ import com.baby.babygrowthrecord.R;
  * Created by asus on 2016/11/22.
  */
 public class PublishFragment extends AppCompatActivity{
-    private ImageView composer_btn,composer_btn1,composer_btn2;
+    private ImageView composer_btn,composer_btn1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,14 +27,14 @@ public class PublishFragment extends AppCompatActivity{
     private void getViews(){
         composer_btn = (ImageView)findViewById(R.id.composer_btn);
         composer_btn1 = (ImageView)findViewById(R.id.composer_btn1);
-        composer_btn2 = (ImageView)findViewById(R.id.composer_btn2);
+
     }
     //注册事件监听器
     private void setListener(){
         MyListener listener = new MyListener();
         composer_btn.setOnClickListener(listener);
         composer_btn1.setOnClickListener(listener);
-        composer_btn2.setOnClickListener(listener);
+
     }
     class MyListener implements View.OnClickListener{
         @Override
@@ -47,10 +47,6 @@ public class PublishFragment extends AppCompatActivity{
                 case R.id.composer_btn1:
                     Intent intent1 = new Intent(PublishFragment.this,PublishActivity.class);
                     startActivity(intent1);
-                    break;
-                case R.id.composer_btn2:
-                    Intent intent2 = new Intent(PublishFragment.this,PublishActivity.class);
-                    startActivity(intent2);
                     break;
             }
         }
