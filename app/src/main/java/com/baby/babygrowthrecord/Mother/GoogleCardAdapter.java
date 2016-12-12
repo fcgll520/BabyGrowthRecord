@@ -55,8 +55,18 @@ public class GoogleCardAdapter extends BaseAdapter {
         mHolder.Card_Title.setText(mCards.get(Index).getDescription());
         mHolder.Card_Pic=(ImageView)mView.findViewById(R.id.Card_Pic);
 
+        mHolder.v_ancho=mView.findViewById(R.id.v_ancho);
+
         ImageLoader imageLoader=ImageLoader.getInstance();
         imageLoader.displayImage(mCards.get(Index).getDrawable(),mHolder.Card_Pic);
+
+        mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                HelpFragment.pop.showAsDropDown(view.findViewById(R.id.v_ancho));
+                return true;
+            }
+        });
         return mView;
     }
 
@@ -64,6 +74,7 @@ public class GoogleCardAdapter extends BaseAdapter {
     {
         TextView Card_Title;
         ImageView Card_Pic;
+        View v_ancho;
     }
 
 }

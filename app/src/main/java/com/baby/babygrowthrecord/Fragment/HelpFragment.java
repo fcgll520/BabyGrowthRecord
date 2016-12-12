@@ -2,6 +2,7 @@ package com.baby.babygrowthrecord.Fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.baby.babygrowthrecord.Mother.CardMessage;
@@ -38,13 +40,24 @@ public class HelpFragment extends Fragment{
     private List<GoogleCard> mCards=new ArrayList<GoogleCard>();
     private GoogleCardAdapter mAdapter;
     private RefreshableView refreshableView;
+    public static PopupWindow pop;
 
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.activity_mother_main, container, false);
-        //下拉刷新
-        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_help);
+
+        //显示收藏按钮
+        LayoutInflater inflater1=LayoutInflater.from(getActivity());
+        View popview=inflater1.inflate(R.layout.activity_mother_itme_collection,null);
+        //创建popupwindow对象
+        pop=new PopupWindow(popview, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,false);
+        //设置参数实现点击外面消失
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        //设置点击窗口外边消失
+        pop.setOutsideTouchable(true);
+        //设置此参数获得焦点，否则无法点击
+        pop.setFocusable(true);
 
         getItems();
         //获取listview
@@ -63,14 +76,7 @@ public class HelpFragment extends Fragment{
                 startActivity(intent);
             }
         });
-        //下拉刷新
-        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getItems();
-                refreshableView.finishRefreshing();
-            }
-        }, 0);
+
         return view;
     }
 

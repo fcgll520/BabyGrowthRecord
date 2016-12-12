@@ -54,7 +54,7 @@ public class PeopleFragment extends Fragment{
                     i.setClass(getActivity(), UserSettingName.class);
                     startActivity(i);
                     break;
-                case R.id.tv_user_babyAge:
+                case R.id.tv_user_babyName:
                     i.setClass(getActivity(), UserInfoManage.class);
                     startActivity(i);
                     break;
@@ -117,7 +117,7 @@ public class PeopleFragment extends Fragment{
     private void init(){
         ivHeadPic = (CircleImageView) view.findViewById(R.id.img_circlePic);
         tvUname = (TextView) view.findViewById(R.id.tv_user_uName);
-        tvBabyAge = (TextView) view.findViewById(R.id.tv_user_babyAge);
+        tvBabyAge = (TextView) view.findViewById(R.id.tv_user_babyName);
 
         rlAlbum=(RelativeLayout)view.findViewById(R.id.rl_user_album);
         rlInfoManage=(RelativeLayout)view.findViewById(R.id.rl_user_infoMange);
