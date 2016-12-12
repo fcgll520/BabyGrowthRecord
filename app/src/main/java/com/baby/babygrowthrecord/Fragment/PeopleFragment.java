@@ -31,8 +31,6 @@ public class PeopleFragment extends Fragment{
     private CircleImageView ivHeadPic;
     private TextView tvUname;
     private TextView tvBabyAge;
-    private TextView tvLogin;
-    private TextView tvRegister;
 
     private RelativeLayout rlAlbum;
     private RelativeLayout rlInfoManage;
@@ -58,14 +56,6 @@ public class PeopleFragment extends Fragment{
                     break;
                 case R.id.tv_user_babyAge:
                     i.setClass(getActivity(), UserInfoManage.class);
-                    startActivity(i);
-                    break;
-                case R.id.tv_user_login:
-                    i.setClass(getActivity(), Login_Activity.class);
-                    startActivity(i);
-                    break;
-                case R.id.tv_user_register:
-                    i.setClass(getActivity(), Register_Activity.class);
                     startActivity(i);
                     break;
                 case R.id.rl_user_album:
@@ -120,23 +110,14 @@ public class PeopleFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //自动登陆,成功的话
-        autoLogin();
-        if (isLogin){
-            llLogin.setVisibility(View.VISIBLE);
-            llUnLogin.setVisibility(View.INVISIBLE);
-        }else {
-            llLogin.setVisibility(View.INVISIBLE);
-            llUnLogin.setVisibility(View.VISIBLE);
-        }
+        init();
+
     }
 
     private void init(){
         ivHeadPic = (CircleImageView) view.findViewById(R.id.img_circlePic);
         tvUname = (TextView) view.findViewById(R.id.tv_user_uName);
         tvBabyAge = (TextView) view.findViewById(R.id.tv_user_babyAge);
-        tvLogin=(TextView)view.findViewById(R.id.tv_user_login);
-        tvRegister=(TextView)view.findViewById(R.id.tv_user_register);
 
         rlAlbum=(RelativeLayout)view.findViewById(R.id.rl_user_album);
         rlInfoManage=(RelativeLayout)view.findViewById(R.id.rl_user_infoMange);
@@ -149,14 +130,11 @@ public class PeopleFragment extends Fragment{
         tvSetting=(TextView)view.findViewById(R.id.tv_user_setting);
 
         llLogin=(LinearLayout)view.findViewById(R.id.ll_user_hasLogin);
-        llUnLogin=(LinearLayout)view.findViewById(R.id.ll_user_unLogin);
 
         //绑定监听器
         ivHeadPic.setOnClickListener(myClickListener);
         tvUname.setOnClickListener(myClickListener);
         tvBabyAge.setOnClickListener(myClickListener);
-        tvLogin.setOnClickListener(myClickListener);
-        tvRegister.setOnClickListener(myClickListener);
 
         rlAlbum.setOnClickListener(myClickListener);
         rlInfoManage.setOnClickListener(myClickListener);

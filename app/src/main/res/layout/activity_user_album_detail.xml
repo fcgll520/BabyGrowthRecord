@@ -19,7 +19,7 @@
             android:text="照片详情"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_marginTop="@dimen/actionBarTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

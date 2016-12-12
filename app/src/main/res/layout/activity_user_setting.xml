@@ -19,7 +19,7 @@
             android:text="设置"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_marginTop="@dimen/actionBarTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -28,7 +28,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:showDividers="middle"
+        android:divider="@drawable/divider">
         <RelativeLayout
             android:id="@+id/rv_userSetting_pic"
             style="@style/listRLstyle">
@@ -37,7 +38,16 @@
                 android:text="头像"
                 android:textSize="@dimen/list_textSize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_marginLeft" />
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/user_arrow"
+                android:background="@android:color/transparent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="50dp"
+                android:alpha="0.1"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rv_userSetting_name"
@@ -47,7 +57,8 @@
                 android:text="昵称"
                 android:textSize="@dimen/list_textSize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_marginLeft"/>
             <TextView
                 android:id="@+id/tv_userSetting_uName"
                 android:text="宝宝抱"
@@ -55,17 +66,8 @@
                 android:textColor="@android:color/darker_gray"
                 android:gravity="right"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rv_userSetting_skin"
-            style="@style/listRLstyle">
-            <TextView
-                android:id="@+id/tv_userSetting_skin"
-                android:text="皮肤"
-                android:textSize="@dimen/list_textSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rv_userSetting_pwd"
@@ -75,7 +77,16 @@
                 android:text="修改密码"
                 android:textSize="@dimen/list_textSize"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_marginLeft" />
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/user_arrow"
+                android:background="@android:color/transparent"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginRight="50dp"
+                android:alpha="0.1"/>
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

@@ -1,7 +1,9 @@
 package com.baby.babygrowthrecord.Fragment;
 
+
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,28 +13,26 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.Button;;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+
 
 public class PublishActivity extends AppCompatActivity {
 
 
     private Button button1;
     private Button button2;
-    private ImageView imageView_camera,imageView_shipin;
+    private ImageView imageView_camera;
     private ImageView image_view;
     private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private static final String TAG = "MyActivity";
 
-    private static final int VIDEO_CAPTURE = 0;
     private static final int ALBUM_REQUEST_CODE = 1;
     private static final int CAMERA_REQUEST_CODE = 2;
     private static final int CROP_REQUEST_CODE = 4;
@@ -41,11 +41,12 @@ public class PublishActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
-        imageView_shipin = (ImageView)findViewById(R.id.income_shipin);
         imageView_camera = (ImageView)findViewById(R.id.income_camera);
         image_view= (ImageView)findViewById(R.id.image_view);
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,15 +95,6 @@ public class PublishActivity extends AppCompatActivity {
                                 }).create().show();
             }
         });
-        imageView_shipin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-                startActivityForResult(intent, VIDEO_CAPTURE);
-            }
-        });
-
     }
 
     @Override
@@ -138,21 +130,6 @@ public class PublishActivity extends AppCompatActivity {
                     image_view.setImageBitmap(photo); //把图片显示在ImageView控件上
                 }
                 break;
-            /*case VIDEO_CAPTURE:
-                if (resultCode == AppCompatActivity.RESULT_OK && requestCode == VIDEO_CAPTURE) {
-                    Uri uri = data.getData();
-                    Cursor cursor = this.getContentResolver().query(uri, null, null,
-                            null, null);
-                    if (cursor != null && cursor.moveToNext()) {
-                        int id = cursor.getInt(cursor.getColumnIndex(MediaStore.Video.VideoColumns._ID));
-                        String filePath = cursor.getString(cursor.getColumnIndex(MediaStore.Video.VideoColumns.DATA));
-                        Bitmap bitmap = MediaStore.Images.Thumbnails.getThumbnail(getContentResolver(), id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
-                        //ThumbnailUtils类2.2以上可用
-                        //Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(filePath, Thumbnails.MICRO_KIND);
-                        image_view.setImageBitmap(bitmap);
-                        cursor.close();
-                    }
-                }*/
             default:
                 break;
         }

@@ -14,6 +14,13 @@ import com.baby.babygrowthrecord.Mother.CardMessage;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.Mother.GoogleCardAdapter;
 import com.baby.babygrowthrecord.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +31,7 @@ import java.util.List;
 public class UserCollection extends Activity {
     private ListView mListView;
     private List<GoogleCard> mCards=new ArrayList<GoogleCard>();
+    private GoogleCardAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,7 @@ public class UserCollection extends Activity {
         //获取listview
         mListView=(ListView) findViewById(R.id.lv_userCollection);
         //配置适配器
-        GoogleCardAdapter mAdapter=new GoogleCardAdapter(UserCollection.this,mCards);
+        mAdapter = new GoogleCardAdapter(UserCollection.this,mCards);
         mListView.setAdapter(mAdapter);
         //给item设置监听
 
@@ -52,22 +60,28 @@ public class UserCollection extends Activity {
 
     private void getItems()
     {
+        //从服务器获取信息并解析
+        AsyncHttpClient client = new AsyncHttpClient();
 
-       /* //第一张卡片
-        GoogleCard mCard=new GoogleCard("纸尿裤的选择和使用",R.drawable.mother_item1);
-        mCards.add(mCard);
-
-        //第二张卡片
-        GoogleCard mCard1=new GoogleCard("就是他们让宝贝越来越笨！",R.drawable.mother_pic1);
-        mCards.add(mCard1);
-
-        //第三张卡片
-        GoogleCard mCard2=new GoogleCard("纸尿裤的选择和使用",R.drawable.mother_item1);
-        mCards.add(mCard2);
-
-        //第四张卡片
-        GoogleCard mCard3=new GoogleCard("纸尿裤的选择和使用",R.drawable.mother_item1);
-        mCards.add(mCard3);*/
+        client.get(UserCollection.this,Utils.StrUrl+"essay/test",new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                JSONObject object;
+                mCards.clear();
+                for (int i=0;i<response.length();i++){
+                    try {
+                        object=response.getJSONObject(i);
+                        GoogleCard card=new GoogleCard(object.getInt("essay_id"),object.getString("essay_title"),
+                                Utils.StrUrl+object.getString("essay_photo"));
+                        mCards.add(card);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                mListView.setAdapter(mAdapter);
+            }
+        });
     }
     public void backOnClick(View view){
         finish();

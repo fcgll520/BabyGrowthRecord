@@ -19,7 +19,7 @@
             android:text="宝宝信息管理"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_marginTop="@dimen/actionBarTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

@@ -20,7 +20,7 @@
             android:text="相册"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
+            android:layout_marginTop="@dimen/actionBarTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -30,41 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="4dp"/>
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<LinearLayout-->
-            <!--android:weightSum="2"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
 
-            <!--<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:id="@+id/ll_userAlbum_1"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:padding="5dp" />-->
-
-            <!--<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:id="@+id/ll_userAlbum_2"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:padding="5dp" />-->
-            <!--<LinearLayout-->
-                <!--android:orientation="vertical"-->
-                <!--android:id="@+id/ll_userAlbum_3"-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:padding="5dp" />-->
-        <!--</LinearLayout>-->
-    <!--</ScrollView>-->
-    <!--<ImageView-->
-    <!--android:id="@+id/iv_userAlbum_example"-->
-    <!--android:src="@drawable/user_default_child"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content" />-->
 </LinearLayout>
