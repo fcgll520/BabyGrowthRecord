@@ -2,9 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/tree1"
+    android:background="@drawable/background"
     android:orientation="vertical"
     android:weightSum="1">
+    <LinearLayout
+        android:id="@+id/login_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="7dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_weight="2"
+            android:background="@drawable/register_btn"
+            android:text="登陆"
+            android:textColor="#ffffff"
+            android:textSize="20dp"/>
+        <Button
+            android:id="@+id/login_login_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:background="@drawable/register_btn"
+            android:text="注册"
+            android:textSize="15dp"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,9 +54,10 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/edittext"
                 android:gravity="center"
+                android:layout_marginBottom="5dp"
                 android:hint="请输入用户名"
-                android:textColor="#9e9898"
-                android:textColorHint="#63b68b" />
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,9 +77,10 @@
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/edittext"
                 android:gravity="center"
+                android:layout_marginBottom="15dp"
                 android:hint="请输入密码"
-                android:textColor="#9e9898"
-                android:textColorHint="#63b68b" />
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"  />
 
         </LinearLayout>
 
@@ -61,32 +89,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/login_Pwd"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
-
             <Button
                 android:id="@+id/login_login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/login_btn"
                 android:text="登录"
                 android:textSize="15dp"
-                android:layout_weight="1"
-                android:layout_marginRight="15dp"
                 android:textColor="#ffffff" />
 
-            <Button
-                android:id="@+id/login_login_register"
-                android:layout_width="match_parent"
-                android:layout_height="38dp"
-                android:background="@drawable/login_btn"
-                android:text="注册"
-                android:textSize="15dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="15dp"
-                android:textColor="#ffffff" />
         </LinearLayout>
 
     </LinearLayout>
@@ -106,10 +122,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:layout_gravity="center_vertical"
-                android:text="其他登录方式"
-                android:textColor="#63b68b"
-                android:textSize="10dp" />
+                android:text="--------------------其他登录方式--------------------"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,12 +149,51 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/qq"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:background="@drawable/qq" />
+        <LinearLayout
+            android:id="@+id/login_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="6dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/WB"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/wb" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/qq"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/qq" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/WX"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/wx" />
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
