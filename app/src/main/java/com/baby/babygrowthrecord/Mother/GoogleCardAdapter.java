@@ -60,13 +60,13 @@ public class GoogleCardAdapter extends BaseAdapter {
         ImageLoader imageLoader=ImageLoader.getInstance();
         imageLoader.displayImage(mCards.get(Index).getDrawable(),mHolder.Card_Pic);
 
-       /* mView.setOnLongClickListener(new View.OnLongClickListener() {
+        mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 HelpFragment.pop.showAsDropDown(view.findViewById(R.id.v_ancho));
                 return true;
             }
-        });*/
+        });
         return mView;
     }
 
