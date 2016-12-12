@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,9 @@ public class UserAlbumAdapter extends RecyclerView.Adapter<UserAlbumAdapter.Base
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i=new Intent(imageView.getContext(),UserAlbumDetail.class);
+                    Intent i=new Intent(imageView.getContext(),UserAlbumBigImg.class);
+                    i.putExtra("imgUrl",urlList.get(getAdapterPosition()));
+                    Log.e("OneViewHolder:",getAdapterPosition()+"");
                     imageView.getContext().startActivity(i);
                 }
             });
@@ -81,12 +84,13 @@ public class UserAlbumAdapter extends RecyclerView.Adapter<UserAlbumAdapter.Base
         void setData(Object data) {
             if (data !=null){
                 String url=(String)data;
-                Glide.with(itemView.getContext())
-                        .load(url)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.drawable.empty_photo)
-                        .crossFade()
-                        .into(imageView);
+                ImageLoader.getInstance().displayImage(url,imageView);
+//                Glide.with(itemView.getContext())
+//                        .load(url)
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .placeholder(R.drawable.empty_photo)
+//                        .crossFade()
+//                        .into(imageView);
             }
         }
     }

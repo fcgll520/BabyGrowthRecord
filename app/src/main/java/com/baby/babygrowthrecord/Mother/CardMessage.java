@@ -45,7 +45,7 @@ public class CardMessage extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Utils.flag = 4;
+                Utils.flag = 3;
                 Intent intent=new Intent(CardMessage.this,BabyMainActivity.class);
                 startActivity(intent);
             }

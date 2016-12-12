@@ -2,7 +2,6 @@ package com.baby.babygrowthrecord.user;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.icu.util.ULocale;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,7 +14,6 @@ import com.baby.babygrowthrecord.R;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -35,7 +33,7 @@ public class UserLogin extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.activity_login);
         init();
     }
 

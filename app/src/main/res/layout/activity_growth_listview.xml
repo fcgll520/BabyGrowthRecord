@@ -32,7 +32,8 @@
             android:text="？？"
             android:textSize="@dimen/growth_title"
             android:textColor="#646161"
-            android:layout_margin="@dimen/growth_title"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"/>
     </LinearLayout>
     <!--时间轴-->
     <LinearLayout
@@ -85,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/refreshable_view_growth">
-        2<ListView
+        <ListView
             android:id="@+id/growth_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

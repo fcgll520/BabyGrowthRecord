@@ -31,25 +31,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/edit_button"
             android:gravity="top"
-            android:text="分享婴儿最新动态"
+            android:hint=""
             android:layout_width="match_parent"
-            android:layout_height="226dp" />
+            android:layout_height="200sp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/income_camera"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/composer_camera"/>
         <ImageView
+            android:layout_weight="1"
             android:id="@+id/income_shipin"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/composer_shipin"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </LinearLayout>

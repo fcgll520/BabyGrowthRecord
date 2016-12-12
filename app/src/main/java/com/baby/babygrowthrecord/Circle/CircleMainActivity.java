@@ -37,7 +37,7 @@ public class CircleMainActivity extends ListActivity {
 
 		@Override
 		protected void onPostExecute(MessageModle result) {
-			mAdapter = new FridListAdapter(CircleMainActivity.this, result.list);
+//			mAdapter = new FridListAdapter(CircleMainActivity.this, result.list);
 			setListAdapter(mAdapter);
 
 		}

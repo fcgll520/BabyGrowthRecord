@@ -32,7 +32,7 @@ public class Growth_Activity_Bron extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.growth);
+        setContentView(R.layout.activity_growth);
         //获取用户头像和用户名
         growth_head =(CircleImageView)findViewById(R.id.growth_head);
         growth_name =(TextView) findViewById(R.id.growth_name);

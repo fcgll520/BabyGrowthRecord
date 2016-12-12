@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.baby.babygrowthrecord.Fragment.GrowthFragment;
@@ -22,10 +23,9 @@ public class BabyMainActivity extends AppCompatActivity {
     private LinearLayout ll;
     private LinearLayout quanzi,growth,help,people;
 
-    private ImageButton income;
+    private ImageButton income_button;
     private QuanziFragment mQuanzi;
     private GrowthFragment mGrowth;
-    private PublishFragment mPublish;
     private HelpFragment mHelp;
     private PeopleFragment mPeople;
     @Override
@@ -48,16 +48,25 @@ public class BabyMainActivity extends AppCompatActivity {
             case 2://圈子页面
                 setGrowthPage();
                 break;
-            case 3://发布功能页面
+            /*case 3://发布功能页面
                 setPublishPage();
-                break;
-            case 4://妈妈帮页面
+                break;*/
+            case 3://妈妈帮页面
                 setHelpPage();
                 break;
-            case 5://个人中心页面
+            case 4://个人中心页面
                 setPeoplePage();
                 break;
         }
+
+        income_button = (ImageButton) findViewById(R.id.income);
+        income_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BabyMainActivity.this,PublishFragment.class);
+                startActivity(intent);
+            }
+        });
     }
     //获取界面的控件
     private void getViews(){
@@ -66,7 +75,6 @@ public class BabyMainActivity extends AppCompatActivity {
         growth = (LinearLayout) findViewById(R.id.growth);
         help = (LinearLayout) findViewById(R.id.help);
         people = (LinearLayout) findViewById(R.id.people);
-        income = (ImageButton) findViewById(R.id.income);
     }
 
     //注册事件监听器
@@ -76,7 +84,6 @@ public class BabyMainActivity extends AppCompatActivity {
         growth.setOnClickListener(listener);
         help.setOnClickListener(listener);
         people.setOnClickListener(listener);
-        income.setOnClickListener(listener);
     }
 
     //设置默认的页面（fragment页面）
@@ -110,7 +117,7 @@ public class BabyMainActivity extends AppCompatActivity {
         transaction.commit();
         ll.invalidate();
     }
-    //设置默认的页面（fragment页面）
+    /*//设置默认的页面（fragment页面）
     private void setPublishPage(){
         //1. 获取一个FragmentManager对象
         android.app.FragmentManager fm = getFragmentManager();
@@ -124,7 +131,7 @@ public class BabyMainActivity extends AppCompatActivity {
         //4. 执行更改
         transaction.commit();
         ll.invalidate();
-    }
+    }*/
     //设置默认的页面（fragment页面）
     private void setHelpPage(){
         //1. 获取一个FragmentManager对象
@@ -178,13 +185,13 @@ public class BabyMainActivity extends AppCompatActivity {
                     //3. 设置页面
                     transaction.replace(R.id.contaner, mGrowth);
                     break;
-                case R.id.income:
+                /*case R.id.income:
                     if(mPublish == null){
                         mPublish = new PublishFragment();
                     }
                     //3. 设置页面
                     transaction.replace(R.id.contaner, mPublish);
-                    break;
+                    break;*/
                 case R.id.help:
                     if(mHelp == null){
                         mHelp = new HelpFragment();
@@ -200,7 +207,6 @@ public class BabyMainActivity extends AppCompatActivity {
                     transaction.replace(R.id.contaner, mPeople);
                     break;
             }
-            //4. 执行更改
             transaction.commit();
             ll.invalidate();
         }
