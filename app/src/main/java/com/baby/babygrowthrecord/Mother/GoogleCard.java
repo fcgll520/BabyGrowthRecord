@@ -4,14 +4,13 @@ package com.baby.babygrowthrecord.Mother;
  * Created by apple on 2016/11/22.
  */
 public class GoogleCard {
-
-        private int id;
+    private int mId;
         private String mDescription;
         private String mDrawable;
 
-        public GoogleCard(int essay_id, String mDescription, String mDrawable)
+        public GoogleCard(int id,String mDescription,String mDrawable)
         {
-            this.id=essay_id;
+            this.mId=id;
             this.mDescription=mDescription;
             this.mDrawable=mDrawable;
         }
@@ -36,12 +35,11 @@ public class GoogleCard {
             this.mDrawable = mDrawable;
         }
 
-         public int getId() {
-            return id;
-         }
+    public int getmId() {
+        return mId;
+    }
 
-         public void setId(int id) {
-            this.id = id;
-         }
-
+    public void setmId(int mId) {
+        this.mId = mId;
+    }
 }

@@ -27,12 +27,12 @@
             android:id="@+id/growth_head"
             android:layout_width="@dimen/growth_head"
             android:layout_height="@dimen/growth_head"
-            android:src="@drawable/head_sculpture" />
+            android:src="@drawable/empty_photo" />
         <TextView
             android:id="@+id/growth_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="宝宝"
+            android:text="？？"
             android:textSize="@dimen/growth_title"
             android:textColor="#646161"
             android:layout_margin="@dimen/growth_title"/>
@@ -108,7 +108,6 @@
                     android:id="@+id/growth_left_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14.11.25"
                     android:textSize="@dimen/growth_time_things"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#494646" />
@@ -116,7 +115,6 @@
                     android:id="@+id/growth_left_week"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="周三"
                     android:textSize="@dimen/growth_time_things"
                     android:padding="@dimen/growth_padding"
                     android:layout_marginTop="10dp"/>
@@ -132,7 +130,6 @@
                     android:id="@+id/growth_right_duration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3月+8天"
                     android:textSize="20dp"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#2b5ae5" />
@@ -140,38 +137,37 @@
                     android:id="@+id/growth_right_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。"
                     android:textSize="18dp"
                     android:padding="@dimen/growth_padding"
                     android:textColor="#494646"
                     android:layout_marginTop="10dp"/>
-                <TextView
-                    android:id="@+id/growth_right_Ym"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="疫苗：卡介苗、乙肝疫苗"
-                    android:textSize="17dp"
-                    android:textColor="#d86b92"
-                    android:padding="@dimen/growth_padding"
-                    android:layout_marginTop="10dp"/>
-                <TextView
-                    android:id="@+id/growth_right_Tz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="体重：4.1公斤"
-                    android:textSize="17dp"
-                    android:padding="@dimen/growth_padding"
-                    android:textColor="#75db81"
-                    android:layout_marginTop="5dp"/>
-                <TextView
-                    android:id="@+id/growth_right_Sg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="身高：50厘米"
-                    android:layout_marginTop="5dp"
-                    android:textSize="17dp"
-                    android:padding="@dimen/growth_padding"
-                    android:textColor="#75db81" />
+                <!--<TextView-->
+                    <!--android:id="@+id/growth_right_Ym"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="疫苗：卡介苗、乙肝疫苗"-->
+                    <!--android:textSize="17dp"-->
+                    <!--android:textColor="#d86b92"-->
+                    <!--android:padding="@dimen/growth_padding"-->
+                    <!--android:layout_marginTop="10dp"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/growth_right_Tz"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="体重：4.1公斤"-->
+                    <!--android:textSize="17dp"-->
+                    <!--android:padding="@dimen/growth_padding"-->
+                    <!--android:textColor="#75db81"-->
+                    <!--android:layout_marginTop="5dp"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/growth_right_Sg"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="身高：50厘米"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:textSize="17dp"-->
+                    <!--android:padding="@dimen/growth_padding"-->
+                    <!--android:textColor="#75db81" />-->
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -184,13 +180,11 @@
             <ImageView
                 android:id="@+id/growth_firstimg"
                 android:layout_width="@dimen/growth_head"
-                android:layout_height="@dimen/growth_head"
-                android:src="@drawable/hundred_first"/>
+                android:layout_height="@dimen/growth_head"/>
             <ImageView
                 android:id="@+id/growth_secondimg"
                 android:layout_width="@dimen/growth_head"
-                android:layout_height="@dimen/growth_head"
-                android:src="@drawable/hundred_second"/>
+                android:layout_height="@dimen/growth_head"/>
         </LinearLayout>
     </LinearLayout>
 

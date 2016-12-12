@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 
 import com.baby.babygrowthrecord.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -63,9 +64,11 @@ public class Growth_MyAdapter extends BaseAdapter {
         content = (TextView)convertView.findViewById(R.id.growth_right_content);
         content.setText(growth_classes.get(position).getContent());
         img_first = (ImageView)convertView.findViewById(R.id.growth_firstimg);
-        img_first.setImageResource(growth_classes.get(position).getImg_first());
+
         img_second = (ImageView)convertView.findViewById(R.id.growth_secondimg);
-        img_second.setImageResource(growth_classes.get(position).getImg_second());
+
+        ImageLoader.getInstance().displayImage(growth_classes.get(position).getImg_first(),img_first);
+        ImageLoader.getInstance().displayImage(growth_classes.get(position).getImg_second(),img_second);
 
         return convertView;
     }

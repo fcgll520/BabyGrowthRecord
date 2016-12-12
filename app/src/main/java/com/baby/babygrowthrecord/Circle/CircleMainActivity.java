@@ -18,6 +18,7 @@ public class CircleMainActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_circle_main);//主界面activity
+
 		imageLoader.init(ImageLoaderConfiguration.createDefault(this));
 		new LoderDataTask().execute();
 

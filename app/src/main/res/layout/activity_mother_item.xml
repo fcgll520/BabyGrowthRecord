@@ -6,6 +6,12 @@
     android:background="@drawable/mother_shape"
     android:descendantFocusability="blocksDescendants"
     android:padding="15dp">
+
+    <View
+        android:id="@+id/v_ancho"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
     <TextView
         android:id="@+id/Card_Title"
         android:layout_width="match_parent"
@@ -13,12 +19,10 @@
         android:text="宝宝成长"
         android:textSize="20sp"
         android:textIsSelectable="true"/>
-
     <ImageView
         android:id="@+id/Card_Pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/Description"
         android:scaleType="center" />
-
 </LinearLayout>

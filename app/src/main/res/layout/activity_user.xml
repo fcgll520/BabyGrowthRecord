@@ -6,20 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".user.UserActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <RelativeLayout
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="150dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_circlePic"
             android:src="@drawable/user_pic"
             android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_margin="20dp"
             android:layout_centerVertical="true"
             app:civ_border_width="1dp"
             app:civ_border_color="@android:color/darker_gray"/>
         <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/ll_user_hasLogin"
             android:layout_toRightOf="@+id/img_circlePic"
             android:layout_centerVertical="true"
             android:orientation="vertical"
@@ -46,14 +49,35 @@
             </LinearLayout>
 
         </LinearLayout>
+        <LinearLayout
+            android:visibility="visible"
+            android:id="@+id/ll_user_unLogin"
+            android:layout_toRightOf="@+id/img_circlePic"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_user_login"
+                android:text="登录"
+                android:textSize="@dimen/head_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:id="@+id/tv_user_register"
+                android:text="注册"
+                android:textSize="@dimen/head_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
     </RelativeLayout>
+
     <LinearLayout
-        android:background="@drawable/users_list_ll"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="1dp">
+        android:layout_marginTop="30dp">
         <RelativeLayout
             android:id="@+id/rl_user_album"
             style="@style/listRLstyle">
@@ -73,25 +97,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rl_user_infoMange"
-            style="@style/listRLstyle">
-            <ImageView
-                android:id="@+id/img_infoMange"
-                android:layout_width="@dimen/list_iconSize"
-                android:layout_height="@dimen/list_iconSize"
-                android:src="@drawable/users_infomanager"
-                android:layout_centerVertical="true"/>
-            <TextView
-                android:id="@+id/tv_user_infoMange"
-                android:text="宝宝信息管理"
-                android:layout_toRightOf="@+id/img_infoMange"
-                android:layout_marginLeft="@dimen/list_textMargin"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/list_textSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+        <LinearLayout
+            android:background="#ffcccccc"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp" />
         <RelativeLayout
             android:id="@+id/rl_user_collect"
             style="@style/listRLstyle">
@@ -112,6 +121,27 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
+            android:layout_marginTop="30dp"
+            android:id="@+id/rl_user_infoMange"
+            style="@style/listRLstyle">
+            <ImageView
+                android:id="@+id/img_infoMange"
+                android:layout_width="@dimen/list_iconSize"
+                android:layout_height="@dimen/list_iconSize"
+                android:src="@drawable/users_infomanager"
+                android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/tv_user_infoMange"
+                android:text="宝宝信息管理"
+                android:layout_toRightOf="@+id/img_infoMange"
+                android:layout_marginLeft="@dimen/list_textMargin"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="30dp"
             android:id="@+id/rl_user_setting"
             style="@style/listRLstyle">
             <ImageView

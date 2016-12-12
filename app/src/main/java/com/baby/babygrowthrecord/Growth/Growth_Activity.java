@@ -42,11 +42,11 @@ public class Growth_Activity extends AppCompatActivity {
     }
 
     private void getDate() {
-        growth_classes.add(new Growth_Class(0L,"14.08.18","周一","出生","宝宝今天出生，顺产8斤2两，非常可爱的小胖妞，爸爸妈妈一定好好记录你的成长",R.drawable.hundred_first,R.drawable.hundred_second));
-        growth_classes.add(new Growth_Class(1L,"14.09.18","周四","1月（31天）","宝宝今天满月了，爸爸带宝贝去打了乙肝疫苗第二针，有点儿疼，宝贝哭了一小会儿",R.drawable.born,R.drawable.head_sculpture));
-        growth_classes.add(new Growth_Class(2L,"14.11.25","周三","3月+8天","宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。",R.drawable.hundred_first,R.drawable.hundred_second));
-        growth_classes.add(new Growth_Class(3L,"14.08.18","周一","出生","宝宝今天出生，顺产8斤2两，非常可爱的小胖妞，爸爸妈妈一定好好记录你的成长",R.drawable.hundred_first,R.drawable.hundred_second));
-        growth_classes.add(new Growth_Class(4L,"14.09.18","周四","1月（31天）","宝宝今天满月了，爸爸带宝贝去打了乙肝疫苗第二针，有点儿疼，宝贝哭了一小会儿",R.drawable.born,R.drawable.head_sculpture));
-        growth_classes.add(new Growth_Class(5L,"14.11.25","周三","3月+8天","宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。",R.drawable.hundred_first,R.drawable.hundred_second));
+//        growth_classes.add(new Growth_Class(0L,"14.08.18","周一","出生","宝宝今天出生，顺产8斤2两，非常可爱的小胖妞，爸爸妈妈一定好好记录你的成长",R.drawable.hundred_first,R.drawable.hundred_second));
+//        growth_classes.add(new Growth_Class(1L,"14.09.18","周四","1月（31天）","宝宝今天满月了，爸爸带宝贝去打了乙肝疫苗第二针，有点儿疼，宝贝哭了一小会儿",R.drawable.born,R.drawable.head_sculpture));
+//        growth_classes.add(new Growth_Class(2L,"14.11.25","周三","3月+8天","宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。",R.drawable.hundred_first,R.drawable.hundred_second));
+//        growth_classes.add(new Growth_Class(3L,"14.08.18","周一","出生","宝宝今天出生，顺产8斤2两，非常可爱的小胖妞，爸爸妈妈一定好好记录你的成长",R.drawable.hundred_first,R.drawable.hundred_second));
+//        growth_classes.add(new Growth_Class(4L,"14.09.18","周四","1月（31天）","宝宝今天满月了，爸爸带宝贝去打了乙肝疫苗第二针，有点儿疼，宝贝哭了一小会儿",R.drawable.born,R.drawable.head_sculpture));
+//        growth_classes.add(new Growth_Class(5L,"14.11.25","周三","3月+8天","宝宝今天100天了，爸爸妈妈带宝宝去拍了百天照。",R.drawable.hundred_first,R.drawable.hundred_second));
     }
 }

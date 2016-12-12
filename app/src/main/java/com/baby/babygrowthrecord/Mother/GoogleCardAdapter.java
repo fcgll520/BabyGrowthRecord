@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baby.babygrowthrecord.Fragment.HelpFragment;
-import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -52,16 +51,22 @@ public class GoogleCardAdapter extends BaseAdapter {
     {
         ViewHolder mHolder=new ViewHolder();
         mView= LayoutInflater.from(mContext).inflate(R.layout.activity_mother_item, null);
-
         mHolder.Card_Title=(TextView)mView.findViewById(R.id.Card_Title);
         mHolder.Card_Title.setText(mCards.get(Index).getDescription());
-
         mHolder.Card_Pic=(ImageView)mView.findViewById(R.id.Card_Pic);
-        //从服务器获取图片
-        ImageLoader imageLoader=ImageLoader.getInstance();
-        imageLoader.displayImage(Utils.StrUrl+mCards.get(Index).getDrawable(),mHolder.Card_Pic);
 
-       /* mHolder.Card_Pic.setImageResource(mCards.get(Index).getDrawable());*/
+        mHolder.v_ancho=mView.findViewById(R.id.v_ancho);
+
+        ImageLoader imageLoader=ImageLoader.getInstance();
+        imageLoader.displayImage(mCards.get(Index).getDrawable(),mHolder.Card_Pic);
+
+       /* mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                HelpFragment.pop.showAsDropDown(view.findViewById(R.id.v_ancho));
+                return true;
+            }
+        });*/
         return mView;
     }
 
@@ -69,6 +74,7 @@ public class GoogleCardAdapter extends BaseAdapter {
     {
         TextView Card_Title;
         ImageView Card_Pic;
+        View v_ancho;
     }
 
 }
