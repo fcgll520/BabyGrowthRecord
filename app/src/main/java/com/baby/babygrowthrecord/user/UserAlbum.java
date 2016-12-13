@@ -50,7 +50,7 @@ public class UserAlbum extends Activity {
     public void getData() {
         final ArrayList<String> list=new ArrayList<>();
         AsyncHttpClient client=new AsyncHttpClient();
-        client.get(UserAlbum.this, Utils.StrUrl+"user/getUserAlbumInfoById/1",new JsonHttpResponseHandler(){
+        client.get(UserAlbum.this, Utils.StrUrl+"user/getUserAlbumInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);

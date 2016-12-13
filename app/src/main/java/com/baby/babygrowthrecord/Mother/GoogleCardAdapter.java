@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baby.babygrowthrecord.Fragment.HelpFragment;
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -57,16 +60,18 @@ public class GoogleCardAdapter extends BaseAdapter {
 
         mHolder.v_ancho=mView.findViewById(R.id.v_ancho);
 
+
+
         ImageLoader imageLoader=ImageLoader.getInstance();
         imageLoader.displayImage(mCards.get(Index).getDrawable(),mHolder.Card_Pic);
 
-        mView.setOnLongClickListener(new View.OnLongClickListener() {
+      /*  mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 HelpFragment.pop.showAsDropDown(view.findViewById(R.id.v_ancho));
                 return true;
             }
-        });
+        });*/
         return mView;
     }
 

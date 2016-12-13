@@ -82,7 +82,7 @@ public class  QuanziFragment extends ListFragment {
     public void getData(){
         AsyncHttpClient client=new AsyncHttpClient();
         //获取圈子中用户的头像
-        client.get(getActivity(),Utils.StrUrl+"circle/getFriendAvator",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"circle/getFriendAvator/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -98,6 +98,9 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
+                if(headPicList!=null){
+                    headPicList.clear();
+                }
                 for (int i=0;i<tempList.size()&&k>=0;i++,k--){
                     headPicList.add(i,tempList.get(k));
                 }
@@ -105,7 +108,7 @@ public class  QuanziFragment extends ListFragment {
             }
         });
         //获取动态内容
-        client.get(getActivity(),Utils.StrUrl+"circle/test",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"circle/test/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -127,6 +130,9 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
+                if (circleList!=null){
+                    circleList.clear();
+                }
                 for (int i=0;i<list.size()&&k>=0;i++){
                     circleList.add(i,list.get(k));
                     k--;
