@@ -45,6 +45,7 @@ public class Login_Activity extends Activity {
     private Button login_btn;
     private Button login_login_register;
     private EditText login_Pwd_text;
+    private EditText login_Uname_text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,18 +54,31 @@ public class Login_Activity extends Activity {
         // 固定竖屏
         setContentView(R.layout.activity_login);
         initViews();
-        login_Pwd_text = (EditText)findViewById(R.id.login_Pwd_text);
-        login_btn = (Button)findViewById(R.id.login_login_btn);
+
+        /* 控件获取*/
+        login_Pwd_text = (EditText) findViewById(R.id.login_Pwd_text);
+        login_btn = (Button) findViewById(R.id.login_login_btn);
+        login_Uname_text = (EditText) findViewById(R.id.login_Uname_text);
+
+        /*设置密码隐藏*/
         login_Pwd_text.setTransformationMethod(PasswordTransformationMethod.getInstance());
+
+        /*设置焦点改变时设置hint为空*/
+        login_Uname_text.setOnFocusChangeListener(mOnFocusChangeListener);
+        login_Pwd_text.setOnFocusChangeListener(mOnFocusChangeListener);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*验证用户和密码是否存储在数据库中*/
+                Utils.flag = 5;
                 Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
                 startActivity(intent);
+                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
-        login_login_register=(Button)findViewById(R.id.login_login_register);
+        login_login_register = (Button) findViewById(R.id.login_login_register);
         login_login_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,12 +125,12 @@ public class Login_Activity extends Activity {
 
     private void initViews() {
         mNewLoginButton = (Button) findViewById(R.id.qq);
-
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_container);
         OnClickListener listener = new NewClickListener();
         for (int i = 0; i < linearLayout.getChildCount(); i++) {
             View view = linearLayout.getChildAt(i);
             if (view instanceof Button) {
+                Log.e("test", "test");
                 view.setOnClickListener(listener);
             }
         }
@@ -292,4 +306,21 @@ public class Login_Activity extends Activity {
             }
         }
     }
+
+    /* 自动获取焦点时隐藏hint代码*/
+    private View.OnFocusChangeListener mOnFocusChangeListener = new View.OnFocusChangeListener() {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            EditText textView = (EditText) v;
+            String hint;
+            if (hasFocus) {
+                hint = textView.getHint().toString();
+                textView.setTag(hint);
+                textView.setHint(null);
+            } else {
+                hint = textView.getTag().toString();
+                textView.setHint(hint);
+            }
+        }
+    };
 }
