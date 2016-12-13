@@ -95,7 +95,8 @@ public class GrowthFragment extends Fragment{
                 try {
                     Log.e(response.getString("set_id"),response.getString("set_name"));
                     name.setText(response.getString("set_name"));
-                    ImageLoader.getInstance().displayImage(Utils.StrUrl+response.getString("set_dp"),head);
+                    ImageLoader imageLoader=ImageLoader.getInstance();
+                    imageLoader.displayImage(Utils.StrUrl+response.getString("set_dp"),head);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
