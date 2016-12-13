@@ -90,12 +90,12 @@ public class GrowthFragment extends Fragment{
         //获取用户名和用户头像
         client.get(getActivity(),Utils.StrUrl+"user/getUserInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 try {
-                    Log.e(response.getString("set_id"),response.getString("set_name"));
-                    name.setText(response.getString("set_name"));
-                    ImageLoader.getInstance().displayImage(Utils.StrUrl+response.getString("set_dp"),head);
+                    Log.e("用户名字",response.getJSONObject(0).getString("user_name"));
+                    name.setText(response.getJSONObject(0).getString("user_name"));
+                    ImageLoader.getInstance().displayImage(Utils.StrUrl+response.getJSONObject(0).getString("user_photo"),head);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

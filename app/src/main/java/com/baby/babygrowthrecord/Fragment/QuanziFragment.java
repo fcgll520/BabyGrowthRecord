@@ -82,7 +82,7 @@ public class  QuanziFragment extends ListFragment {
     public void getData(){
         AsyncHttpClient client=new AsyncHttpClient();
         //获取圈子中用户的头像
-        client.get(getActivity(),Utils.StrUrl+"circle/getFriendAvator/"+Utils.userId,new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"circle/getFriendAvator",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -92,7 +92,7 @@ public class  QuanziFragment extends ListFragment {
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
-                        tempList.add(Utils.StrUrl+object.getString("set_dp"));
+                        tempList.add(Utils.StrUrl+object.getString("user_photo"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -108,7 +108,7 @@ public class  QuanziFragment extends ListFragment {
             }
         });
         //获取动态内容
-        client.get(getActivity(),Utils.StrUrl+"circle/test/"+Utils.userId,new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"circle/test",new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -118,12 +118,11 @@ public class  QuanziFragment extends ListFragment {
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
-                        if (object.getString("friend_photo").equals("null")){      //没有照片的动态
-                            list.add(i,new Circle(object.getInt("cir_id"),"",
-                                    object.getString("friend_name"), object.getString("friend_content")));
+                        if (object.getString("cir_photo").equals("null")){      //没有照片的动态
+                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("cir_name"), object.getString("cir_content")));
                         }else {
-                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("friend_name"),
-                                    object.getString("friend_content"),new String[]{Utils.StrUrl+object.getString("friend_photo")}));
+                            list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("cir_name"),
+                                    object.getString("cir_content"),new String[]{Utils.StrUrl+object.getString("cir_photo")}));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
