@@ -57,6 +57,7 @@
         <activity android:name=".user.UserAlbumBigImg" />
         <activity android:name=".user.UserCollection" />
         <activity android:name=".user.UserInfoManage" />
+        <activity android:name=".user.UserInfoManageEdit"/>
         <activity android:name=".user.UserSetting" />
         <activity android:name=".user.UserSettingHeadPic" />
         <activity android:name=".user.UserSettingName" />

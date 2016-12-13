@@ -22,93 +22,88 @@
             android:layout_marginTop="@dimen/actionBarTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_userInfo_save"
-            android:text="保存"
-            android:textColor="@color/userBarSmallText"
-            android:textSize="@dimen/actionBarSmallText"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
-            android:layout_marginRight="@dimen/actionBarImgMargin"
-            android:gravity="right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
+
     <LinearLayout
+        android:background="@drawable/users_list_ll"
         android:orientation="vertical"
-        android:layout_margin="30dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:showDividers="middle"
+        android:divider="@drawable/divider">
+        <RelativeLayout
+            android:id="@+id/rv_userInfo_babyName"
+            style="@style/listRLstyle">
             <TextView
                 android:text="宝宝昵称"
-                android:textSize="@dimen/userInfo_textSize"
+                android:textSize="@dimen/list_textSize"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-            <EditText
-                android:id="@+id/et_userInfo_name"
-                android:background="@android:drawable/editbox_background_normal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="宝宝1号"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_marginLeft="@dimen/list_item_marginLeft" />
             <TextView
-                android:text="年\t\t\t\t龄"
-                android:textSize="@dimen/userInfo_textSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-            <EditText
-                android:id="@+id/et_userInfo_age"
-                android:background="@android:drawable/editbox_background_normal"
+                android:id="@+id/tv_userInfo_name"
+                android:text="宝宝"
+                android:textSize="20dp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="2个月"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_marginRight="50dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rv_userInfo_babyAge"
+            style="@style/listRLstyle">
             <TextView
-                android:text="身\t\t\t\t高"
-                android:textSize="@dimen/userInfo_textSize"
+                android:text="宝宝年龄"
+                android:textSize="@dimen/list_textSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-            <EditText
-                android:id="@+id/et_userInfo_height"
-                android:background="@android:drawable/editbox_background_normal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="40cm"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_margin="@dimen/userInfo_ll_margin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_marginLeft="@dimen/list_item_marginLeft"/>
             <TextView
-                android:text="体\t\t\t\t重"
-                android:textSize="@dimen/userInfo_textSize"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-            <EditText
-                android:id="@+id/et_userInfo_weight"
-                android:background="@android:drawable/editbox_background_normal"
+                android:id="@+id/tv_userInfo_age"
+                android:textSize="20dp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="8kg"
-                android:layout_margin="@dimen/userInfo_tv_et_margin"/>
-        </LinearLayout>
+                android:layout_marginRight="50dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rv_userInfo_height"
+            style="@style/listRLstyle">
+            <TextView
+                android:text="宝宝身高"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_marginLeft" />
+            <TextView
+                android:id="@+id/tv_userInfo_height"
+                android:textSize="20dp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rv_userInfo_weight"
+            style="@style/listRLstyle">
+            <TextView
+                android:text="宝宝体重"
+                android:textSize="@dimen/list_textSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/list_item_marginLeft" />
+            <TextView
+                android:id="@+id/tv_userInfo_weight"
+                android:textSize="20dp"
+                android:textColor="@android:color/darker_gray"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"/>
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

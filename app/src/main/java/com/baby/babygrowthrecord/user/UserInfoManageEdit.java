@@ -17,42 +17,48 @@ import com.baby.babygrowthrecord.R;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
  * Created by think on 2016/11/22.
  */
 public class
- UserSettingName extends Activity {
-    private EditText etName;
+UserInfoManageEdit extends Activity {
+    private String urlStr="";   //发送请求的url
+    private EditText editText;
     private TextView tvSave;
+    private TextView tvTitle;
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.arg1==1){
-                Toast.makeText(UserSettingName.this,"昵称修改成功！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInfoManageEdit.this,"宝宝信息修改成功！",Toast.LENGTH_SHORT).show();
                 finish();
             }else {
-                Toast.makeText(UserSettingName.this,"昵称修改失败，请稍后再试！",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserInfoManageEdit.this,"宝宝信息修改失败，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
         }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_setting_name);
-        etName=(EditText)findViewById(R.id.et_userSetting_name);
-        tvSave=(TextView)findViewById(R.id.tv_userSetName_save);
+        setContentView(R.layout.activity_user_infomanage_item);
+        editText =(EditText)findViewById(R.id.et_userInfo_edit);
+        tvSave=(TextView)findViewById(R.id.tv_userInfo_save);
+        tvTitle=(TextView)findViewById(R.id.tv_userInfoItem_title);
+
         Intent i=getIntent();
-        etName.setHint(i.getStringExtra("name"));
+        urlStr=i.getStringExtra("url");
+        editText.setHint(editText.getHint().toString()+i.getStringExtra("editHint"));
+        tvTitle.setText("更改宝宝"+i.getStringExtra("title"));
+
         tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String name=etName.getText().toString();
-                if (name.equals("")){
-                    Toast.makeText(UserSettingName.this,"昵称不能为空！",Toast.LENGTH_SHORT).show();
+                final String babyMsg= editText.getText().toString();
+                if (babyMsg.equals("")){
+                    Toast.makeText(UserInfoManageEdit.this,"信息不能为空！",Toast.LENGTH_SHORT).show();
                     return;
                 }
                 new Thread(new Runnable() {
@@ -60,7 +66,7 @@ public class
                     public void run() {
                         try {
                             Message msg=new Message();
-                            msg.arg1=changeName(name);
+                            msg.arg1=changeMsg(babyMsg);
                             handler.sendMessage(msg);
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -71,17 +77,19 @@ public class
         });
     }
 
-    private int changeName(String name) throws IOException {
-        String urlStr= Utils.StrUrl+"user/editUserName?user_id="+Utils.userId+"&name="+name;
-        HttpURLConnection connection=(HttpURLConnection)(new URL(urlStr)).openConnection();
+    private int changeMsg(String babyMsg) throws IOException {
+        String url= urlStr+"&baby_msg="+babyMsg;
+        HttpURLConnection connection=(HttpURLConnection)(new URL(url)).openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
-        Log.e("changeName",connection.getResponseCode()+"");
+        Log.e("changeMsg",connection.getResponseCode()+"");
         InputStream is=connection.getInputStream();
         byte[]b=new byte[1];
         is.read(b);
         return Integer.parseInt(new String(b));
     }
+
+
 
     public void backOnClick(View view){
         finish();

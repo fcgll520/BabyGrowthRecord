@@ -11,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baby.babygrowthrecord.Login.Login_Activity;
-import com.baby.babygrowthrecord.Login.Register_Activity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.user.UserAlbum;
 import com.baby.babygrowthrecord.user.UserCollection;
@@ -20,6 +18,12 @@ import com.baby.babygrowthrecord.user.UserInfoManage;
 import com.baby.babygrowthrecord.user.UserSetting;
 import com.baby.babygrowthrecord.user.UserSettingHeadPic;
 import com.baby.babygrowthrecord.user.UserSettingName;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -30,7 +34,7 @@ public class PeopleFragment extends Fragment{
     private View view;
     private CircleImageView ivHeadPic;
     private TextView tvUname;
-    private TextView tvBabyAge;
+    private TextView tvBabyName;
 
     private RelativeLayout rlAlbum;
     private RelativeLayout rlInfoManage;
@@ -117,7 +121,7 @@ public class PeopleFragment extends Fragment{
     private void init(){
         ivHeadPic = (CircleImageView) view.findViewById(R.id.img_circlePic);
         tvUname = (TextView) view.findViewById(R.id.tv_user_uName);
-        tvBabyAge = (TextView) view.findViewById(R.id.tv_user_babyName);
+        tvBabyName = (TextView) view.findViewById(R.id.tv_user_babyName);
 
         rlAlbum=(RelativeLayout)view.findViewById(R.id.rl_user_album);
         rlInfoManage=(RelativeLayout)view.findViewById(R.id.rl_user_infoMange);
@@ -134,7 +138,7 @@ public class PeopleFragment extends Fragment{
         //绑定监听器
         ivHeadPic.setOnClickListener(myClickListener);
         tvUname.setOnClickListener(myClickListener);
-        tvBabyAge.setOnClickListener(myClickListener);
+        tvBabyName.setOnClickListener(myClickListener);
 
         rlAlbum.setOnClickListener(myClickListener);
         rlInfoManage.setOnClickListener(myClickListener);
@@ -145,8 +149,35 @@ public class PeopleFragment extends Fragment{
         tvInfoManage.setOnClickListener(myClickListener);
         tvCollection.setOnClickListener(myClickListener);
         tvSetting.setOnClickListener(myClickListener);
+
+        //获取用户名、头像
+        GrowthFragment g=new GrowthFragment();
+        g.getUserInfo(ivHeadPic,tvUname);
+        //获取宝宝昵称
+       getBabyName(tvBabyName);
     }
     private void autoLogin(){
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBabyName(tvBabyName);
+    }
+
+    public void  getBabyName(final TextView babyName) {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(getActivity(),Utils.StrUrl+"baby/getBabyInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    babyName.setText(response.getString("baby_name"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
