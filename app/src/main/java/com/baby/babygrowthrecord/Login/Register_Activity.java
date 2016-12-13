@@ -33,19 +33,32 @@ public class Register_Activity extends Activity {
     private EditText pas;
     private EditText repas;
     public TimeCount time;
+    private Button register_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         message =(EditText)findViewById(R.id.message);
+        register_back=(Button)findViewById(R.id.rejister_back);
         btn = (Button)findViewById(R.id.btn);
         phone = (EditText)findViewById(R.id.phone);
         pas = (EditText)findViewById(R.id.password);
         repas = (EditText)findViewById(R.id.repassword);
+
         time = new TimeCount(60000, 1000);
         flag = true;
-      /*  密码隐藏*/
+
+        /*点击“返回”到登陆界面*/
+        register_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register_Activity.this,Login_Activity.class);
+                startActivity(intent);
+            }
+        });
+        /*密码隐藏*/
         pas.setTransformationMethod(PasswordTransformationMethod.getInstance());
         repas.setTransformationMethod(PasswordTransformationMethod.getInstance());
         btn.setOnClickListener(new View.OnClickListener() {
