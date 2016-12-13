@@ -1,98 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/tree1"
+    android:background="@drawable/background_rejister"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="8dp"
+        android:background="@drawable/edittext_rejister">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="+86"
+            android:textColor="#ffffff"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff" />
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:textColorHint="#ffffff"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/register_ll"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:orientation="horizontal"
-        android:layout_centerInParent="true">
-    </LinearLayout>
-    <!--用户名-->
-    <LinearLayout
-        android:id="@+id/register_Uname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/register_ll"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
-        <EditText
-            android:id="@+id/register_Uname_text"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:hint="请输入用户名"
-            android:background="@drawable/edittext"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColorHint="#63b68b"
-            android:textColor="#9e9898" />
-    </LinearLayout>
-    <!--密码-->
-    <LinearLayout
-        android:id="@+id/register_Pwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/register_Uname"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp">
-        <EditText
-            android:id="@+id/login_Pwd_text"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:hint="请输入密码"
-            android:textColorHint="#63b68b"
-            android:background="@drawable/edittext"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColor="#9e9898" />
+        android:background="@drawable/edittext_rejister"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="8dp">
 
-    </LinearLayout>
-    <!--确认密码-->
-    <LinearLayout
-        android:id="@+id/register_RePwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/register_Pwd"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="10dp">
         <EditText
-            android:id="@+id/login_RePwd_text"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:hint="请输入密码"
-            android:textColorHint="#63b68b"
-            android:background="@drawable/edittext"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColor="#9e9898" />
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="left"
+            android:hint="请输入短信验证码"
+            android:textColorHint="#ffffff"
+            android:paddingTop="13dp" />
 
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="#00000000"
+            android:text="获取验证码"
+            android:textColor="#fca5a8" />
     </LinearLayout>
-    <!--注册-->
+
     <LinearLayout
-        android:id="@+id/register_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/register_RePwd"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginTop="20dp">
+        android:background="@drawable/edittext_rejister"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="密码"
+            android:textColorHint="#ffffff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_rejister"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/repassword"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="确认密码"
+            android:textColorHint="#ffffff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="40dp">
+
         <Button
             android:id="@+id/register_register_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_btn"
-            android:text="确认注册"
-            android:textColor="#ffffff"/>
+            android:background="@drawable/register_rejister"
+            android:text="立即注册"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:padding="8dp"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

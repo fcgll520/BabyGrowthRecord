@@ -7,10 +7,12 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +44,7 @@ public class Login_Activity extends Activity {
     private final String APP_ID = "1105869088";// 测试时使用，真正发布的时候要换成自己的APP_ID
     private Button login_btn;
     private Button login_login_register;
+    private EditText login_Pwd_text;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,9 @@ public class Login_Activity extends Activity {
         // 固定竖屏
         setContentView(R.layout.activity_login);
         initViews();
-
+        login_Pwd_text = (EditText)findViewById(R.id.login_Pwd_text);
         login_btn = (Button)findViewById(R.id.login_login_btn);
+        login_Pwd_text.setTransformationMethod(PasswordTransformationMethod.getInstance());
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +65,7 @@ public class Login_Activity extends Activity {
         });
 
         login_login_register=(Button)findViewById(R.id.login_login_register);
-        login_login_register.setOnClickListener(new OnClickListener() {
+        login_login_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Activity.this, Register_Activity.class);

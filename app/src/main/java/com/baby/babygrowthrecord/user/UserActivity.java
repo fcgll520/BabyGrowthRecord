@@ -39,7 +39,7 @@ public class UserActivity extends AppCompatActivity {
                     i.setClass(UserActivity.this, UserSettingName.class);
                     startActivity(i);
                     break;
-                case R.id.tv_user_babyAge:
+                case R.id.tv_user_babyName:
                     i.setClass(UserActivity.this, UserInfoManage.class);
                     startActivity(i);
                     break;
@@ -92,7 +92,7 @@ public class UserActivity extends AppCompatActivity {
     private void init(){
         ivHeadPic = (CircleImageView) findViewById(R.id.img_circlePic);
         tvUname = (TextView) findViewById(R.id.tv_user_uName);
-        tvBabyAge = (TextView) findViewById(R.id.tv_user_babyAge);
+        tvBabyAge = (TextView) findViewById(R.id.tv_user_babyName);
 
         rlAlbum=(RelativeLayout)findViewById(R.id.rl_user_album);
         rlInfoManage=(RelativeLayout)findViewById(R.id.rl_user_infoMange);
