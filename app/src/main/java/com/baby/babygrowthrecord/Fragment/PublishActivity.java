@@ -14,12 +14,32 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
+import com.loopj.android.http.AsyncHttpClient;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class PublishActivity extends AppCompatActivity {
@@ -29,6 +49,7 @@ public class PublishActivity extends AppCompatActivity {
     private Button button2;
     private ImageView imageView_camera;
     private ImageView image_view;
+    private EditText editText;
     private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private static final String TAG = "MyActivity";
@@ -45,7 +66,8 @@ public class PublishActivity extends AppCompatActivity {
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
         imageView_camera = (ImageView)findViewById(R.id.income_camera);
-        image_view= (ImageView)findViewById(R.id.image_view);
+        image_view = (ImageView)findViewById(R.id.image_view);
+        editText = (EditText)findViewById(R.id.edit_text);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,17 +78,51 @@ public class PublishActivity extends AppCompatActivity {
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                  //这里添加点击确定后的逻辑
-                                Toast.makeText(PublishActivity.this, "以保存为草稿", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(PublishActivity.this, BabyMainActivity.class);
-                                startActivity(intent);
+                                Toast.makeText(PublishActivity.this, "已保存到草稿", Toast.LENGTH_SHORT).show();
+                                finish();
+                                //Intent intent = new Intent(PublishActivity.this, BabyMainActivity.class);
+                                //startActivity(intent);
                             }
                         });
                 builder.setNegativeButton("取消",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
+                                finish();
                             }
                         });
                 builder.create().show();
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                /*//使用HttpPost发送请求
+                HttpPost httpPost = new HttpPost("http://169.254.76.180:8080/circle/uploading");
+                //使用NameValuePaira保存请求中所需要传入的参数
+                List<NameValuePair> paramas = new ArrayList<NameValuePair>();
+                paramas.add(new BasicNameValuePair("friend_content", "friend_photo"));
+                try{
+                    HttpResponse httpResponse;
+                    //将NameValuePair放入HttpPost请求体中
+                    httpPost.setEntity(new UrlEncodedFormEntity(paramas, HTTP.UTF_8));
+                    //执行HttpPost请求
+                    httpResponse = new DefaultHttpClient().execute(httpPost);
+                    if (httpResponse.getStatusLine().getStatusCode() == 200)
+                    {
+                        String s = EntityUtils.toString(httpResponse.getEntity());
+                    }
+                } catch (UnsupportedEncodingException e) {
+                // TODO Auto-generated catch bloc
+                    e.printStackTrace();
+                } catch (ClientProtocolException e) {
+                    // TODO Auto-generated catch bloc
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch bloc
+                    e.printStackTrace();
+                }*/
             }
         });
         imageView_camera.setOnClickListener(new View.OnClickListener() {
