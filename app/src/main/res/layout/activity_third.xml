@@ -31,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/edit_text"
             android:gravity="top"
             android:hint=""
             android:layout_width="match_parent"
@@ -46,12 +47,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/composer_camera"/>
-        <ImageView
-            android:layout_weight="1"
-            android:id="@+id/income_shipin"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/composer_shipin"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

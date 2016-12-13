@@ -63,7 +63,7 @@ public class UserCollection extends Activity {
         //从服务器获取信息并解析
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get(UserCollection.this,Utils.StrUrl+"essay/test",new JsonHttpResponseHandler(){
+        client.get(UserCollection.this,Utils.StrUrl+"user/getUserCollectionInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
@@ -72,8 +72,8 @@ public class UserCollection extends Activity {
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
-                        GoogleCard card=new GoogleCard(object.getInt("essay_id"),object.getString("essay_title"),
-                                Utils.StrUrl+object.getString("essay_photo"));
+                        GoogleCard card=new GoogleCard(object.getInt("col_id"),object.getString("col_title"),
+                                Utils.StrUrl+object.getString("col_photo"));
                         mCards.add(card);
                     } catch (JSONException e) {
                         e.printStackTrace();
