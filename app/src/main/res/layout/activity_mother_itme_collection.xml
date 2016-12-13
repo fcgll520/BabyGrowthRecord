@@ -6,9 +6,10 @@
     >
 
     <Button
+        android:id="@+id/collection_btn"
         android:layout_width="50dp"
         android:layout_height="25dp"
-        android:layout_marginLeft="310dp"
+        android:layout_marginLeft="0dp"
         android:background="@drawable/mother_shape1"
         android:text="收藏"/>
 </LinearLayout>
