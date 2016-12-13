@@ -88,7 +88,7 @@ public class GrowthFragment extends Fragment{
 
     public void getUserInfo(final CircleImageView head,final TextView name){
         //获取用户名和用户头像
-        client.get(getActivity(),Utils.StrUrl+"user/getUserInfoById/1",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"user/getUserInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
@@ -104,7 +104,7 @@ public class GrowthFragment extends Fragment{
     }
     public void getData(){
         //获取成长记录列表
-        client.get(getActivity(),Utils.StrUrl+"grow/test",new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"grow/test/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);

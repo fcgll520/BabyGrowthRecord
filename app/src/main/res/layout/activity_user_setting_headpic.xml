@@ -25,12 +25,34 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:weightSum="3">
         <ImageView
+            android:layout_weight="2"
+            android:id="@+id/iv_userSetHeadPic"
             android:src="@drawable/user_default_child"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="0dp" />
+        <Gallery
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:spacing="5dp"
+            android:id="@+id/gal_userSetHeadPic"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+        <!--<HorizontalScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="120dp">-->
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_userSetHeadPic"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+            <!--</LinearLayout>-->
+        <!--</HorizontalScrollView>-->
     </LinearLayout>
 </LinearLayout>

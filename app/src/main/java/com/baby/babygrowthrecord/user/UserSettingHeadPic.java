@@ -10,17 +10,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Gallery;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.baby.babygrowthrecord.R;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
  * Created by think on 2016/11/22.
  */
 public class UserSettingHeadPic extends Activity {
-    private Toolbar toolbar;
+    private ImageView ivHeadPic;
+    private Gallery gallery;
+//    private HorizontalScrollView hs;
+//    private LinearLayout llHeadPic;
+
+    private UserSettingHeadPicAdapter adapter;
+    private int[]images={R.raw.raw_01,R.raw.raw_1478764276,R.raw.raw_1478765147,R.raw.raw_1478766470,R.raw.raw_1478766479,
+            R.raw.raw_1479174901,R.raw.raw_1479174922,R.raw.raw_1479174957,R.raw.raw_1479177109};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +44,32 @@ public class UserSettingHeadPic extends Activity {
     }
 
     private void init() {
-        toolbar=(Toolbar)findViewById(R.id.toolBar_userSetting_headPic);
+        ivHeadPic=(ImageView)findViewById(R.id.iv_userSetHeadPic);
+//        hs=(HorizontalScrollView)findViewById(R.id.hs_userSetHeadPic);
+//        llHeadPic=(LinearLayout)findViewById(R.id.ll_userSetHeadPic);
+//        for (int i=0;i<7;i++){
+//            ImageView img=new ImageView(UserSettingHeadPic.this);
+//            img.setImageResource(images[i]);
+//            llHeadPic.addView(img,i,new HorizontalScrollView.LayoutParams(80,
+//                    ViewGroup.LayoutParams.MATCH_PARENT));
+//            img.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    ivHeadPic.setImageResource(v.getId());
+//                }
+//            });
+//        }
 
+        gallery=(Gallery)findViewById(R.id.gal_userSetHeadPic);
+        ivHeadPic.setImageResource(images[0]);
+        adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,images);
+        gallery.setAdapter(adapter);
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ivHeadPic.setImageResource(images[position]);
+            }
+        });
     }
 
     @Override
