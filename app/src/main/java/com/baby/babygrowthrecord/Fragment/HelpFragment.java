@@ -4,12 +4,16 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -19,6 +23,7 @@ import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.Mother.GoogleCardAdapter;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
+import com.baby.babygrowthrecord.util.Util;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -28,6 +33,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +50,15 @@ public class HelpFragment extends Fragment{
     private GoogleCardAdapter mAdapter;
     private RefreshableView refreshableView;
     public static PopupWindow pop;
+    private Button btn;
+    public int essay_Id;
 
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +94,47 @@ public class HelpFragment extends Fragment{
             }
         });
 
+        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                pop.showAtLocation(view, Gravity.NO_GRAVITY,500,150);
+                pop.showAsDropDown(view);
+                essay_Id=mCards.get(i).getmId();
+                Log.e("essay_id", String.valueOf(essay_Id));
+                return true;
+            }
+        });
+         btn =(Button)popview.findViewById(R.id.collection_btn);
+         btn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 Toast.makeText(getActivity(),"点击了popupwindow",Toast.LENGTH_SHORT).show();
+                 new Thread(new Runnable() {
+                     @Override
+                     public void run() {
+                         sendDatatoServer();
+                     }
+                 }).start();
+
+             }
+         });
         return view;
+    }
+
+    private void sendDatatoServer() {
+        try {
+            String Url= Utils.StrUrl+"collection/add?essay_id="+essay_Id;
+            URL url=new URL(Url);
+            HttpURLConnection coon= (HttpURLConnection) url.openConnection();
+            coon.setRequestMethod("GET");
+            coon.setConnectTimeout(3000);
+            coon.connect();
+            Log.e("发送成功", String.valueOf(coon.getResponseCode()));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getItems()
