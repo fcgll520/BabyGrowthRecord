@@ -7,7 +7,17 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baby.babygrowthrecord.Circle.Circle;
+import com.baby.babygrowthrecord.Fragment.GrowthFragment;
+import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.R;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -18,6 +28,7 @@ public class UserSetting extends Activity {
     private RelativeLayout rvName;
     private RelativeLayout rvPwd;
     private TextView tvHeadPic;
+    private CircleImageView ivHeadPic;
     private TextView tvName;
     private TextView tvUname;
     private TextView tvPwd;
@@ -32,6 +43,7 @@ public class UserSetting extends Activity {
                     break;
                 case R.id.rv_userSetting_name:
                     i.setClass(UserSetting.this,UserSettingName.class);
+                    i.putExtra("name",tvUname.getText());
                     startActivity(i);
                     break;
                 case R.id.rv_userSetting_pwd:
@@ -44,6 +56,7 @@ public class UserSetting extends Activity {
                     break;
                 case R.id.tv_userSetting_name:
                     i.setClass(UserSetting.this,UserSettingName.class);
+                    i.putExtra("name",tvUname.getText());
                     startActivity(i);
                     break;
                 case R.id.tv_userSetting_pwd:
@@ -67,6 +80,7 @@ public class UserSetting extends Activity {
         rvName=(RelativeLayout)findViewById(R.id.rv_userSetting_name);
         rvPwd=(RelativeLayout)findViewById(R.id.rv_userSetting_pwd);
         tvHeadPic=(TextView)findViewById(R.id.tv_userSetting_pic);
+        ivHeadPic=(CircleImageView)findViewById(R.id.iv_userSet_headPic);
         tvName=(TextView)findViewById(R.id.tv_userSetting_name);
         tvUname=(TextView)findViewById(R.id.tv_userSetting_uName);
         tvPwd=(TextView)findViewById(R.id.tv_userSetting_pwd);
@@ -77,6 +91,10 @@ public class UserSetting extends Activity {
         tvHeadPic.setOnClickListener(myClickListener);
         tvName.setOnClickListener(myClickListener);
         tvPwd.setOnClickListener(myClickListener);
+
+        //获取用户名和头像
+        GrowthFragment g=new GrowthFragment();
+        g.getUserInfo(ivHeadPic,tvUname);
     }
     public void backOnClick(View view){
         finish();

@@ -16,14 +16,15 @@
             android:layout_width="@dimen/actionBarImgSize"
             android:layout_height="@dimen/actionBarImgSize" />
         <TextView
-            android:text="更改昵称"
+            android:text="更改宝宝信息"
+            android:id="@+id/tv_userInfoItem_title"
             android:textColor="@color/userBarBigText"
             android:textSize="@dimen/actionBarTextSize"
             android:layout_marginTop="@dimen/actionBarTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/tv_userSetName_save"
+            android:id="@+id/tv_userInfo_save"
             android:text="保存"
             android:textColor="@color/userBarSmallText"
             android:textSize="@dimen/actionBarSmallText"
@@ -34,7 +35,8 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <EditText
-        android:id="@+id/et_userSetting_name"
+        android:hint="请输入宝宝"
+        android:id="@+id/et_userInfo_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp" />
