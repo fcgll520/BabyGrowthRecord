@@ -52,7 +52,8 @@ public class UserCollection extends Activity {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent=new Intent(UserCollection.this,CardMessage.class);
+                Intent intent=new Intent(UserCollection.this,UserCollectonMessage.class);
+                intent.putExtra("col_id",mCards.get(i).getmId());
                 startActivity(intent);
             }
         });
@@ -72,9 +73,11 @@ public class UserCollection extends Activity {
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
-                        GoogleCard card=new GoogleCard(object.getInt("col_id"),object.getString("col_title"),
-                                Utils.StrUrl+object.getString("col_photo"));
-                        mCards.add(card);
+                        if (Utils.userId == object.getInt("user_id")){
+                            GoogleCard card=new GoogleCard(object.getInt("col_id"),object.getString("col_title"),
+                                    Utils.StrUrl+object.getString("col_photo"));
+                            mCards.add(card);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

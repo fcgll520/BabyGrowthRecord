@@ -123,7 +123,8 @@ public class HelpFragment extends Fragment{
 
     private void sendDatatoServer() {
         try {
-            String Url= Utils.StrUrl+"collection/add?essay_id="+essay_Id;
+            String Url= Utils.StrUrl+"collection/add?essay_id="+essay_Id+"&user_id="+Utils.userId;
+            Log.e("url",Url);
             URL url=new URL(Url);
             HttpURLConnection coon= (HttpURLConnection) url.openConnection();
             coon.setRequestMethod("GET");
