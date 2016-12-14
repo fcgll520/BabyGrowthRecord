@@ -163,12 +163,14 @@ public class PeopleFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
+        GrowthFragment g=new GrowthFragment();
+        g.getUserInfo(ivHeadPic,tvUname);
         getBabyName(tvBabyName);
     }
 
     public void  getBabyName(final TextView babyName) {
         AsyncHttpClient client=new AsyncHttpClient();
-        client.get(getActivity(),Utils.StrUrl+"baby/getBabyInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
+        client.get(getActivity(),Utils.StrUrl+"user/getBabyInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
