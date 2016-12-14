@@ -210,7 +210,7 @@ public class Login_Activity extends Activity {
                 JSONObject response = (JSONObject) msg.obj;
                 if (response.has("nickname")) {
                     try {
-                        mUserInfo.setVisibility(android.view.View.VISIBLE);
+                        mUserInfo.setVisibility(View.GONE);
                         mUserInfo.setText(response.getString("nickname"));
                     } catch (JSONException e) {
                         // TODO Auto-generated catch block
@@ -220,7 +220,7 @@ public class Login_Activity extends Activity {
             } else if (msg.what == 1) {
                 Bitmap bitmap = (Bitmap) msg.obj;
                 mUserLogo.setImageBitmap(bitmap);
-                mUserLogo.setVisibility(android.view.View.VISIBLE);
+                mUserLogo.setVisibility(View.GONE);
             }
         }
 
