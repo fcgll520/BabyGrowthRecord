@@ -60,8 +60,8 @@ public class UserSettingPwd extends Activity {
                         Toast.makeText(UserSettingPwd.this,"请补全信息！",Toast.LENGTH_SHORT).show();
                         break;
                     }
-                    if (!pwd.equals(confirmPwd)){
-                        Toast.makeText(UserSettingPwd.this,"密码与确认密码不同！",Toast.LENGTH_SHORT).show();
+                    if (!confirmPwd.equals(pwd)){
+                        Toast.makeText(UserSettingPwd.this,"确认密码与密码不同！",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     //修改密码
