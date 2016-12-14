@@ -9,13 +9,11 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 
@@ -35,35 +33,39 @@ public class Register_Activity extends Activity {
     private EditText pas;
     private EditText repas;
     public TimeCount time;
-    private EditText csed1;
-    private EditText csed2;
-    private EditText csed3;
+    private Button register_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        message = (EditText) findViewById(R.id.message);
-        btn = (Button) findViewById(R.id.btn);
-        phone = (EditText) findViewById(R.id.phone);
-        pas = (EditText) findViewById(R.id.password);
-        repas = (EditText) findViewById(R.id.repassword);
+        message =(EditText)findViewById(R.id.message);
+        register_back=(Button)findViewById(R.id.rejister_back);
+        btn = (Button)findViewById(R.id.btn);
+        phone = (EditText)findViewById(R.id.phone);
+        pas = (EditText)findViewById(R.id.password);
+        repas = (EditText)findViewById(R.id.repassword);
+
         time = new TimeCount(60000, 1000);
         flag = true;
-        /*  密码隐藏*/
+
+        /*点击“返回”到登陆界面*/
+        register_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register_Activity.this,Login_Activity.class);
+                startActivity(intent);
+            }
+        });
+        /*密码隐藏*/
         pas.setTransformationMethod(PasswordTransformationMethod.getInstance());
         repas.setTransformationMethod(PasswordTransformationMethod.getInstance());
-        phone.setOnFocusChangeListener(mOnFocusChangeListener);
-        pas.setOnFocusChangeListener(mOnFocusChangeListener);
-        repas.setOnFocusChangeListener(mOnFocusChangeListener);
-        message.setOnFocusChangeListener(mOnFocusChangeListener);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final Handler handler = new Handler() {
+                Handler handler = new Handler(){
                     @Override
                     public void handleMessage(Message msg) {
                         super.handleMessage(msg);
@@ -85,47 +87,36 @@ public class Register_Activity extends Activity {
                             //回调完成
                             if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                                 //提交验证码成功
-                            } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+                            }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                                 //获取验证码成功
-                            } else if (event == SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES) {
+                            }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
                                 //返回支持发送验证码的国家列表
                             }
-                        } else {
-                            ((Throwable) data).printStackTrace();
+                        }else{
+                            ((Throwable)data).printStackTrace();
                         }
                     }
                 };
-                if (Vaildateinfo()) {
-                    SMSSDK.initSDK(Register_Activity.this, "19b8735a28d76", "4451d3257d069c4cd342b225a7b8f2fe");
-                    SMSSDK.registerEventHandler(eh);
-                    SMSSDK.getVerificationCode("86", phone.getText().toString());//请求获取短信验证码
-                    time.start();
-                }
+                SMSSDK.initSDK(Register_Activity.this,"19b8735a28d76","4451d3257d069c4cd342b225a7b8f2fe");
+                SMSSDK.registerEventHandler(eh);
+                SMSSDK.getVerificationCode("86", phone.getText().toString());//请求获取短信验证码
+                time.start();
             }
         });
 
-        register_register_btn = (Button) findViewById(R.id.register_register_btn);
+        register_register_btn=(Button)findViewById(R.id.register_register_btn);
         register_register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Vailpasinfo()) {
-                    if (Vailrepasinfo()) {
-                        SMSSDK.initSDK(Register_Activity.this, "19b8735a28d76", "4451d3257d069c4cd342b225a7b8f2fe");
-                        SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
-                        Utils.flag = 5;
-                        Intent intent = new Intent(Register_Activity.this, BabyMainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-
+                SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
+                Intent intent = new Intent(Register_Activity.this,BabyMainActivity.class);
+                startActivity(intent);
             }
         });
 
 
     }
-
-    /*内部类创建timacount类*/
+    /*内部类穿件timacount类*/
     private class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
@@ -135,7 +126,7 @@ public class Register_Activity extends Activity {
         public void onTick(long millisUntilFinished) {
             btn.setBackgroundColor(Color.parseColor("#B6B6D8"));
             btn.setClickable(false);
-            btn.setText("(" + millisUntilFinished / 1000 + ") 秒后可重新发送");
+            btn.setText("("+millisUntilFinished / 1000 +") 秒后可重新发送");
 
         }
 
@@ -143,87 +134,10 @@ public class Register_Activity extends Activity {
         public void onFinish() {
             btn.setText("重新获取验证码");
             btn.setClickable(true);
+            btn.setBackgroundColor(Color.parseColor("#4EB84A"));
+
         }
     }
-    /*阻止返回注册页面*/
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SMSSDK.unregisterAllEventHandler();
-    }
-
-    /*验证手机号*/
-    private boolean Vaildateinfo() {
-        csed1 = (EditText) findViewById(R.id.phone);
-        String zh = csed1.getText().toString();
-        Log.e("gaibain", "123");
-        //首先要判断是否为空
-        if (!zh.equals("") || null != zh) {
-            if (zh.length() == 11) {
-                return true;
-            } else {
-                Toast.makeText(Register_Activity.this, "手机号不足11位", Toast.LENGTH_SHORT).show();
-                csed1.requestFocus();
-            }
-        } else {
-            Toast.makeText(Register_Activity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
-            csed1.requestFocus();
-        }
-        return false;
-    }
-
-    /*验证密码*/
-    private boolean Vailpasinfo() {
-        csed2 = (EditText) findViewById(R.id.password);
-        String pwd = csed2.getText().toString();
-        if (!pwd.equals("") || null != pwd) {
-            if (pwd.length() >= 8) {
-                return true;
-            } else {
-                Toast.makeText(Register_Activity.this, "密码不足8位", Toast.LENGTH_SHORT).show();
-                csed2.requestFocus();
-            }
-        } else {
-            Toast.makeText(Register_Activity.this, "密码不能为空", Toast.LENGTH_SHORT).show();
-            csed2.requestFocus();
-        }
-        return false;
-    }
-
-
-    /*验证密码是否一致*/
-    private boolean Vailrepasinfo() {
-        csed2 = (EditText) findViewById(R.id.password);
-        csed3 = (EditText) findViewById(R.id.repassword);
-        String pwd = csed2.getText().toString();
-        String repwd = csed3.getText().toString();
-        if (pwd.equals(repwd)) {
-            Log.e("123","13");
-            Toast.makeText(Register_Activity.this, "注册成功", Toast.LENGTH_SHORT).show();
-            return true;
-        } else {
-            Toast.makeText(Register_Activity.this, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
-        }
-        return false;
-    }
-
-    ;
-    /* 自动获取焦点时隐藏hint代码*/
-    private View.OnFocusChangeListener mOnFocusChangeListener = new View.OnFocusChangeListener() {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus) {
-            EditText textView = (EditText) v;
-            String hint;
-            if (hasFocus) {
-                hint = textView.getHint().toString();
-                textView.setTag(hint);
-                textView.setHint(null);
-            } else {
-                hint = textView.getTag().toString();
-                textView.setHint(hint);
-            }
-        }
-    };
 }
 
 
