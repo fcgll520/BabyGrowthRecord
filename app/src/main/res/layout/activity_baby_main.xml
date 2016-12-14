@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/ll"
+    android:background="@drawable/beijing1"
     android:orientation="vertical"
     tools:context=".MainActivity.BabyMainActivity">
 
@@ -14,7 +15,6 @@
         android:layout_weight="5">
     </FrameLayout>
     <LinearLayout
-        android:background="@drawable/beijing1"
         android:layout_width="match_parent"
         android:layout_height="45sp"
         android:gravity="bottom">

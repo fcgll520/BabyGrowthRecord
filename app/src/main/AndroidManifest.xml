@@ -69,7 +69,6 @@
         <activity android:name=".Circle.ImagePagerActivity" />
         <activity android:name=".Circle.CircleMainActivity" />
         <activity android:name=".Fragment.PublishActivity" />
-        <activity android:name=".Fragment.PublishFragment"/>
     </application>
 
 </manifest>

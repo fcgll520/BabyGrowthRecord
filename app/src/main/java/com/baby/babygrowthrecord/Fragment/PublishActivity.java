@@ -110,8 +110,8 @@ public class PublishActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                /*String text = editText.getText().toString();
+                
+               /* String text = editText.getText().toString();
                 String image = image_view.toString();
                 Map<String,String> params = new HashMap<String, String>();
                 params.put("context",text);
