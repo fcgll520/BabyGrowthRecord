@@ -28,21 +28,20 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="3">
+        android:layout_height="match_parent">
         <ImageView
             android:layout_weight="2"
             android:id="@+id/iv_userSetHeadPic"
             android:src="@drawable/user_default_child"
             android:layout_width="match_parent"
-            android:layout_height="0dp" />
-        <Gallery
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:spacing="5dp"
-            android:id="@+id/gal_userSetHeadPic"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="wrap_content" />
+        <!--<Gallery-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:spacing="5dp"-->
+            <!--android:id="@+id/gal_userSetHeadPic"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"/>-->
         <!--<HorizontalScrollView-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="120dp">-->
