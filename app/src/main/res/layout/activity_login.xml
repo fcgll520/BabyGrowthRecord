@@ -5,31 +5,34 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     android:weightSum="1">
+
     <LinearLayout
         android:id="@+id/login_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="7dp">
+        android:layout_marginTop="7dp"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:layout_weight="2"
             android:background="@drawable/register_btn"
+            android:gravity="right"
             android:text="登陆"
             android:textColor="#ffffff"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
+
         <Button
             android:id="@+id/login_login_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="right"
             android:background="@drawable/register_btn"
+            android:gravity="right"
             android:text="注册"
-            android:textSize="15dp"
-            android:textColor="#ffffff" />
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,9 +55,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/edittext"
                 android:gravity="center"
-                android:layout_marginBottom="5dp"
                 android:hint="请输入用户名"
                 android:textColor="#ffffff"
                 android:textColorHint="#ffffff" />
@@ -75,12 +78,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/edittext"
                 android:gravity="center"
-                android:layout_marginBottom="15dp"
                 android:hint="请输入密码"
                 android:textColor="#ffffff"
-                android:textColorHint="#ffffff"  />
+                android:textColorHint="#ffffff" />
 
         </LinearLayout>
 
@@ -93,6 +96,7 @@
             android:layout_marginRight="80dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/login_login_btn"
                 android:layout_width="match_parent"
@@ -100,20 +104,20 @@
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_btn"
                 android:text="登录"
-                android:textSize="15dp"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -122,8 +126,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"
                 android:text="--------------------其他登录方式--------------------"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
@@ -153,13 +157,15 @@
             android:id="@+id/login_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center">
+
                 <Button
                     android:id="@+id/WB"
                     android:layout_width="40dp"
@@ -167,11 +173,14 @@
                     android:layout_gravity="center"
                     android:background="@drawable/wb" />
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/main_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center">
+
                 <Button
                     android:id="@+id/qq"
                     android:layout_width="40dp"
@@ -179,11 +188,13 @@
                     android:layout_gravity="center"
                     android:background="@drawable/qq" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center">
+
                 <Button
                     android:id="@+id/WX"
                     android:layout_width="40dp"
