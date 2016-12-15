@@ -56,12 +56,13 @@
 
         <EditText
             android:id="@+id/message"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@null"
             android:gravity="left"
             android:hint="请输入短信验证码"
+            android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:paddingTop="13dp" />
 
@@ -86,10 +87,11 @@
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@null"
             android:hint="密码"
+            android:textColor="#ffffff"
             android:textColorHint="#ffffff"/>
     </LinearLayout>
 
@@ -104,10 +106,11 @@
 
         <EditText
             android:id="@+id/repassword"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@null"
             android:hint="确认密码"
+            android:textColor="#ffffff"
             android:textColorHint="#ffffff"/>
     </LinearLayout>
 
