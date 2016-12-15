@@ -87,6 +87,9 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
+                if (headPicList!=null){
+                    headPicList.clear();
+                }
                 for (int i=0;i<tempList.size()&&k>=0;i++,k--){
                     headPicList.add(i,tempList.get(k));
                 }
@@ -115,6 +118,9 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
+                if (circleList!=null){
+                    circleList.clear();
+                }
                 for (int i=0;i<list.size()&&k>=0;i++){
                     circleList.add(i,list.get(k));
                     k--;
