@@ -53,8 +53,7 @@ public class MoreWindow extends PopupWindow implements View.OnClickListener {
         mContext.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         statusBarHeight = frame.top;
         DisplayMetrics metrics = new DisplayMetrics();
-        mContext.getWindowManager().getDefaultDisplay()
-                .getMetrics(metrics);
+        mContext.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mWidth = metrics.widthPixels;
         mHeight = metrics.heightPixels;
 
@@ -86,7 +85,7 @@ public class MoreWindow extends PopupWindow implements View.OnClickListener {
         canvas.drawBitmap(mBitmap, 0, 0, paint);
 
         overlay = FastBlur.doBlur(overlay, (int) radius, true);
-        Log.i(TAG, "blur time is:"+(System.currentTimeMillis() - startMs));
+        Log.i(TAG, "blur time is:"+(System.currentTimeMillis() - startMs) );
         return overlay;
     }
 
@@ -94,7 +93,7 @@ public class MoreWindow extends PopupWindow implements View.OnClickListener {
         AnimationSet set = new AnimationSet(true);
         TranslateAnimation go = new TranslateAnimation(0, 0, fromY, toY);
         go.setDuration(300);
-        TranslateAnimation go1 = new TranslateAnimation(0, 0, -10, 2);
+        TranslateAnimation go1 = new TranslateAnimation(0, 0, -60, 20);
         go1.setDuration(100);
         go1.setStartOffset(250);
         set.addAnimation(go1);
@@ -128,8 +127,10 @@ public class MoreWindow extends PopupWindow implements View.OnClickListener {
         ImageView close= (ImageView)layout.findViewById(R.id.center_music_window_close);
         android.widget.RelativeLayout.LayoutParams params =new android.widget.RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.bottomMargin = bottomMargin;
-        params.topMargin = 400;
-        params.leftMargin = 100;
+        params.addRule(RelativeLayout.BELOW, R.id.more_window_beijing);
+        params.addRule(RelativeLayout.RIGHT_OF, R.id.more_window_local);
+        params.topMargin = 200;
+        params.leftMargin = 18;
         close.setLayoutParams(params);
 
         close.setOnClickListener(new View.OnClickListener() {

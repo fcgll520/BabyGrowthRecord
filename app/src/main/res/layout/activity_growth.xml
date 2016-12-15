@@ -9,10 +9,11 @@
     <TextView
         android:id="@+id/growth_title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/growth_lenth"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
         android:text="成长记录"
         android:textColor="#ffffff"
-        android:textSize="@dimen/growth_title"
+        android:textSize="23dp"
         android:gravity="center"
         android:background="#63b68b"/>
     <!--头像和姓名-->
