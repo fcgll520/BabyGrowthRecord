@@ -5,6 +5,8 @@ import android.media.audiofx.LoudnessEnhancer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
 import java.net.URL;
 
 /**
@@ -93,6 +96,12 @@ public class UserSettingPwd extends Activity {
 //        tvSave.setOnClickListener(myListener);
         btnSave.setOnClickListener(myListener);
         btnCancel.setOnClickListener(myListener);
+
+        //设置隐藏密码框
+        etOriginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        etConfirmPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+        etPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+       // etConfirmPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
     }
 
     //确认原密码是否正确
