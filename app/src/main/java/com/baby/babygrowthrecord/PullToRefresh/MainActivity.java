@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.baby.babygrowthrecord.R;
 
-public class RefreshMainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     RefreshableView refreshableView;
     ListView listView;
@@ -18,13 +18,12 @@ public class RefreshMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_refresh_main);
+        setContentView(R.layout.activity_main);
 
         refreshableView = (RefreshableView) findViewById(R.id.refreshable_view);
         listView = (ListView) findViewById(R.id.list_view);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         listView.setAdapter(adapter);
-
         refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
             @Override
             public void onRefresh() {
