@@ -1,6 +1,7 @@
 package com.baby.babygrowthrecord.Fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,11 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,7 +36,7 @@ import java.util.ArrayList;
 /**
  * Created by asus on 2016/11/22.
  */
-public class  QuanziFragment extends ListFragment {
+public class  QuanziFragment extends Fragment {
     private View view;
     public static final String TAG = "MainActivity";
     private FridListAdapter mAdapter;
@@ -43,6 +47,7 @@ public class  QuanziFragment extends ListFragment {
     private ArrayList<String> headPicList=new ArrayList<>();  //头像动态数组
 
     private RefreshableView refreshableView;
+    private PullToRefreshListView refreshLv;
 
 
     @Nullable
@@ -52,18 +57,25 @@ public class  QuanziFragment extends ListFragment {
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         setColor(getActivity(), Color.parseColor("#63b68b") );
         //下拉刷新
-        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_circle);
+//        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_circle);
         getData();
         mAdapter = new FridListAdapter(getActivity(), circleList,headPicList);
-        setListAdapter(mAdapter);
+        refreshLv = (PullToRefreshListView)view.findViewById(R.id.list);
+        refreshLv.setAdapter(mAdapter);
         //下拉刷新
-        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+//        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                getData();
+//                refreshableView.finishRefreshing();
+//            }
+//        }, 0);
+        refreshLv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 getData();
-                refreshableView.finishRefreshing();
             }
-        }, 0);
+        });
         return view;
     }
 
@@ -93,7 +105,8 @@ public class  QuanziFragment extends ListFragment {
                 for (int i=0;i<tempList.size()&&k>=0;i++,k--){
                     headPicList.add(i,tempList.get(k));
                 }
-                setListAdapter(mAdapter);
+                refreshLv.setAdapter(mAdapter);
+                refreshLv.onRefreshComplete();
             }
         });
         //获取动态内容
@@ -125,7 +138,8 @@ public class  QuanziFragment extends ListFragment {
                     circleList.add(i,list.get(k));
                     k--;
                 }
-                setListAdapter(mAdapter);
+                refreshLv.setAdapter(mAdapter);
+                refreshLv.onRefreshComplete();
             }
         });
     }

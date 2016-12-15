@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,6 +25,8 @@ import com.baby.babygrowthrecord.Mother.GoogleCardAdapter;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -45,10 +48,10 @@ import java.util.List;
  */
 public class HelpFragment extends Fragment{
     private View view;
-    private ListView mListView;
+    private PullToRefreshListView mListView;
     private List<GoogleCard> mCards=new ArrayList<GoogleCard>();
     private GoogleCardAdapter mAdapter;
-    private RefreshableView refreshableView;
+//    private RefreshableView refreshableView;
     public static PopupWindow pop;
     private Button btn;
     public int essay_Id;
@@ -78,7 +81,7 @@ public class HelpFragment extends Fragment{
 
         getItems();
         //获取listview
-        mListView=(ListView) view.findViewById(R.id.ListView);
+        mListView=(PullToRefreshListView) view.findViewById(R.id.ListView);
         //配置适配器
         mAdapter = new GoogleCardAdapter(getActivity(),mCards);
         mListView.setAdapter(mAdapter);
@@ -94,7 +97,7 @@ public class HelpFragment extends Fragment{
             }
         });
 
-        mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        mListView.getRefreshableView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 pop.showAtLocation(view, Gravity.NO_GRAVITY,500,150);
@@ -104,6 +107,14 @@ public class HelpFragment extends Fragment{
                 return true;
             }
         });
+
+        mListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                getItems();
+            }
+        });
+
          btn =(Button)popview.findViewById(R.id.collection_btn);
          btn.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -160,6 +171,7 @@ public class HelpFragment extends Fragment{
                     }
                 }
                 mListView.setAdapter(mAdapter);
+                mListView.onRefreshComplete();
             }
         });
     }
