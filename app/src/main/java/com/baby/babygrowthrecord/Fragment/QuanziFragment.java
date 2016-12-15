@@ -4,25 +4,19 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
-import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
-import com.baby.babygrowthrecord.util.Util;
-import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,11 +27,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -98,9 +87,6 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
-                if(headPicList!=null){
-                    headPicList.clear();
-                }
                 for (int i=0;i<tempList.size()&&k>=0;i++,k--){
                     headPicList.add(i,tempList.get(k));
                 }
@@ -129,9 +115,6 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
-                if (circleList!=null){
-                    circleList.clear();
-                }
                 for (int i=0;i<list.size()&&k>=0;i++){
                     circleList.add(i,list.get(k));
                     k--;

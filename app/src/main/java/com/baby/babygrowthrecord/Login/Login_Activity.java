@@ -267,8 +267,8 @@ public class Login_Activity extends Activity {
         @Override
         public void onComplete(Object response) {
             //返回的json字符
-            /*Util.showResultDialog(Login_Activity.this, response.toString(),
-                    "登录成功");*/
+            Util.showResultDialog(Login_Activity.this, response.toString(),
+                    "登录成功");
             doComplete((JSONObject) response);
         }
 
