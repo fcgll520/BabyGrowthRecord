@@ -37,17 +37,17 @@
                 android:id="@+id/tv_userSetting_pic"
                 android:text="头像"
                 android:textSize="@dimen/list_textSize"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/list_item_marginLeft" />
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_userSet_headPic"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/user_arrow"
-                android:background="@android:color/transparent"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginRight="50dp"
-                android:alpha="0.1"/>
+                android:src="@drawable/empty_photo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="50dp"/>
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/rv_userSetting_name"
@@ -61,7 +61,6 @@
                 android:layout_marginLeft="@dimen/list_item_marginLeft"/>
             <TextView
                 android:id="@+id/tv_userSetting_uName"
-                android:text="宝宝抱"
                 android:textSize="20dp"
                 android:textColor="@android:color/darker_gray"
                 android:gravity="right"
