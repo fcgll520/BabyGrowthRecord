@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
+import com.baby.babygrowthrecord.util.Util;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.AsyncHttpClient;
@@ -123,8 +125,14 @@ public class  QuanziFragment extends Fragment {
                         if (object.getString("cir_photo").equals("null")){      //没有照片的动态
                             list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("cir_name"), object.getString("cir_content")));
                         }else {
+                            String photos = object.getString("cir_photo");
+                            String []m=photos.split(";");
+                            for (int k=0;k<m.length;k++){
+                                m[k]= Utils.StrUrl+m[k];
+                                Log.e("m["+k+"]",m[k]);
+                            }
                             list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("cir_name"),
-                                    object.getString("cir_content"),new String[]{Utils.StrUrl+object.getString("cir_photo")}));
+                                    object.getString("cir_content"),m));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
