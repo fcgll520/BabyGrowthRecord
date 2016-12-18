@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baby.babygrowthrecord.Growth.Growth_Activity_Bron;
 import com.baby.babygrowthrecord.Growth.Growth_Class;
@@ -108,7 +109,15 @@ public class GrowthFragment extends Fragment{
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
+            }
         });
+
     }
     public void getData(){
         //获取成长记录列表
@@ -130,6 +139,13 @@ public class GrowthFragment extends Fragment{
                 }
                 growth_listview.setAdapter(myAdapter);
                 growth_listview.onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
         });
     }

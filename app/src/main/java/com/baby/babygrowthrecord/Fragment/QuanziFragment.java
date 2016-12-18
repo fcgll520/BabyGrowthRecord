@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
@@ -110,6 +111,13 @@ public class  QuanziFragment extends Fragment {
                 refreshLv.setAdapter(mAdapter);
                 refreshLv.onRefreshComplete();
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
+            }
         });
         //获取动态内容
         client.get(getActivity(),Utils.StrUrl+"circle/test",new JsonHttpResponseHandler(){
@@ -148,6 +156,13 @@ public class  QuanziFragment extends Fragment {
                 }
                 refreshLv.setAdapter(mAdapter);
                 refreshLv.onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -173,6 +173,13 @@ public class HelpFragment extends Fragment{
                 mListView.setAdapter(mAdapter);
                 mListView.onRefreshComplete();
             }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
