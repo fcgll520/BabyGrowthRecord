@@ -23,14 +23,24 @@ import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQAuth;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Login_Activity extends Activity {
     private static final String TAG = Login_Activity.class.getName();
@@ -46,6 +56,9 @@ public class Login_Activity extends Activity {
     private Button login_login_register;
     private EditText login_Pwd_text;
     private EditText login_Uname_text;
+    public  String loginUname;
+    public  String loginPwd;
+    public int userID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,17 +77,26 @@ public class Login_Activity extends Activity {
         login_Pwd_text.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         /*设置焦点改变时设置hint为空*/
-        login_Uname_text.setOnFocusChangeListener(mOnFocusChangeListener);
-        login_Pwd_text.setOnFocusChangeListener(mOnFocusChangeListener);
+        //login_Uname_text.setOnFocusChangeListener(mOnFocusChangeListener);
+       // login_Pwd_text.setOnFocusChangeListener(mOnFocusChangeListener);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*验证用户和密码是否存储在数据库中*/
+
+                //获取用户输入的用户名和密码
+                loginUname=login_Uname_text.getText().toString();
+                loginPwd=login_Pwd_text.getText().toString();
+                Log.e("用户名：",loginUname);
+                Log.e("密码：",loginPwd);
+                //网络请求验证用户名和密码
+                getLoginMessage();
+
                 Utils.flag = 5;
-                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
-                startActivity(intent);
-                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                finish();
+//                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                //finish();
             }
         });
 
@@ -85,6 +107,65 @@ public class Login_Activity extends Activity {
                 Intent intent = new Intent(Login_Activity.this, Register_Activity.class);
                 startActivity(intent);
             }
+        });
+    }
+
+    //网络请求验证用户名和密码
+    private void getLoginMessage() {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(Login_Activity.this,Utils.StrUrl+"user/confirmLogin?userName="+loginUname+"&userPwd="+loginPwd,new TextHttpResponseHandler(){
+            @Override
+            public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
+
+            }
+            @Override
+            public void onSuccess(int i, Header[] headers, String s) {
+
+
+//                try {
+//                    URL url=new URL(Utils.StrUrl+"user/text?userName="+loginUname+"&userPwd="+loginPwd);
+//                    HttpURLConnection coon= (HttpURLConnection) url.openConnection();
+//                    coon.setRequestMethod("GET");
+//                    coon.setConnectTimeout(3000);
+//                    coon.connect();
+//                    if (coon.getResponseCode()==200){
+//
+//                    }
+//                } catch (MalformedURLException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+
+            }
+
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//                super.onSuccess(statusCode, headers, response);
+//                for (int i=0;i<response.length();i++){
+//                    try {
+//                        if (loginUname.equals(response.getJSONObject(i).getString("user_name"))){
+//                            if (loginPwd.equals(response.getJSONObject(i).getString("user_pwd"))){
+//                                userID=response.getJSONObject(i).getInt("user_id");
+//                                Utils.userId=userID;
+//                                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+//                                startActivity(intent);
+//                                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
+//                            }
+//                            else {
+//                                Toast.makeText(Login_Activity.this,"密码输入错误",Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+////                        else {
+////                            Toast.makeText(Login_Activity.this,"用户不存在！",Toast.LENGTH_SHORT).show();
+////                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                Toast.makeText(Login_Activity.this,"用户不存在！",Toast.LENGTH_SHORT).show();
+//
+//            }
         });
     }
 
@@ -267,8 +348,8 @@ public class Login_Activity extends Activity {
         @Override
         public void onComplete(Object response) {
             //返回的json字符
-            /*Util.showResultDialog(Login_Activity.this, response.toString(),
-                    "登录成功");*/
+            Util.showResultDialog(Login_Activity.this, response.toString(),
+                    "登录成功");
             doComplete((JSONObject) response);
         }
 

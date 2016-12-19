@@ -156,7 +156,7 @@
             android:orientation="horizontal"
             android:layout_marginBottom="6dp">
             <LinearLayout
-                android:id="@+id/main_container"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -169,6 +169,7 @@
                     android:background="@drawable/wb" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/main_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
