@@ -23,7 +23,9 @@ import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.user.UserAlbum;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpRequest;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.tencent.utils.HttpUtils;
 
 import org.apache.http.Header;
@@ -57,12 +59,12 @@ import java.util.Map;
 public class PublishActivity extends AppCompatActivity {
 
 
-    private Context context;
     private Button button1;
     private Button button2;
     private ImageView imageView_camera;
     private ImageView image_view;
-    private EditText editText;
+    private String paths;
+    private Context content;
     private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private static final String TAG = "MyActivity";
@@ -80,7 +82,6 @@ public class PublishActivity extends AppCompatActivity {
         button2 = (Button)findViewById(R.id.button2);
         imageView_camera = (ImageView)findViewById(R.id.income_camera);
         image_view = (ImageView)findViewById(R.id.image_view);
-        editText = (EditText)findViewById(R.id.edit_text);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,38 +111,21 @@ public class PublishActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
-               /* String text = editText.getText().toString();
-                String image = image_view.toString();
-                Map<String,String> params = new HashMap<String, String>();
-                params.put("context",text);
-                params.put("image",image);
-                editText.setText(HttpUtils.submitPostData(params, "utf-8"));
-                //使用HttpPost发送请求
-                HttpPost httpPost = new HttpPost("http://169.254.76.180:8080/circle/uploading");
-                //使用NameValuePaira保存请求中所需要传入的参数
-                List<NameValuePair> paramas = new ArrayList<NameValuePair>();
-                paramas.add(new BasicNameValuePair("friend_content", "friend_photo"));
-                try{
-                    HttpResponse httpResponse;
-                    //将NameValuePair放入HttpPost请求体中
-                    httpPost.setEntity(new UrlEncodedFormEntity(paramas, HTTP.UTF_8));
-                    //执行HttpPost请求
-                    httpResponse = new DefaultHttpClient().execute(httpPost);
-                    if (httpResponse.getStatusLine().getStatusCode() == 200)
-                    {
-                        String s = EntityUtils.toString(httpResponse.getEntity());
+                Log.e("tv3","onclick");
+                Log.e("dass",paths);
+                String url = "http://169.254.254.2:8080/circle";
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams requestParams = new RequestParams();
+                client.get(url, requestParams, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
                     }
-                } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch bloc
-                    e.printStackTrace();
-                } catch (ClientProtocolException e) {
-                    // TODO Auto-generated catch bloc
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch bloc
-                    e.printStackTrace();
-                }*/
+
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+
+                    }
+                });
             }
         });
         imageView_camera.setOnClickListener(new View.OnClickListener() {
@@ -202,7 +186,7 @@ public class PublishActivity extends AppCompatActivity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     photo.compress(Bitmap.CompressFormat.JPEG, 75, stream);// (0-100)压缩文件
                     //此处可以把Bitmap保存到sd卡中，具体请看：http://www.cnblogs.com/linjiqin/archive/2011/12/28/2304940.html
-                    image_view.setImageBitmap(photo); //把图片显示在ImageView控件上
+                    imageView_camera.setImageBitmap(photo); //把图片显示在ImageView控件上
                 }
                 break;
             default:
@@ -231,61 +215,5 @@ public class PublishActivity extends AppCompatActivity {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
 
-    /*public static String submitPostData(Map<String, String> params, String encode){
-        byte[] data = getRequestData(params, encode).toString().getBytes();   //获得请求体
-        try {
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-            httpURLConnection.setConnectTimeout(3000);        //设置连接超时时间
-            httpURLConnection.setDoInput(true);                  //打开输入流，以便从服务器获取数据
-            httpURLConnection.setDoOutput(true);                 //打开输出流，以便向服务器提交数据
-            httpURLConnection.setRequestMethod("POST");     //设置以Post方式提交数据
-            httpURLConnection.setUseCaches(false);               //使用Post方式不能使用缓存
-            //设置请求体的类型是文本类型
-            httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            //设置请求体的长度
-            httpURLConnection.setRequestProperty("Content-Length", String.valueOf(data.length));
-            //获得输出流，向服务器写入数据
-            OutputStream outputStream = httpURLConnection.getOutputStream();
-            outputStream.write(data);
-            int response = httpURLConnection.getResponseCode();            //获得服务器的响应码
-            if(response == HttpURLConnection.HTTP_OK) {
-                InputStream inptStream = httpURLConnection.getInputStream();
-                return dealResponseResult(inptStream);                     //处理服务器的响应结果
-            }
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return "";
-    }
-    public static StringBuffer getRequestData(Map<String, String> params, String encode) {
-                 StringBuffer stringBuffer = new StringBuffer();        //存储封装好的请求体信息
-                try {
-                         for(Map.Entry<String, String> entry : params.entrySet()) {
-                                 stringBuffer.append(entry.getKey())
-                                             .append("=")
-                                             .append(URLEncoder.encode(entry.getValue(), encode))
-                                             .append("&");
-                             }
-                         stringBuffer.deleteCharAt(stringBuffer.length() - 1);    //删除最后的一个"&"
-                     } catch (Exception e) {
-                         e.printStackTrace();
-                     }
-                 return stringBuffer;
-             }
-    public static String dealResponseResult(InputStream inputStream) {
-                 String resultData = null;      //存储处理结果
-                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                 byte[] data = new byte[1024];
-                 int len = 0;
-                 try {
-                         while((len = inputStream.read(data)) != -1) {
-                                 byteArrayOutputStream.write(data, 0, len);
-                             }
-                     } catch (IOException e) {
-                         e.printStackTrace();
-                     }
-                 resultData = new String(byteArrayOutputStream.toByteArray());
-                 return resultData;
-             }*/
 
 }
