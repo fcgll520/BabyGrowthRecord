@@ -64,6 +64,8 @@ public class UserSettingHeadPic extends Activity {
     private UserSettingHeadPicAdapter adapter;
     private String[]images={Utils.StrUrl+"img/user_photo"+0+".jpg",Utils.StrUrl+"img/user_photo"+1+".jpg",
             Utils.StrUrl+"img/user_photo"+2+".jpg"};
+    private int[]imgArray={R.raw.user_photo0,R.raw.user_photo1,R.raw.user_photo2,R.raw.user_photo3,R.raw.user_photo4,
+            R.raw.user_photo5,R.raw.user_photo6,R.raw.user_photo7,R.raw.user_photo8,R.raw.user_photo9};
     private int imgId=0;
 
     @Override
@@ -80,7 +82,8 @@ public class UserSettingHeadPic extends Activity {
 
         gallery=(Gallery)findViewById(R.id.gal_userSetHeadPic);
         setBigImg();
-        adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,images);
+      //  adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,images);
+        adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,imgArray);
         gallery.setAdapter(adapter);
 
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -122,8 +125,8 @@ public class UserSettingHeadPic extends Activity {
     }
 
     private void setBigImg() {
-        ImageLoader.getInstance().displayImage(images[imgId],ivHeadPic);
-
+//        ImageLoader.getInstance().displayImage(images[imgId],ivHeadPic);
+        ivHeadPic.setImageResource(imgArray[imgId]);
     }
 
 
