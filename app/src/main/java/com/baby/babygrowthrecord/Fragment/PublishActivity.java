@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -16,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
@@ -55,6 +57,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.smssdk.gui.layout.Res;
+
 
 public class PublishActivity extends AppCompatActivity {
 
@@ -62,9 +66,9 @@ public class PublishActivity extends AppCompatActivity {
     private Button button1;
     private Button button2;
     private ImageView imageView_camera;
-    private ImageView image_view;
-    private String paths;
-    private Context content;
+    private EditText editText;
+    private GridView noScrollgridview;
+    public static Bitmap bimap ;
     private static final String IMAGE_UNSPECIFIED = "image/*";
 
     private static final String TAG = "MyActivity";
@@ -73,21 +77,23 @@ public class PublishActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST_CODE = 2;
     private static final int CROP_REQUEST_CODE = 4;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-
+        bimap = BitmapFactory.decodeResource(
+                getResources(),
+                R.drawable.composer_camera);
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
         imageView_camera = (ImageView)findViewById(R.id.income_camera);
-        image_view = (ImageView)findViewById(R.id.image_view);
+        editText = (EditText)findViewById(R.id.edit_text);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(PublishActivity.this);
+                /*AlertDialog.Builder builder = new AlertDialog.Builder(PublishActivity.this);
                 builder.setTitle("你确定要取消发布并保存为草稿？");
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
@@ -104,28 +110,38 @@ public class PublishActivity extends AppCompatActivity {
                                 finish();
                             }
                         });
-                builder.create().show();
+                builder.create().show();*/
+                PublishActivity.this.finish();
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("tv3","onclick");
-                Log.e("dass",paths);
-                String url = "http://169.254.254.2:8080/circle";
+                String context = editText.getText().toString();
+                String img = imageView_camera.toString();
+                String url = "http://169.254.254.2:8080/";
                 AsyncHttpClient client = new AsyncHttpClient();
-                RequestParams requestParams = new RequestParams();
-                client.get(url, requestParams, new AsyncHttpResponseHandler() {
+                client.get(PublishActivity.this, url+"circle/test?cir_content="+context+"&cir_photo="+img,new JsonHttpResponseHandler(){
                     @Override
-                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        super.onSuccess(statusCode, headers, response);
+                        try {
+                            Utils.circlrId=response.getInt("cir_id");
+                            Utils.circleCntent=response.getString("cir_content");
+                            Utils.circlePhoto=response.getString("cir_photo");
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
                     }
-
                     @Override
-                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        super.onFailure(statusCode, headers, throwable, errorResponse);
+                        Toast.makeText(PublishActivity.this,"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
+                        Log.e("REGISTER_ERROR",throwable.toString());
                     }
                 });
+                finish();
             }
         });
         imageView_camera.setOnClickListener(new View.OnClickListener() {
