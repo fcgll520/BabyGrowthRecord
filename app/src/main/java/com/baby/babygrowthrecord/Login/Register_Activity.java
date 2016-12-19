@@ -108,8 +108,12 @@ public class Register_Activity extends Activity {
         register_register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
-                Intent intent = new Intent(Register_Activity.this,BabyMainActivity.class);
+//                SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
+                Intent intent = new Intent(Register_Activity.this,RegisterConfirm.class);
+                intent.putExtra("userPhone",phone.getText().toString());
+                intent.putExtra("confirmCode",message.getText().toString());
+                intent.putExtra("userPwd",pas.getText().toString());
+                intent.putExtra("userConfirmPwd",repas.getText().toString());
                 startActivity(intent);
             }
         });
