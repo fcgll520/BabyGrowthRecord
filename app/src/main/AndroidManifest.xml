@@ -94,6 +94,7 @@
             android:screenOrientation="portrait" />
         <!--页面所需activity-->
         <activity android:name=".Login.Register_Activity"/>
+        <activity android:name=".Login.RegisterConfirm"/>
         <activity android:name=".MainActivity.BabyMainActivity"/>
         <activity android:name=".user.UserActivity" />
         <activity android:name=".user.UserAlbum" />

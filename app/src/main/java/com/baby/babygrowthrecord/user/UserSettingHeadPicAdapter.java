@@ -34,10 +34,17 @@ import java.util.Calendar;
  * Created by think on 2016/11/22.
  */
 public class UserSettingHeadPicAdapter extends BaseAdapter {
-    private String[]imgs;
+//    private String[]imgs;
     private Context context;
+    private int[]imgs;
 
-    public UserSettingHeadPicAdapter(Context context, String[] imgs) {
+//    public UserSettingHeadPicAdapter(Context context, String[] imgs) {
+//        this.context = context;
+//        this.imgs = imgs;
+//    }
+
+
+    public UserSettingHeadPicAdapter(Context context, int[] imgs) {
         this.context = context;
         this.imgs = imgs;
     }
@@ -60,10 +67,11 @@ public class UserSettingHeadPicAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView==null){
-            ImageView imageView=new ImageView(context);
-            ImageLoader.getInstance().displayImage(imgs[position],imageView);
-
-            Gallery.LayoutParams layoutParams=new Gallery.LayoutParams(300, ViewGroup.LayoutParams.MATCH_PARENT);
+            final ImageView imageView=new ImageView(context);
+           // ImageLoader.getInstance().displayImage(imgs[position],imageView);
+            imageView.setImageResource(imgs[position]);
+            Gallery.LayoutParams layoutParams=new Gallery.LayoutParams(300,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
             imageView.setLayoutParams(layoutParams);
 
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);

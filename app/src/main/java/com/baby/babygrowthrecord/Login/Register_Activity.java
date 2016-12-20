@@ -9,13 +9,21 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -108,9 +116,7 @@ public class Register_Activity extends Activity {
         register_register_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
-                Intent intent = new Intent(Register_Activity.this,BabyMainActivity.class);
-                startActivity(intent);
+                registerConfirm();
             }
         });
 
@@ -137,6 +143,63 @@ public class Register_Activity extends Activity {
             btn.setBackgroundColor(Color.parseColor("#4EB84A"));
 
         }
+    }
+
+    public void registerConfirm(){
+        String phoneStr=phone.getText().toString();
+        String pwd=pas.getText().toString();
+        String confirmPwd=repas.getText().toString();
+        if (phoneStr.equals("")){
+            Toast.makeText(Register_Activity.this,"手机号不能为空，请输入手机号！",Toast.LENGTH_SHORT).show();
+            finish();
+        } else if (pwd.equals("")){
+            Toast.makeText(Register_Activity.this,"密码不能为空，请输入密码！",Toast.LENGTH_SHORT).show();
+            finish();
+        } else if (confirmPwd.equals("")){
+            Toast.makeText(Register_Activity.this,"确认密码不能为空，请输入确认密码！",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        //匹配验证码
+        SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
+        //匹配密码与确认密码
+        if (!confirmPwd.equals(pwd)){
+            Toast.makeText(Register_Activity.this,"确认密码与密码不一致，请重新输入！",Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        //发送注册用户的请求
+        sendRegisterRequest(phoneStr,pwd);
+    }
+
+    private void sendRegisterRequest(String phoneStr,String pwd) {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(Register_Activity.this, Utils.StrUrl+"user/register?user_phone="+phoneStr+"&user_pwd="+pwd,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (response!=null){
+                    Toast.makeText(Register_Activity.this,"注册成功！欢迎使用成长树~",Toast.LENGTH_SHORT).show();
+                    try {
+                        Utils.userId=response.getInt("user_id");
+                        Utils.userName=response.getString("user_name");
+                        Utils.userPhoto=response.getString("user_photo");
+                        Utils.userPwd=response.getString("user_pwd");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Intent intent=new Intent(Register_Activity.this, BabyMainActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(Register_Activity.this,"注册失败，请稍后再试！",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Toast.makeText(Register_Activity.this,"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
+                Log.e("REGISTER_ERROR",throwable.toString());
+            }
+        });
     }
 }
 
