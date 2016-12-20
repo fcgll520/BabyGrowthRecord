@@ -38,6 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -59,6 +60,13 @@ public class Login_Activity extends Activity {
     public  String loginUname;
     public  String loginPwd;
     public int userID;
+
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,6 +97,7 @@ public class Login_Activity extends Activity {
                 loginPwd=login_Pwd_text.getText().toString();
                 Log.e("用户名：",loginUname);
                 Log.e("密码：",loginPwd);
+
                 //网络请求验证用户名和密码
                 getLoginMessage();
 
@@ -116,58 +125,62 @@ public class Login_Activity extends Activity {
         client.get(Login_Activity.this,Utils.StrUrl+"user/confirmLogin?userName="+loginUname+"&userPwd="+loginPwd,new TextHttpResponseHandler(){
             @Override
             public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
-
+                Log.e("网络有问题","请检查网络");
             }
             @Override
             public void onSuccess(int i, Header[] headers, String s) {
+                Log.e("返回的s值",s);
+                if (Integer.parseInt(s)==-1){
+                    Log.e("服务器返回数字-1",s);
+                    Toast.makeText(Login_Activity.this,"用户不存在,请重新输入",Toast.LENGTH_SHORT).show();
+                }
+                else if (Integer.parseInt(s)==0){
+                    Log.e("服务器返回数字0",s);
+                    Toast.makeText(Login_Activity.this,"密码输入错误,请重新输入",Toast.LENGTH_SHORT).show();
+                }
+                else if (Integer.parseInt(s)==1){
+                    Log.e("服务器返回数字1",s);
+                    Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
 
-
-//                try {
-//                    URL url=new URL(Utils.StrUrl+"user/text?userName="+loginUname+"&userPwd="+loginPwd);
-//                    HttpURLConnection coon= (HttpURLConnection) url.openConnection();
-//                    coon.setRequestMethod("GET");
-//                    coon.setConnectTimeout(3000);
-//                    coon.connect();
-//                    if (coon.getResponseCode()==200){
-//
-//                    }
-//                } catch (MalformedURLException e) {
-//                    e.printStackTrace();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-
+                    //得到用户ID
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getUserId();
+                        }
+                    }).start();
+                }
             }
-
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                super.onSuccess(statusCode, headers, response);
-//                for (int i=0;i<response.length();i++){
-//                    try {
-//                        if (loginUname.equals(response.getJSONObject(i).getString("user_name"))){
-//                            if (loginPwd.equals(response.getJSONObject(i).getString("user_pwd"))){
-//                                userID=response.getJSONObject(i).getInt("user_id");
-//                                Utils.userId=userID;
-//                                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
-//                                startActivity(intent);
-//                                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
-//                            }
-//                            else {
-//                                Toast.makeText(Login_Activity.this,"密码输入错误",Toast.LENGTH_SHORT).show();
-//                            }
-//                        }
-////                        else {
-////                            Toast.makeText(Login_Activity.this,"用户不存在！",Toast.LENGTH_SHORT).show();
-////                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                Toast.makeText(Login_Activity.this,"用户不存在！",Toast.LENGTH_SHORT).show();
-//
-//            }
         });
     }
+
+    private void getUserId() {
+        Log.e("调用了此函数","调用了此函数");
+        try {
+            String url=Utils.StrUrl+"user/getuserid";
+            URL Url=new URL(url);
+            HttpURLConnection coon= (HttpURLConnection) Url.openConnection();
+            InputStream is=coon.getInputStream();
+            byte []b=new byte[1];
+            is.read(b);
+//            String str=String.valueOf(b);
+//            int id=Integer.parseInt(str);
+//            Log.e("服务器返回的用户ID", String.valueOf(id));
+            Utils.userId=Integer.parseInt(new String(b));
+            Log.e("服务器返回的用户ID", String.valueOf(Utils.userId));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //登录成功，跳转到主页面
+        Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+        startActivity(intent);
+
+        finish();
+    }
+
 
     @Override
     protected void onStart() {
