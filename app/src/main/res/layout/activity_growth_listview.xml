@@ -3,15 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <!--标题-->
-    <TextView
-        android:id="@+id/growth_title"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/growth_lenth"
-        android:text="成长记录"
-        android:textColor="#ffffff"
-        android:textSize="@dimen/growth_title"
-        android:gravity="center"
-        android:background="#63b68b"/>
+        android:layout_height="wrap_content"
+        android:background="#63b68b">
+        <TextView
+            android:id="@+id/growth_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="成长记录"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/growth_title"
+            android:layout_margin="15dp"
+            android:gravity="center"/>
+    </LinearLayout>
     <!--头像和姓名-->
     <LinearLayout
         android:id="@+id/growth_head_name"
