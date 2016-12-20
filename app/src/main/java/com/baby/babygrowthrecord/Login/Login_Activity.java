@@ -23,14 +23,25 @@ import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQAuth;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
+import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Login_Activity extends Activity {
     private static final String TAG = Login_Activity.class.getName();
@@ -46,6 +57,16 @@ public class Login_Activity extends Activity {
     private Button login_login_register;
     private EditText login_Pwd_text;
     private EditText login_Uname_text;
+    public  String loginUname;
+    public  String loginPwd;
+    public int userID;
+
+    Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,17 +85,27 @@ public class Login_Activity extends Activity {
         login_Pwd_text.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
         /*设置焦点改变时设置hint为空*/
-        login_Uname_text.setOnFocusChangeListener(mOnFocusChangeListener);
-        login_Pwd_text.setOnFocusChangeListener(mOnFocusChangeListener);
+        //login_Uname_text.setOnFocusChangeListener(mOnFocusChangeListener);
+       // login_Pwd_text.setOnFocusChangeListener(mOnFocusChangeListener);
         login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 /*验证用户和密码是否存储在数据库中*/
+
+                //获取用户输入的用户名和密码
+                loginUname=login_Uname_text.getText().toString();
+                loginPwd=login_Pwd_text.getText().toString();
+                Log.e("用户名：",loginUname);
+                Log.e("密码：",loginPwd);
+
+                //网络请求验证用户名和密码
+                getLoginMessage();
+
                 Utils.flag = 5;
-                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
-                startActivity(intent);
-                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                finish();
+//                Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+//                startActivity(intent);
+//                Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                //finish();
             }
         });
 
@@ -87,6 +118,69 @@ public class Login_Activity extends Activity {
             }
         });
     }
+
+    //网络请求验证用户名和密码
+    private void getLoginMessage() {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(Login_Activity.this,Utils.StrUrl+"user/confirmLogin?userName="+loginUname+"&userPwd="+loginPwd,new TextHttpResponseHandler(){
+            @Override
+            public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
+                Log.e("网络有问题","请检查网络");
+            }
+            @Override
+            public void onSuccess(int i, Header[] headers, String s) {
+                Log.e("返回的s值",s);
+                if (Integer.parseInt(s)==-1){
+                    Log.e("服务器返回数字-1",s);
+                    Toast.makeText(Login_Activity.this,"用户不存在,请重新输入",Toast.LENGTH_SHORT).show();
+                }
+                else if (Integer.parseInt(s)==0){
+                    Log.e("服务器返回数字0",s);
+                    Toast.makeText(Login_Activity.this,"密码输入错误,请重新输入",Toast.LENGTH_SHORT).show();
+                }
+                else if (Integer.parseInt(s)==1){
+                    Log.e("服务器返回数字1",s);
+                    Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
+
+                    //得到用户ID
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            getUserId();
+                        }
+                    }).start();
+                }
+            }
+        });
+    }
+
+    private void getUserId() {
+        Log.e("调用了此函数","调用了此函数");
+        try {
+            String url=Utils.StrUrl+"user/getuserid";
+            URL Url=new URL(url);
+            HttpURLConnection coon= (HttpURLConnection) Url.openConnection();
+            InputStream is=coon.getInputStream();
+            byte []b=new byte[1];
+            is.read(b);
+//            String str=String.valueOf(b);
+//            int id=Integer.parseInt(str);
+//            Log.e("服务器返回的用户ID", String.valueOf(id));
+            Utils.userId=Integer.parseInt(new String(b));
+            Log.e("服务器返回的用户ID", String.valueOf(Utils.userId));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //登录成功，跳转到主页面
+        Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
+        startActivity(intent);
+
+        finish();
+    }
+
 
     @Override
     protected void onStart() {
