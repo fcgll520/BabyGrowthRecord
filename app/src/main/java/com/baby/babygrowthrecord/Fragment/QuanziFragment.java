@@ -1,10 +1,10 @@
 package com.baby.babygrowthrecord.Fragment;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,15 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
-import com.baby.babygrowthrecord.Circle.MessageModle;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
-import com.google.gson.Gson;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,17 +34,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**
  * Created by asus on 2016/11/22.
  */
-public class  QuanziFragment extends ListFragment {
+public class  QuanziFragment extends Fragment {
     private View view;
     public static final String TAG = "MainActivity";
     private FridListAdapter mAdapter;
@@ -54,6 +50,7 @@ public class  QuanziFragment extends ListFragment {
     private ArrayList<String> headPicList=new ArrayList<>();  //头像动态数组
 
     private RefreshableView refreshableView;
+    private PullToRefreshListView refreshLv;
 
 
     @Nullable
@@ -63,18 +60,25 @@ public class  QuanziFragment extends ListFragment {
         imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         setColor(getActivity(), Color.parseColor("#63b68b") );
         //下拉刷新
-        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_circle);
+//        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_circle);
         getData();
         mAdapter = new FridListAdapter(getActivity(), circleList,headPicList);
-        setListAdapter(mAdapter);
+        refreshLv = (PullToRefreshListView)view.findViewById(R.id.list);
+        refreshLv.setAdapter(mAdapter);
         //下拉刷新
-        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+//        refreshableView.setOnRefreshListener(new RefreshableView.PullToRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                getData();
+//                refreshableView.finishRefreshing();
+//            }
+//        }, 0);
+        refreshLv.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onRefresh() {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 getData();
-                refreshableView.finishRefreshing();
             }
-        }, 0);
+        });
         return view;
     }
 
@@ -98,13 +102,21 @@ public class  QuanziFragment extends ListFragment {
                     }
                 }
                 int k=response.length()-1;
-                if(headPicList!=null){
+                if (headPicList!=null){
                     headPicList.clear();
                 }
                 for (int i=0;i<tempList.size()&&k>=0;i++,k--){
                     headPicList.add(i,tempList.get(k));
                 }
-                setListAdapter(mAdapter);
+                refreshLv.setAdapter(mAdapter);
+                refreshLv.onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
         });
         //获取动态内容
@@ -121,8 +133,14 @@ public class  QuanziFragment extends ListFragment {
                         if (object.getString("cir_photo").equals("null")){      //没有照片的动态
                             list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("cir_name"), object.getString("cir_content")));
                         }else {
+                            String photos = object.getString("cir_photo");
+                            String []m=photos.split(";");
+                            for (int k=0;k<m.length;k++){
+                                m[k]= Utils.StrUrl+m[k];
+                                Log.e("m["+k+"]",m[k]);
+                            }
                             list.add(i,new Circle(object.getInt("cir_id"),"",object.getString("cir_name"),
-                                    object.getString("cir_content"),new String[]{Utils.StrUrl+object.getString("cir_photo")}));
+                                    object.getString("cir_content"),m));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -136,7 +154,15 @@ public class  QuanziFragment extends ListFragment {
                     circleList.add(i,list.get(k));
                     k--;
                 }
-                setListAdapter(mAdapter);
+                refreshLv.setAdapter(mAdapter);
+                refreshLv.onRefreshComplete();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_GROWTH_INFO_ERROR",throwable.toString());
+                Toast.makeText(getActivity(),"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
         });
     }

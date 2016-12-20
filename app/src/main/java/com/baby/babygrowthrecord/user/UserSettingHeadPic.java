@@ -4,16 +4,25 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Gallery;
@@ -21,11 +30,26 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.apache.http.Header;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
@@ -36,106 +60,75 @@ import java.util.Locale;
 public class UserSettingHeadPic extends Activity {
     private ImageView ivHeadPic;
     private Gallery gallery;
-//    private HorizontalScrollView hs;
-//    private LinearLayout llHeadPic;
-
+    private TextView tvSave;
     private UserSettingHeadPicAdapter adapter;
-    private int[]images={R.raw.raw_01,R.raw.raw_1478764276,R.raw.raw_1478765147,R.raw.raw_1478766470,R.raw.raw_1478766479,
-            R.raw.raw_1479174901,R.raw.raw_1479174922,R.raw.raw_1479174957,R.raw.raw_1479177109};
+    private String[]images={Utils.StrUrl+"img/user_photo"+0+".jpg",Utils.StrUrl+"img/user_photo"+1+".jpg",
+            Utils.StrUrl+"img/user_photo"+2+".jpg"};
+    private int[]imgArray={R.raw.user_photo0,R.raw.user_photo1,R.raw.user_photo2,R.raw.user_photo3,R.raw.user_photo4,
+            R.raw.user_photo5,R.raw.user_photo6,R.raw.user_photo7,R.raw.user_photo8,R.raw.user_photo9};
+    private int imgId=0;
 
-    private String imgFileName="";
-    private PopupWindow popupWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting_headpic);
         init();
+
     }
 
     private void init() {
         ivHeadPic=(ImageView)findViewById(R.id.iv_userSetHeadPic);
-        popupWindow=new PopupWindow(LayoutInflater.from(UserSettingHeadPic.this)
-                .inflate(R.menu.user_setting_change_headpic,null));
-//        hs=(HorizontalScrollView)findViewById(R.id.hs_userSetHeadPic);
-//        llHeadPic=(LinearLayout)findViewById(R.id.ll_userSetHeadPic);
-//        for (int i=0;i<7;i++){
-//            ImageView img=new ImageView(UserSettingHeadPic.this);
-//            img.setImageResource(images[i]);
-//            llHeadPic.addView(img,i,new HorizontalScrollView.LayoutParams(80,
-//                    ViewGroup.LayoutParams.MATCH_PARENT));
-//            img.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    ivHeadPic.setImageResource(v.getId());
-//                }
-//            });
-//        }
+        tvSave=(TextView)findViewById(R.id.tv_userSetHeadPic_save);
 
-//        gallery=(Gallery)findViewById(R.id.gal_userSetHeadPic);
-//        ivHeadPic.setImageResource(images[0]);
-//        adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,images);
-//        gallery.setAdapter(adapter);
-//        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                ivHeadPic.setImageResource(images[position]);
-//            }
-//        });
-    }
+        gallery=(Gallery)findViewById(R.id.gal_userSetHeadPic);
+        setBigImg();
+      //  adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,images);
+        adapter=new UserSettingHeadPicAdapter(UserSettingHeadPic.this,imgArray);
+        gallery.setAdapter(adapter);
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_setting_change_headpic,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        switch (item.getItemId()){
-            //拍照
-            case R.id.item_headPic_photograph:
-                Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                long time = Calendar.getInstance().getTimeInMillis();
-//                if (Environment.getExternalStorageState()==Environment.MEDIA_MOUNTED){  //sd卡是否可用
-                    imgFileName=Environment.getExternalStorageDirectory().getAbsolutePath() + "/baby_record" + time + ".jpg";
-                    i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(imgFileName)));
-                    startActivityForResult(i, 0);
-//                }else {
-//                    Toast.makeText(UserSettingHeadPic.this,"无可用sd卡,更改头像失败！",Toast.LENGTH_SHORT).show();
-//                }
-                break;
-            //相册
-            case R.id.item_headPic_camera:
-                Intent getImage=new Intent(Intent.ACTION_GET_CONTENT);
-                getImage.addCategory(Intent.CATEGORY_OPENABLE);
-                getImage.setType("image/*");
-                startActivityForResult(getImage, 1);
-                break;
-            default:
-                break;
-        }
-        return super.onMenuItemSelected(featureId, item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode==RESULT_OK){
-            //拍照
-            if (requestCode==0){
-                Bitmap b= BitmapFactory.decodeFile(imgFileName);
-                ivHeadPic.setImageBitmap(b);
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                imgId=position;
+                setBigImg();
             }
-            //相册
-            if (requestCode==1){
+        });
+        tvSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeHeadPic();
+            }
+        });
+
+    }
+
+    private void changeHeadPic() {
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(UserSettingHeadPic.this, Utils.StrUrl + "user/editUserHeadPic?user_id="
+                + Utils.userId + "&user_photo=" + imgId, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
+                Toast.makeText(UserSettingHeadPic.this,"网络连接失败，请稍后再试！",Toast.LENGTH_SHORT).show();
 
             }
-        }
+
+            @Override
+            public void onSuccess(int i, Header[] headers, String s) {
+                if (s.equals("success")){
+                    Toast.makeText(UserSettingHeadPic.this,"更改头像成功！",Toast.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    Toast.makeText(UserSettingHeadPic.this,"更改头像失败，请稍后再试！",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
-    public void sendPic(){
-
+    private void setBigImg() {
+//        ImageLoader.getInstance().displayImage(images[imgId],ivHeadPic);
+        ivHeadPic.setImageResource(imgArray[imgId]);
     }
+
 
     public void backOnClick(View view){
         finish();

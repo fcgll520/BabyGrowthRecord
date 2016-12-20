@@ -57,7 +57,7 @@ public class UserAlbum extends Activity {
                 JSONObject object;
                 for (int i=0;i<response.length();i++){
                     try {
-                        list.add(Utils.StrUrl+response.getJSONObject(i).getString("friend_photo"));
+                        list.add(Utils.StrUrl+response.getJSONObject(i).getString("cir_photo"));
                         Log.e("photo:",list.get(i));
                     } catch (JSONException e) {
                         e.printStackTrace();

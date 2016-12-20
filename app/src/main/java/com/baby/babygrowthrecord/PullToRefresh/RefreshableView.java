@@ -19,155 +19,126 @@ import android.widget.TextView;
 import com.baby.babygrowthrecord.R;
 
 /**
- * Created by Administrator on 2016/12/6.
+ * Created by Administrator on 2016/12/15.
  */
 public class RefreshableView extends LinearLayout implements View.OnTouchListener {
     /**
      * 下拉状态
      */
     public static final int STATUS_PULL_TO_REFRESH = 0;
-
     /**
      * 释放立即刷新状态
      */
     public static final int STATUS_RELEASE_TO_REFRESH = 1;
-
     /**
      * 正在刷新状态
      */
     public static final int STATUS_REFRESHING = 2;
-
     /**
      * 刷新完成或未刷新状态
      */
     public static final int STATUS_REFRESH_FINISHED = 3;
-
     /**
      * 下拉头部回滚的速度
      */
     public static final int SCROLL_SPEED = -20;
-
     /**
      * 一分钟的毫秒值，用于判断上次的更新时间
      */
     public static final long ONE_MINUTE = 60 * 1000;
-
     /**
      * 一小时的毫秒值，用于判断上次的更新时间
      */
     public static final long ONE_HOUR = 60 * ONE_MINUTE;
-
     /**
      * 一天的毫秒值，用于判断上次的更新时间
      */
     public static final long ONE_DAY = 24 * ONE_HOUR;
-
     /**
      * 一月的毫秒值，用于判断上次的更新时间
      */
     public static final long ONE_MONTH = 30 * ONE_DAY;
-
     /**
      * 一年的毫秒值，用于判断上次的更新时间
      */
     public static final long ONE_YEAR = 12 * ONE_MONTH;
-
     /**
      * 上次更新时间的字符串常量，用于作为SharedPreferences的键值
      */
     private static final String UPDATED_AT = "updated_at";
-
     /**
      * 下拉刷新的回调接口
      */
     private PullToRefreshListener mListener;
-
     /**
      * 用于存储上次更新时间
      */
     private SharedPreferences preferences;
-
     /**
      * 下拉头的View
      */
     private View header;
-
     /**
      * 需要去下拉刷新的ListView
      */
     private ListView listView;
-
     /**
      * 刷新时显示的进度条
      */
     private ProgressBar progressBar;
-
     /**
      * 指示下拉和释放的箭头
      */
     private ImageView arrow;
-
     /**
      * 指示下拉和释放的文字描述
      */
     private TextView description;
-
     /**
      * 上次更新时间的文字描述
      */
     private TextView updateAt;
-
     /**
      * 下拉头的布局参数
      */
     private MarginLayoutParams headerLayoutParams;
-
     /**
      * 上次更新时间的毫秒值
      */
     private long lastUpdateTime;
-
     /**
      * 为了防止不同界面的下拉刷新在上次更新时间上互相有冲突，使用id来做区分
      */
     private int mId = -1;
-
     /**
      * 下拉头的高度
      */
     private int hideHeaderHeight;
-
     /**
      * 当前处理什么状态，可选值有STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH,
      * STATUS_REFRESHING 和 STATUS_REFRESH_FINISHED
      */
     private int currentStatus = STATUS_REFRESH_FINISHED;;
-
     /**
      * 记录上一次的状态是什么，避免进行重复操作
      */
     private int lastStatus = currentStatus;
-
     /**
      * 手指按下时的屏幕纵坐标
      */
     private float yDown;
-
     /**
      * 在被判定为滚动之前用户手指可以移动的最大值。
      */
     private int touchSlop;
-
     /**
      * 是否已加载过一次layout，这里onLayout中的初始化只需加载一次
      */
     private boolean loadOnce;
-
     /**
      * 当前是否可以下拉，只有ListView滚动到头的时候才允许下拉
      */
     private boolean ableToPull;
-
     /**
      * 下拉刷新控件的构造函数，会在运行时动态添加一个下拉头的布局。
      *
@@ -177,7 +148,7 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
     public RefreshableView(Context context, AttributeSet attrs) {
         super(context, attrs);
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        header = LayoutInflater.from(context).inflate(R.layout.activity_pull_to_refresh, null, true);
+        header = LayoutInflater.from(context).inflate(R.layout.pull_to_refresh, null, true);
         progressBar = (ProgressBar) header.findViewById(R.id.progress_bar);
         arrow = (ImageView) header.findViewById(R.id.arrow);
         description = (TextView) header.findViewById(R.id.description);
@@ -187,7 +158,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
         setOrientation(VERTICAL);
         addView(header, 0);
     }
-
     /**
      * 进行一些关键性的初始化操作，比如：将下拉头向上偏移进行隐藏，给ListView注册touch事件。
      */
@@ -203,7 +173,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
             loadOnce = true;
         }
     }
-
     /**
      * 当ListView被触摸时调用，其中处理了各种下拉刷新的具体逻辑。
      */
@@ -262,7 +231,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
         }
         return false;
     }
-
     /**
      * 给下拉刷新控件注册一个监听器。
      *
@@ -275,7 +243,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
         mListener = listener;
         mId = id;
     }
-
     /**
      * 当所有的刷新逻辑完成后，记录调用一下，否则你的ListView将一直处于正在刷新状态。
      */
@@ -284,7 +251,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
         preferences.edit().putLong(UPDATED_AT + mId, System.currentTimeMillis()).commit();
         new HideHeaderTask().execute();
     }
-
     /**
      * 根据当前ListView的滚动状态来设定 {@link #ableToPull}
      * 的值，每次都需要在onTouch中第一个执行，这样可以判断出当前应该是滚动ListView，还是应该进行下拉。
@@ -313,7 +279,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
             ableToPull = true;
         }
     }
-
     /**
      * 更新下拉头中的信息。
      */
@@ -338,7 +303,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
             refreshUpdatedAtValue();
         }
     }
-
     /**
      * 根据当前的状态来旋转箭头。
      */
@@ -359,7 +323,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
         animation.setFillAfter(true);
         arrow.startAnimation(animation);
     }
-
     /**
      * 刷新下拉头中上次更新时间的文字描述。
      */
@@ -398,14 +361,12 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
         }
         updateAt.setText(updateAtValue);
     }
-
     /**
      * 正在刷新的任务，在此任务中会去回调注册进来的下拉刷新监听器。
      *
      * @author guolin
      */
     class RefreshingTask extends AsyncTask<Void, Integer, Void> {
-
         @Override
         protected Void doInBackground(Void... params) {
             int topMargin = headerLayoutParams.topMargin;
@@ -416,11 +377,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
                     break;
                 }
                 publishProgress(topMargin);
-//                try {
-//                    Thread.sleep(10);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
                 sleep(10);
             }
             currentStatus = STATUS_REFRESHING;
@@ -430,28 +386,19 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
             }
             return null;
         }
-
         @Override
         protected void onProgressUpdate(Integer... topMargin) {
             updateHeaderView();
             headerLayoutParams.topMargin = topMargin[0];
             header.setLayoutParams(headerLayoutParams);
         }
-
-
-//       自己添加....................................................................................................................................
-        public void execute() {
-
-        }
     }
-
     /**
      * 隐藏下拉头的任务，当未进行下拉刷新或下拉刷新完成后，此任务将会使下拉头重新隐藏。
      *
      * @author guolin
      */
     class HideHeaderTask extends AsyncTask<Void, Integer, Integer> {
-
         @Override
         protected Integer doInBackground(Void... params) {
             int topMargin = headerLayoutParams.topMargin;
@@ -462,22 +409,15 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
                     break;
                 }
                 publishProgress(topMargin);
-//                try {
-//                    Thread.sleep(10);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
                 sleep(10);
             }
             return topMargin;
         }
-
         @Override
         protected void onProgressUpdate(Integer... topMargin) {
             headerLayoutParams.topMargin = topMargin[0];
             header.setLayoutParams(headerLayoutParams);
         }
-
         @Override
         protected void onPostExecute(Integer topMargin) {
             headerLayoutParams.topMargin = topMargin;
@@ -485,7 +425,6 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
             currentStatus = STATUS_REFRESH_FINISHED;
         }
     }
-
     /**
      * 使当前线程睡眠指定的毫秒数。
      *
@@ -499,19 +438,15 @@ public class RefreshableView extends LinearLayout implements View.OnTouchListene
             e.printStackTrace();
         }
     }
-
     /**
      * 下拉刷新的监听器，使用下拉刷新的地方应该注册此监听器来获取刷新回调。
      *
      * @author guolin
      */
     public interface PullToRefreshListener {
-
         /**
          * 刷新时会去回调此方法，在方法内编写具体的刷新逻辑。注意此方法是在子线程中调用的， 你可以不必另开线程来进行耗时操作。
          */
         void onRefresh();
-
     }
-
 }

@@ -20,7 +20,7 @@
     <!--USERS INFO-->
     <dimen name="userInfo_ll_margin">5dp</dimen>
     <dimen name="userInfo_tv_et_margin">2dp</dimen>
-    <dimen name="userInfo_textSize">20dp</dimen>
+    <dimen name="userInfo_textSize">15dp</dimen>
 
     <!--GY-->
     <dimen name="growth_title">25dp</dimen>
