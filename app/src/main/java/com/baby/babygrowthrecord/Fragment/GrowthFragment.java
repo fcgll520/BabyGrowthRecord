@@ -23,6 +23,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -45,11 +46,13 @@ public class GrowthFragment extends Fragment{
     private CircleImageView growth_head;
     private TextView growth_name;
     AsyncHttpClient client= new AsyncHttpClient();
+    public ImageLoader imageLoader=ImageLoader.getInstance();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.activity_growth_listview, container, false);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
         //下拉刷新
 //        refreshableView = (RefreshableView) view.findViewById(R.id.refreshable_view_growth);
 
@@ -104,7 +107,7 @@ public class GrowthFragment extends Fragment{
                 try {
                     Log.e("用户名字",response.getJSONObject(0).getString("user_name"));
                     name.setText(response.getJSONObject(0).getString("user_name"));
-                    ImageLoader.getInstance().displayImage(Utils.StrUrl+response.getJSONObject(0).getString("user_photo"),head);
+                    imageLoader.getInstance().displayImage(Utils.StrUrl+response.getJSONObject(0).getString("user_photo"),head);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
