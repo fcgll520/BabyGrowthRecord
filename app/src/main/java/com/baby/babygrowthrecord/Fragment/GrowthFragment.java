@@ -71,13 +71,13 @@ public class GrowthFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(),Growth_Activity_Bron.class);
-                intent.putExtra("grow_id",growth_classes.get(position).getId());
-                intent.putExtra("grow_year",growth_classes.get(position).getYear());
-                intent.putExtra("grow_week",growth_classes.get(position).getWeek());
-                intent.putExtra("grow_time",growth_classes.get(position).getDuration());
-                intent.putExtra("grow_content",growth_classes.get(position).getContent());
-                intent.putExtra("grow_pic1",growth_classes.get(position).getImg_first());
-                intent.putExtra("grow_pic2",growth_classes.get(position).getImg_second());
+                intent.putExtra("grow_id",growth_classes.get(position-1).getId());
+                intent.putExtra("grow_year",growth_classes.get(position-1).getYear());
+                intent.putExtra("grow_week",growth_classes.get(position-1).getWeek());
+                intent.putExtra("grow_time",growth_classes.get(position-1).getDuration());
+                intent.putExtra("grow_content",growth_classes.get(position-1).getContent());
+                intent.putExtra("grow_pic1",growth_classes.get(position-1).getImg_first());
+                intent.putExtra("grow_pic2",growth_classes.get(position-1).getImg_second());
                 startActivityForResult(intent,1);
             }
         });
