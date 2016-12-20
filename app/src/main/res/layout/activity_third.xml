@@ -10,8 +10,10 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/button1"
+            android:background="@drawable/register_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#5e5c5c"
             android:text="取消"/>
         <TextView
             android:gravity="center"
@@ -23,9 +25,16 @@
         <Button
             android:layout_weight="1"
             android:id="@+id/button2"
+            android:background="@drawable/register_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#ea706e"
             android:text="发布"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#b4b0b0">
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
