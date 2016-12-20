@@ -180,6 +180,9 @@ public class Register_Activity extends Activity {
                     Toast.makeText(Register_Activity.this,"注册成功！欢迎使用成长树~",Toast.LENGTH_SHORT).show();
                     try {
                         Utils.userId=response.getInt("user_id");
+                        Utils.userName=response.getString("user_name");
+                        Utils.userPhoto=response.getString("user_photo");
+                        Utils.userPwd=response.getString("user_pwd");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

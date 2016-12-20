@@ -1,79 +1,73 @@
 package com.baby.babygrowthrecord.Fragment;
 
 
+import android.annotation.SuppressLint;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
+
 import com.baby.babygrowthrecord.R;
-import com.baby.babygrowthrecord.user.UserAlbum;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpRequest;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.tencent.utils.HttpUtils;
+import com.baby.babygrowthrecord.activity.AlbumActivity;
+import com.baby.babygrowthrecord.util.Bimp;
+import com.baby.babygrowthrecord.util.FileUtils;
+import com.baby.babygrowthrecord.util.ImageItem;
+import com.baby.babygrowthrecord.util.PublicWay;
+import com.baby.babygrowthrecord.util.Res;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import cn.smssdk.gui.layout.Res;
-
-
+@SuppressLint("HandlerLeak")
 public class PublishActivity extends AppCompatActivity {
 
 
     private Button button1;
     private Button button2;
-    private ImageView imageView_camera;
     private EditText editText;
+
+    private GridAdapter adapter;
+    private LinearLayout ll_popup;
     private GridView noScrollgridview;
     public static Bitmap bimap ;
+    private PopupWindow pop = null;
+    private View parentView;
+    public TextView send_message ;
+    private EditText word_message ;
+    private Uri photoUri ; //得到清晰的图片
+
+
     private static final String IMAGE_UNSPECIFIED = "image/*";
-
     private static final String TAG = "MyActivity";
-
-    private static final int ALBUM_REQUEST_CODE = 1;
+    private static final int ALBUM_REQUEST_CODE = 2;
     private static final int CAMERA_REQUEST_CODE = 2;
     private static final int CROP_REQUEST_CODE = 4;
 
@@ -81,15 +75,19 @@ public class PublishActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_third);
+        Res.init(this);
         bimap = BitmapFactory.decodeResource(
                 getResources(),
-                R.drawable.composer_camera);
+                R.drawable.icon_addpic_unfocused);
+        PublicWay.activityList.add(this);
+        parentView = getLayoutInflater().inflate(R.layout.activity_third, null);
+        setContentView(parentView);
+        Init();
+        //Sent_Message();
+
         button1 = (Button)findViewById(R.id.button1);
         button2 = (Button)findViewById(R.id.button2);
-        imageView_camera = (ImageView)findViewById(R.id.income_camera);
-        editText = (EditText)findViewById(R.id.edit_text);
-
+        editText = (EditText)findViewById(R.id.edit_text) ;
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,40 +109,41 @@ public class PublishActivity extends AppCompatActivity {
                             }
                         });
                 builder.create().show();*/
-                PublishActivity.this.finish();
+                finish();
             }
         });
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String context = editText.getText().toString();
-                String img = imageView_camera.toString();
+                /*String context = editText.getText().toString();
                 String url = "http://169.254.254.2:8080/";
                 AsyncHttpClient client = new AsyncHttpClient();
-                client.get(PublishActivity.this, url+"circle/test?cir_content="+context+"&cir_photo="+img,new JsonHttpResponseHandler(){
+                client.get(PublishActivity.this, url + "circle/test?cir_content=" + context, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
                         try {
-                            Utils.circlrId=response.getInt("cir_id");
-                            Utils.circleCntent=response.getString("cir_content");
-                            Utils.circlePhoto=response.getString("cir_photo");
-                        }catch (JSONException e){
+                            Utils.circlrId = response.getInt("cir_id");
+                            Utils.circleCntent = response.getString("cir_content");
+                            Utils.circlePhoto = response.getString("cir_photo");
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         super.onFailure(statusCode, headers, throwable, errorResponse);
-                        Toast.makeText(PublishActivity.this,"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
-                        Log.e("REGISTER_ERROR",throwable.toString());
+                        Toast.makeText(PublishActivity.this, "网络连接错误，请稍后再试！", Toast.LENGTH_SHORT).show();
+                        Log.e("REGISTER_ERROR", throwable.toString());
                     }
-                });
+                });*/
                 finish();
             }
         });
-        imageView_camera.setOnClickListener(new View.OnClickListener() {
+    }
+        /*imageView_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new android.app.AlertDialog.Builder(PublishActivity.this)
@@ -221,15 +220,331 @@ public class PublishActivity extends AppCompatActivity {
         intent.putExtra("outputY", 200);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, CROP_REQUEST_CODE);
-    }
+    }*/
     /**
      * 判断sdcard卡是否可用
      *
      * @return 布尔类型 true 可用 false 不可用
      */
-    private boolean isSDCardCanUser() {
+    /*private boolean isSDCardCanUser() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }*/
+
+
+    /*public void Sent_Message(){
+        button2 = (Button) findViewById(R.id.button2);
+        editText = (EditText) findViewById(R.id.edit_text);
+
+        send_message.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(word_message.getText().toString() == null || word_message.getText().toString().length()==0){
+                    Toast.makeText(PublishActivity.this, "内容不能为空", Toast.LENGTH_LONG).show();
+                }else{
+                    new Thread(networkTask).start();
+                    //System.out.println(adapter.getItem(1).toString());
+                    Toast.makeText(PublishActivity.this, adapter.getCount()+"信息是："+(word_message.getText().toString() == null) +word_message.getText().toString().length()+word_message.getText().toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    }*/
+
+
+
+    public void Init(){
+        pop = new PopupWindow(PublishActivity.this);
+
+        View view = getLayoutInflater().inflate(R.layout.item_popupwindows, null);
+
+        ll_popup = (LinearLayout) view.findViewById(R.id.ll_popup);
+
+        pop.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        pop.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setFocusable(true);
+        pop.setOutsideTouchable(true);
+        pop.setContentView(view);
+
+        RelativeLayout parent = (RelativeLayout) view.findViewById(R.id.parent);
+        Button bt1 = (Button) view
+                .findViewById(R.id.item_popupwindows_camera);
+        Button bt2 = (Button) view
+                .findViewById(R.id.item_popupwindows_Photo);
+        Button bt3 = (Button) view
+                .findViewById(R.id.item_popupwindows_cancel);
+        parent.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                photo();
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+        bt2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               /* Intent intent = new Intent(Intent.ACTION_PICK, null);
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
+                startActivityForResult(intent, ALBUM_REQUEST_CODE);*/
+                Intent intent = new Intent(PublishActivity.this, AlbumActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.activity_translate_in, R.anim.activity_translate_out);
+                pop.dismiss();
+                ll_popup.clearAnimation();
+
+               /* new android.app.AlertDialog.Builder(PublishActivity.this)
+                        .setPositiveButton(R.string.dialog_p_btn,
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(Intent.ACTION_PICK, null);
+                                        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, IMAGE_UNSPECIFIED);
+                                        startActivityForResult(intent, ALBUM_REQUEST_CODE);
+                                    }
+                                });
+                */
+            }
+        });
+        bt3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                pop.dismiss();
+                ll_popup.clearAnimation();
+            }
+        });
+
+        noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
+        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
+        adapter = new GridAdapter(this);
+        adapter.update();
+        noScrollgridview.setAdapter(adapter);
+        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+                if (arg2 == Bimp.tempSelectBitmap.size()) {
+                    Log.i("ddddddd", "----------");
+                    ll_popup.startAnimation(AnimationUtils.loadAnimation(PublishActivity.this,R.anim.activity_translate_in));
+                    pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
+                } else {
+                        Toast.makeText(PublishActivity.this, Bimp.tempSelectBitmap.get(arg2).imagePath, Toast.LENGTH_LONG).show();
+                    /*Intent intent = new Intent(PublishActivity.this, GalleryActivity.class);
+                    intent.putExtra("position", "1");
+                    intent.putExtra("ID", arg2);
+                    startActivity(intent);*/
+                }
+            }
+        });
+    }
+    @SuppressLint("HandlerLeak")
+    public class GridAdapter extends BaseAdapter {
+        private LayoutInflater inflater;
+        private int selectedPosition = -1;
+        private boolean shape;
+
+        public boolean isShape() {
+            return shape;
+        }
+
+        public void setShape(boolean shape) {
+            this.shape = shape;
+        }
+
+        public GridAdapter(Context context) {
+            inflater = LayoutInflater.from(context);
+        }
+
+        public void update() {
+            loading();
+        }
+
+        public int getCount() {
+            if(Bimp.tempSelectBitmap.size() == 9){
+                return 9;
+            }
+            return (Bimp.tempSelectBitmap.size() + 1);
+        }
+
+        public Object getItem(int arg0) {
+            return null;
+        }
+
+        public long getItemId(int arg0) {
+            return 0;
+        }
+
+        public void setSelectedPosition(int position) {
+            selectedPosition = position;
+        }
+
+        public int getSelectedPosition() {
+            return selectedPosition;
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.item_published_grida,
+                        parent, false);
+                holder = new ViewHolder();
+                holder.image = (ImageView) convertView
+                        .findViewById(R.id.item_grida_image);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            if (position ==Bimp.tempSelectBitmap.size()) {
+                holder.image.setImageBitmap(BitmapFactory.decodeResource(
+                        getResources(), R.drawable.icon_addpic_unfocused));
+                if (position == 9) {
+                    holder.image.setVisibility(View.GONE);
+                }
+            } else {
+                holder.image.setImageBitmap(Bimp.tempSelectBitmap.get(position).getBitmap());
+            }
+
+            return convertView;
+        }
+
+        public class ViewHolder {
+            public ImageView image;
+        }
+
+        Handler handler = new Handler() {
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
+
+        public void loading() {
+            new Thread(new Runnable() {
+                public void run() {
+                    while (true) {
+                        if (Bimp.max == Bimp.tempSelectBitmap.size()) {
+                            Message message = new Message();
+                            message.what = 1;
+                            handler.sendMessage(message);
+                            break;
+                        } else {
+                            Bimp.max += 1;
+                            Message message = new Message();
+                            message.what = 1;
+                            handler.sendMessage(message);
+                        }
+                    }
+                }
+            }).start();
+        }
+    }
+    public String getString(String s) {
+        String path = null;
+        if (s == null)
+            return "";
+        for (int i = s.length() - 1; i > 0; i++) {
+            s.charAt(i);
+        }
+        return path;
     }
 
+    protected void onRestart() {
+        adapter.update();
+        super.onRestart();
+    }
 
+    private static final int TAKE_PICTURE = 0x000001;
+
+    public void photo() {
+        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+        {
+            //Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            ContentValues values = new ContentValues();
+            photoUri = getContentResolver().insert(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            //准备intent，并 指定 新 照片 的文件名（photoUri）
+            System.out.println("-------------------------"+photoUri.toString());
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            //启动拍照的窗体。并注册 回调处理。
+            startActivityForResult(intent, TAKE_PICTURE);
+            // startActivityForResult(openCameraIntent, TAKE_PICTURE);
+        }else{
+            Toast.makeText(PublishActivity.this, "没有内存卡不能拍照", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case TAKE_PICTURE:
+                ContentResolver cr = this.getContentResolver();
+                Cursor cursor = cr.query(photoUri, null, null, null, null);
+                Bitmap bm = null;
+                if (cursor != null) {
+                    if (cursor.moveToNext()) {
+                        String path = cursor.getString(1);
+                        //String path = photoUri.toString();
+                        //System.out.println("+++++++++++++++++++++++++="+path);
+					/*BitmapFactory.Options options = new BitmapFactory.Options();
+					options.inJustDecodeBounds = true;
+					bm = BitmapFactory.decodeFile(path, options);
+					int xScale ;
+					if(options.outWidth>options.outHeight){
+						 xScale = options.outHeight / 160;
+					}else{
+						xScale = options.outWidth / 160;
+					}
+					options.inSampleSize = xScale;
+					options.inJustDecodeBounds = false;*/
+                        bm = BitmapFactory.decodeFile(path);
+                    }
+                }
+                cursor.close();
+                if (Bimp.tempSelectBitmap.size() < 9 && resultCode == RESULT_OK) {
+                    System.out.println("添加照片");
+                    String fileName = String.valueOf(System.currentTimeMillis());
+                    //Bitmap bm = (Bitmap) data.getExtras().get("data");
+                    //FileUtils.saveBitmap(bm, fileName);
+
+                    FileUtils.saveBitmap(bm, fileName);
+                    //为了得到照片的路径
+                    String SDPATH = Environment.getExternalStorageDirectory()
+                            + "/Photo_LJ/";
+                    ImageItem takePhoto = new ImageItem();
+                    takePhoto.setBitmap(bm);
+                    takePhoto.setImagePath(SDPATH+fileName+".JPEG");
+                    takePhoto.setImageName(fileName+".JPEG");
+                    Bimp.tempSelectBitmap.add(takePhoto);
+                    System.out.println("里面有多少张图片"+Bimp.tempSelectBitmap.size());
+                }
+                bm = null;
+                break;
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            for(int i=0;i<PublicWay.activityList.size();i++){
+                if (null != PublicWay.activityList.get(i)) {
+                    PublicWay.activityList.get(i).finish();
+                }
+            }
+            System.exit(0);
+        }
+        return true;
+    }
 }
+
