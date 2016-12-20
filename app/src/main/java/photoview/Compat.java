@@ -28,7 +28,7 @@ public class Compat {
 
     public static void postOnAnimation(View view, Runnable runnable) {
         if (VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-            postOnAnimationJellyBean(view, runnable);
+            SDK16.postOnAnimation(view, runnable);
         } else {
             view.postDelayed(runnable, SIXTY_FPS_INTERVAL);
         }

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.BitmapCache;
 import com.baby.babygrowthrecord.util.ImageItem;
 import com.baby.babygrowthrecord.util.Res;
@@ -21,9 +22,9 @@ import com.baby.babygrowthrecord.util.Res;
 import java.util.ArrayList;
 
 /**
- * Created by asus on 2016/12/19.
+ * Created by asus on 2016/12/20.
  */
-public class AlbumGridViewAdapter  extends BaseAdapter {
+public class AlbumGridViewAdapter extends BaseAdapter{
     final String TAG = getClass().getSimpleName();
     private Context mContext;
     private ArrayList<ImageItem> dataList;

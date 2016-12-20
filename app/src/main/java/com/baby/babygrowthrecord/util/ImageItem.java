@@ -13,6 +13,13 @@ public class ImageItem implements Serializable {
     public String thumbnailPath;
     public String imagePath;
     private Bitmap bitmap;
+    private String imageName ;
+    public String getImageName() {
+        return imageName;
+    }
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
     public boolean isSelected = false;
 
     public String getImageId() {

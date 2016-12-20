@@ -46,15 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="200sp" />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/income_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/composer_camera"/>
         <GridView
             android:id="@+id/noScrollgridview"
             android:layout_width="290dp"
@@ -65,5 +56,4 @@
             android:scrollbars="none"
             android:verticalSpacing="5dp" >
         </GridView>
-    </LinearLayout>
 </LinearLayout>
