@@ -72,7 +72,7 @@ public class Login_Activity extends Activity {
     public void initSharedPreferences(){
         if (context==null){
             try {
-                context=this.createPackageContext(PREFERENCES_PACKAGE,Context.CONTEXT_IGNORE_SECURITY);
+                context=Login_Activity.this.createPackageContext(PREFERENCES_PACKAGE,Context.CONTEXT_IGNORE_SECURITY);
                 sharedPreferences=context.getSharedPreferences(PREFERENCES_NAME,MODE);
                 editor=sharedPreferences.edit();
             } catch (PackageManager.NameNotFoundException e) {
@@ -83,8 +83,6 @@ public class Login_Activity extends Activity {
 
     //自动登陆
     public void autoLogin(){
-        if (sharedPreferences==null)
-            initSharedPreferences();
         String name="";
         String pwd="";
         if (sharedPreferences!=null){
@@ -94,8 +92,7 @@ public class Login_Activity extends Activity {
             }
             name=sharedPreferences.getString("user_name","");
             pwd=sharedPreferences.getString("user_pwd","");
-            Login_Activity login=new Login_Activity();
-            login.getLoginMessage(name,pwd);
+            getLoginMessage(name,pwd);
         }else {
             Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
         }
@@ -106,23 +103,15 @@ public class Login_Activity extends Activity {
 
     //记住用户名和密码
     public void rememberUserInfo(String name, String pwd){
-        if (sharedPreferences==null)
-            initSharedPreferences();
-
         if (editor!=null){
             editor.putString("user_name",name);
             editor.putString("user_pwd",pwd);
+            editor.putString("isAutoLogin","true");
+            editor.commit();
             Log.e("REMEMBER_SUCCESS",name+"_"+pwd);
         }else {
             Log.e("REMEMBER_ERROR","editor=null");
         }
-    }
-    //退出登录时设置editor中的user_id
-    public void setUserId(int id){
-        editor.putInt("user_id",id);
-    }
-    public int getShareUserId(){
-        return sharedPreferences.getInt("user_id",-1);
     }
 
     Handler handler=new Handler(){
@@ -137,9 +126,13 @@ public class Login_Activity extends Activity {
         super.onCreate(savedInstanceState);
         initSharedPreferences();
         //自动登陆
-        if (getShareUserId()==0){
+
+        if (sharedPreferences.getString("isAutoLogin","false").equals("true")){
             autoLogin();
         }
+        Log.e("share-user_id",sharedPreferences.getInt("user_id",-5)+"");
+        Log.e("share-user_name",sharedPreferences.getString("user_name","default"));
+        Log.e("share-user_pwd",sharedPreferences.getString("user_pwd","default"));
 
         Log.d(TAG, "-->onCreate");
         // 固定竖屏
@@ -210,9 +203,11 @@ public class Login_Activity extends Activity {
                 }
                 else if (Integer.parseInt(s)==1){
                     Log.e("服务器返回数字1",s);
-                    Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(Login_Activity.this,"登录成功",Toast.LENGTH_SHORT).show();
 
-                    rememberUserInfo(loginUname,loginPwd);
+                    if (sharedPreferences.getString("isAutoLogin","false").equals("false")){
+                        rememberUserInfo(loginUname,loginPwd);
+                    }
 
                     //得到用户ID
                     new Thread(new Runnable() {
