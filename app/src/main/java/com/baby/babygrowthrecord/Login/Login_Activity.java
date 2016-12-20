@@ -17,14 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.baby.babygrowthrecord.Fragment.Utils;
-
 import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQAuth;
@@ -33,7 +30,6 @@ import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 
 import org.apache.http.Header;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -175,6 +171,7 @@ public class Login_Activity extends Activity {
         }
 
         //登录成功，跳转到主页面
+        Utils.flag=1;
         Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
         startActivity(intent);
 
