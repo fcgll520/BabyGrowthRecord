@@ -3,6 +3,7 @@ package com.baby.babygrowthrecord.user;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -28,6 +30,7 @@ import android.widget.Toast;
 import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Fragment.GrowthFragment;
 import com.baby.babygrowthrecord.Fragment.Utils;
+import com.baby.babygrowthrecord.Login.Login_Activity;
 import com.baby.babygrowthrecord.R;
 
 import java.io.ByteArrayOutputStream;
@@ -58,6 +61,7 @@ public class UserSetting extends Activity {
     private TextView tvName;
     private TextView tvUname;
     private TextView tvPwd;
+    private Button btnExist;
     private View.OnClickListener myClickListener=new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -89,11 +93,26 @@ public class UserSetting extends Activity {
                     i.setClass(UserSetting.this,UserSettingPwd.class);
                     startActivity(i);
                     break;
+                case R.id.btn_userSetting_exist:
+                    existLogin();
+                    break;
                 default:
                     break;
             }
         }
     };
+
+    //退出登录
+    private void existLogin() {
+        //
+        Login_Activity login=new Login_Activity();
+        SharedPreferences sharedPreferences=login.initSharedPreferences(UserSetting.this);
+        sharedPreferences.edit().putString("isAutoLogin","false").commit();
+        //
+        Utils.userId=-1;
+        Toast.makeText(UserSetting.this,"退出登录成功",Toast.LENGTH_SHORT).show();
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +130,7 @@ public class UserSetting extends Activity {
         tvName=(TextView)findViewById(R.id.tv_userSetting_name);
         tvUname=(TextView)findViewById(R.id.tv_userSetting_uName);
         tvPwd=(TextView)findViewById(R.id.tv_userSetting_pwd);
+        btnExist=(Button)findViewById(R.id.btn_userSetting_exist);
 
         rvHeadPic.setOnClickListener(myClickListener);
         rvName.setOnClickListener(myClickListener);
@@ -118,6 +138,7 @@ public class UserSetting extends Activity {
         tvHeadPic.setOnClickListener(myClickListener);
         tvName.setOnClickListener(myClickListener);
         tvPwd.setOnClickListener(myClickListener);
+        btnExist.setOnClickListener(myClickListener);
 
         //获取用户名和头像
         getUserInfo();
