@@ -69,51 +69,6 @@ public class Login_Activity extends Activity {
     private String PREFERENCES_NAME="UserInfo";
     private int MODE=Context.MODE_WORLD_READABLE+ Context.MODE_WORLD_WRITEABLE;
 
-    public void initSharedPreferences(){
-        if (context==null){
-            try {
-                context=Login_Activity.this.createPackageContext(PREFERENCES_PACKAGE,Context.CONTEXT_IGNORE_SECURITY);
-                sharedPreferences=context.getSharedPreferences(PREFERENCES_NAME,MODE);
-                editor=sharedPreferences.edit();
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    //自动登陆
-    public void autoLogin(){
-        String name="";
-        String pwd="";
-        if (sharedPreferences!=null){
-            if (sharedPreferences.getInt("user_id",0)==-2){
-                Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
-                return;
-            }
-            name=sharedPreferences.getString("user_name","");
-            pwd=sharedPreferences.getString("user_pwd","");
-            getLoginMessage(name,pwd);
-        }else {
-            Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
-        }
-        if (name.equals("") || pwd.equals("")){
-            Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //记住用户名和密码
-    public void rememberUserInfo(String name, String pwd){
-        if (editor!=null){
-            editor.putString("user_name",name);
-            editor.putString("user_pwd",pwd);
-            editor.putString("isAutoLogin","true");
-            editor.commit();
-            Log.e("REMEMBER_SUCCESS",name+"_"+pwd);
-        }else {
-            Log.e("REMEMBER_ERROR","editor=null");
-        }
-    }
-
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -124,7 +79,7 @@ public class Login_Activity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initSharedPreferences();
+        initSharedPreferences(Login_Activity.this);
         //自动登陆
 
         if (sharedPreferences.getString("isAutoLogin","false").equals("true")){
@@ -250,6 +205,56 @@ public class Login_Activity extends Activity {
     }
 
 
+    /*初始化*/
+    public SharedPreferences initSharedPreferences(Context login){
+        if (context==null){
+            try {
+                context=login.createPackageContext(PREFERENCES_PACKAGE,Context.CONTEXT_IGNORE_SECURITY);
+                sharedPreferences=context.getSharedPreferences(PREFERENCES_NAME,MODE);
+                editor=sharedPreferences.edit();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return sharedPreferences;
+    }
+
+    //自动登陆
+    public void autoLogin(){
+        String name="";
+        String pwd="";
+        if (sharedPreferences!=null){
+            if (sharedPreferences.getInt("user_id",0)==-2){
+                Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            name=sharedPreferences.getString("user_name","");
+            pwd=sharedPreferences.getString("user_pwd","");
+            getLoginMessage(name,pwd);
+        }else {
+            Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
+        }
+        if (name.equals("") || pwd.equals("")){
+            Toast.makeText(Login_Activity.this,"自动登录出错，请再次登录！",Toast.LENGTH_SHORT).show();
+        }
+    }
+    //记住用户名和密码
+    public void rememberUserInfo(String name, String pwd){
+        if (editor!=null){
+            editor.putString("user_name",name);
+            editor.putString("user_pwd",pwd);
+            editor.putString("isAutoLogin","true");
+            editor.commit();
+            Log.e("REMEMBER_SUCCESS",name+"_"+pwd);
+        }else {
+            Log.e("REMEMBER_ERROR","editor=null");
+        }
+    }
+    //退出登录时调用
+    public void isAutoLogin(String flag){
+        editor.putString("isAutoLogin",flag);
+        editor.commit();
+    }
 
     @Override
     protected void onStart() {

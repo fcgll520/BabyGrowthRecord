@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,18 +51,6 @@ public class PeopleFragment extends Fragment{
         public void onClick(View v) {
             Intent i=new Intent();
             switch (v.getId()){
-                case R.id.img_circlePic:
-                    i.setClass(getActivity(), UserSettingHeadPic.class);
-                    startActivity(i);
-                    break;
-                case R.id.tv_user_uName:
-                    i.setClass(getActivity(), UserSettingName.class);
-                    startActivity(i);
-                    break;
-                case R.id.tv_user_babyName:
-                    i.setClass(getActivity(), UserInfoManage.class);
-                    startActivity(i);
-                    break;
                 case R.id.rl_user_album:
                     i.setClass(getActivity(),UserAlbum.class);
                     startActivity(i);
@@ -99,9 +88,7 @@ public class PeopleFragment extends Fragment{
             }
         }
     };
-    private Boolean isLogin=false;
-    private LinearLayout llLogin;
-    private LinearLayout llUnLogin;
+    private GrowthFragment g=new GrowthFragment();  //获取用户信息
 
     @Nullable
     @Override
@@ -115,7 +102,8 @@ public class PeopleFragment extends Fragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
-
+        g.getUserInfo(ivHeadPic,tvUname);
+        getBabyName(tvBabyName);
     }
 
     private void init(){
@@ -133,8 +121,6 @@ public class PeopleFragment extends Fragment{
         tvCollection=(TextView)view.findViewById(R.id.tv_user_collect);
         tvSetting=(TextView)view.findViewById(R.id.tv_user_setting);
 
-        llLogin=(LinearLayout)view.findViewById(R.id.ll_user_hasLogin);
-
         //绑定监听器
         ivHeadPic.setOnClickListener(myClickListener);
         tvUname.setOnClickListener(myClickListener);
@@ -151,24 +137,24 @@ public class PeopleFragment extends Fragment{
         tvSetting.setOnClickListener(myClickListener);
 
         //获取用户名、头像
-        GrowthFragment g=new GrowthFragment();
         g.getUserInfo(ivHeadPic,tvUname);
         //获取宝宝昵称
        getBabyName(tvBabyName);
-    }
-    private void autoLogin(){
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        GrowthFragment g=new GrowthFragment();
+        Log.e("onResume-people","start");
         g.getUserInfo(ivHeadPic,tvUname);
         getBabyName(tvBabyName);
     }
 
     public void  getBabyName(final TextView babyName) {
+        if (Utils.userId==-1){   //此时为未登录状态
+            babyName.setText("");
+            return;
+        }
         AsyncHttpClient client=new AsyncHttpClient();
         client.get(getActivity(),Utils.StrUrl+"user/getBabyInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
