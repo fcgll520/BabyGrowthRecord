@@ -12,9 +12,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
             android:text="妈妈帮"
-            android:textSize="23dp"
+            android:textSize="@dimen/fragmentTitleTextSize"
+            android:layout_margin="@dimen/fragmentTitleTextMargin"
             android:textColor="#ffffff"
             android:layout_gravity="center"
             android:gravity="center"/>

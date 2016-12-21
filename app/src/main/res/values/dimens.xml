@@ -3,6 +3,12 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!--Fragment标题栏的文字大小和文字的外边距-->
+    <dimen name="fragmentTitleTextSize">23dp</dimen>
+    <dimen name="fragmentTitleTextMargin">10dp</dimen>
+
+    <!--由fragment进入的子页面的标题栏-->
+
     <!--USERS FIRST PAGE-->
     <dimen name="head_textSize">18dp</dimen>
     <dimen name="list_textSize">18dp</dimen>
