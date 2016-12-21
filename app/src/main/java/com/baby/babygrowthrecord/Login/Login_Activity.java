@@ -24,6 +24,7 @@ import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQAuth;
@@ -183,16 +184,18 @@ public class Login_Activity extends Activity {
             URL Url=new URL(url);
             HttpURLConnection coon= (HttpURLConnection) Url.openConnection();
             InputStream is=coon.getInputStream();
-            byte []b=new byte[1];
+            byte []b=new byte[1024];
             is.read(b);
-//            String str=String.valueOf(b);
-//            int id=Integer.parseInt(str);
-//            Log.e("服务器返回的用户ID", String.valueOf(id));
-            Utils.userId=Integer.parseInt(new String(b));
+            String str=new String(b);
+            JSONObject object=new JSONObject(str);
+            Utils.userId=object.getInt("user_id");
+         //   Utils.userId=Integer.parseInt(new String(b));
             Log.e("服务器返回的用户ID", String.valueOf(Utils.userId));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
