@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.baby.babygrowthrecord.Fragment.GrowthFragment;
+import com.baby.babygrowthrecord.Fragment.Utils;
+import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -29,6 +33,7 @@ public class Growth_Activity_Bron extends AppCompatActivity {
     private ImageView growth_secondimg;
     private CircleImageView growth_head;
     private TextView growth_name;
+    private Button growth_back;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +64,16 @@ public class Growth_Activity_Bron extends AppCompatActivity {
 //            growth_secondimg=(ImageView)findViewById(R.id.growth_secondimg);
             ImageLoader.getInstance().displayImage(i.getStringExtra("grow_pic1"),growth_firstimg);
 //            ImageLoader.getInstance().displayImage(i.getStringExtra("grow_pic2"),growth_secondimg);
+            //返回上一页
+            growth_back = (Button)findViewById(R.id.growth_back);
+            growth_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Growth_Activity_Bron.this, BabyMainActivity.class);
+                    Utils.flag=2;
+                    startActivity(i);
+                }
+            });
         }
     }
 }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.baby.babygrowthrecord.Growth.Growth_Activity_Bron;
 import com.baby.babygrowthrecord.Growth.Growth_Class;
 import com.baby.babygrowthrecord.Growth.Growth_MyAdapter;
+import com.baby.babygrowthrecord.Login.Login_Activity;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -100,6 +101,12 @@ public class GrowthFragment extends Fragment{
 
     public void getUserInfo(final CircleImageView head,final TextView name){
         //获取用户名和用户头像
+        if (Utils.userId==-1){   //此时为未登录状态
+            head.setImageResource(R.drawable.empty_photo);
+            name.setText("请登录");
+            name.setClickable(true);
+            return;
+        }
         client.get(getActivity(),Utils.StrUrl+"user/getUserInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
@@ -108,6 +115,8 @@ public class GrowthFragment extends Fragment{
                     Log.e("用户名字",response.getJSONObject(0).getString("user_name"));
                     name.setText(response.getJSONObject(0).getString("user_name"));
                     imageLoader.getInstance().displayImage(Utils.StrUrl+response.getJSONObject(0).getString("user_photo"),head);
+                    //不可点击
+                    name.setClickable(false);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
