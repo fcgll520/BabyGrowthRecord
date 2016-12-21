@@ -8,23 +8,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:weightSum="1" >
         <ImageView
             android:id="@+id/back"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/mother_back"
-            android:layout_marginTop="12dp"
+            android:src="@drawable/users_back"
+            android:layout_marginTop="18dp"
             android:gravity="center"
             android:layout_alignParentLeft="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:text="妈妈帮"
-            android:textSize="20dp"
+            android:textSize="23dp"
             android:textColor="#ffffff"
             android:gravity="center"
             android:layout_centerHorizontal="true" />
@@ -36,7 +37,7 @@
             android:src="@drawable/share"
             android:gravity="center"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="18dp"/>
 
     </RelativeLayout>
 
@@ -83,6 +84,7 @@
         android:id="@+id/tv4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="   纸尿裤选择不当事会对宝宝健康不利，执念苦选择时应注意以下几个问题：
           1、选择湿力强的纸尿裤。吸湿力强表现为：能迅速将尿液吸入底层并锁定，能防止回渗，这样的纸尿裤可以保持宝宝臀部皮肤干爽。
           2.选择湿力强的纸尿裤。吸湿力强表现为：能迅速将尿液吸入底层并锁定，能防止回渗，这样的纸尿裤可以保持宝宝臀部皮肤干爽。

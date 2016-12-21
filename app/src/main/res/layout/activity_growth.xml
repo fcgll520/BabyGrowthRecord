@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/growth_title"
-        android:paddingLeft="20dp">
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/growth_head"
             android:layout_width="@dimen/growth_head"
@@ -44,15 +45,13 @@
             android:textColor="#646161"
             android:layout_margin="@dimen/growth_title"/>
     </LinearLayout>
-    <!--时间轴-->
     <!--内容_百天-->
     <LinearLayout
         android:id="@+id/growth_hundred"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/growth_head_name"
-        android:layout_marginTop="20dp">
+        android:layout_below="@+id/growth_head_name">
         <LinearLayout
             android:id="@+id/growth_hundred_horizontol"
             android:layout_width="match_parent"
