@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:id="@+id/ll_userSetting_1"
         android:background="@color/colorPrimary"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -24,6 +24,8 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_userSetting_2"
+        android:layout_below="@+id/ll_userSetting_1"
         android:background="@drawable/users_list_ll"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -88,4 +90,14 @@
                 android:alpha="0.1"/>
         </RelativeLayout>
     </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_userSetting_exist"
+        android:layout_alignParentBottom="true"
+        android:text="退出登录"
+        android:textColor="#fff"
+        android:layout_marginTop="80dp"
+        android:background="@android:color/holo_red_dark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"/>
+</RelativeLayout>

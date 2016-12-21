@@ -1,7 +1,9 @@
 package com.baby.babygrowthrecord.MainActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.baby.babygrowthrecord.Fragment.HelpFragment;
 import com.baby.babygrowthrecord.Fragment.PeopleFragment;
 import com.baby.babygrowthrecord.Fragment.QuanziFragment;
 import com.baby.babygrowthrecord.Fragment.Utils;
+import com.baby.babygrowthrecord.Login.Login_Activity;
 import com.baby.babygrowthrecord.R;
 
 
@@ -211,5 +214,11 @@ public class BabyMainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void jumpToLogin(View view){
+        Log.e("jumpToLogin","start");
+        Intent i=new Intent(BabyMainActivity.this, Login_Activity.class);
+        startActivity(i);
     }
 }
