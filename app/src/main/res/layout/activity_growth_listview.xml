@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:text="成长记录"
             android:textColor="#ffffff"
-            android:textSize="@dimen/growth_title"
+            android:textSize="23dp"
             android:layout_margin="15dp"
             android:gravity="center"/>
     </LinearLayout>

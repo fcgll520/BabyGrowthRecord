@@ -161,4 +161,10 @@ public class GrowthFragment extends Fragment{
             }
         });
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getUserInfo(growth_head,growth_name);
+    }
 }

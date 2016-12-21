@@ -19,6 +19,7 @@ import com.baby.babygrowthrecord.user.UserInfoManage;
 import com.baby.babygrowthrecord.user.UserSetting;
 import com.baby.babygrowthrecord.user.UserSettingHeadPic;
 import com.baby.babygrowthrecord.user.UserSettingName;
+import com.baby.babygrowthrecord.util.Util;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -102,8 +103,6 @@ public class PeopleFragment extends Fragment{
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
-        g.getUserInfo(ivHeadPic,tvUname);
-        getBabyName(tvBabyName);
     }
 
     private void init(){
@@ -122,9 +121,8 @@ public class PeopleFragment extends Fragment{
         tvSetting=(TextView)view.findViewById(R.id.tv_user_setting);
 
         //绑定监听器
-        ivHeadPic.setOnClickListener(myClickListener);
-        tvUname.setOnClickListener(myClickListener);
-        tvBabyName.setOnClickListener(myClickListener);
+//        ivHeadPic.setOnClickListener(myClickListener);
+//        tvBabyName.setOnClickListener(myClickListener);
 
         rlAlbum.setOnClickListener(myClickListener);
         rlInfoManage.setOnClickListener(myClickListener);
@@ -143,11 +141,19 @@ public class PeopleFragment extends Fragment{
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        Log.e("onResume-people","start");
+    public void onStart() {
+        super.onStart();
         g.getUserInfo(ivHeadPic,tvUname);
         getBabyName(tvBabyName);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume-people","start"+Utils.userId);
+        g.getUserInfo(ivHeadPic,tvUname);
+        getBabyName(tvBabyName);
+        Log.e("onResume-people","end"+ Utils.userId);
     }
 
     public void  getBabyName(final TextView babyName) {
