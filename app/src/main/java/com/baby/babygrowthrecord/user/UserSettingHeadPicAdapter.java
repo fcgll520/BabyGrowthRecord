@@ -70,8 +70,7 @@ public class UserSettingHeadPicAdapter extends BaseAdapter {
             final ImageView imageView=new ImageView(context);
            // ImageLoader.getInstance().displayImage(imgs[position],imageView);
             imageView.setImageResource(imgs[position]);
-            Gallery.LayoutParams layoutParams=new Gallery.LayoutParams(300,
-                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            Gallery.LayoutParams layoutParams=new Gallery.LayoutParams(300, 300);
             imageView.setLayoutParams(layoutParams);
 
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
