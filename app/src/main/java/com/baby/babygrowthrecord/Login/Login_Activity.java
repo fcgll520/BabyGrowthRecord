@@ -145,6 +145,7 @@ public class Login_Activity extends Activity {
             @Override
             public void onFailure(int i, Header[] headers, String s, Throwable throwable) {
                 Log.e("网络有问题","请检查网络");
+                Toast.makeText(Login_Activity.this,"网络连接出错，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onSuccess(int i, Header[] headers, String s) {
@@ -208,7 +209,7 @@ public class Login_Activity extends Activity {
     }
 
 
-    /*初始化*/
+    /*初始化SharedPreferences*/
     public SharedPreferences initSharedPreferences(Context login){
         if (context==null){
             try {
@@ -252,11 +253,6 @@ public class Login_Activity extends Activity {
         }else {
             Log.e("REMEMBER_ERROR","editor=null");
         }
-    }
-    //退出登录时调用
-    public void isAutoLogin(String flag){
-        editor.putString("isAutoLogin",flag);
-        editor.commit();
     }
 
     @Override
