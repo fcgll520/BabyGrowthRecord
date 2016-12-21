@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.baby.babygrowthrecord.Mother.CardMessage;
 import com.baby.babygrowthrecord.Mother.GoogleCard;
 import com.baby.babygrowthrecord.Mother.GoogleCardAdapter;
-import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -67,6 +66,7 @@ public class HelpFragment extends Fragment{
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.activity_mother_main, container, false);
 
+
         //显示收藏按钮
         LayoutInflater inflater1=LayoutInflater.from(getActivity());
         View popview=inflater1.inflate(R.layout.activity_mother_itme_collection,null);
@@ -91,8 +91,8 @@ public class HelpFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent=new Intent(getActivity(),CardMessage.class);
-                intent.putExtra("essay_id",mCards.get(i).getmId());
-                Log.e("id:"+mCards.get(i).getmId(),"i:"+i);
+                intent.putExtra("essay_id",mCards.get(i-1).getmId());
+                Log.e("id:"+mCards.get(i-1).getmId(),"i:"+i);
                 startActivity(intent);
             }
         });
@@ -100,9 +100,9 @@ public class HelpFragment extends Fragment{
         mListView.getRefreshableView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                pop.showAtLocation(view, Gravity.NO_GRAVITY,500,150);
+                pop.showAtLocation(view, Gravity.NO_GRAVITY,800,150);
                 pop.showAsDropDown(view);
-                essay_Id=mCards.get(i).getmId();
+                essay_Id=mCards.get(i-1).getmId();
                 Log.e("essay_id", String.valueOf(essay_Id));
                 return true;
             }
@@ -160,7 +160,7 @@ public class HelpFragment extends Fragment{
                 super.onSuccess(statusCode, headers, response);
                 JSONObject object;
                 mCards.clear();
-                for (int i=0;i<response.length();i++){
+                for (int i=response.length();i>=0;i--){
                     try {
                         object=response.getJSONObject(i);
                         GoogleCard card=new GoogleCard(object.getInt("essay_id"),object.getString("essay_title"),

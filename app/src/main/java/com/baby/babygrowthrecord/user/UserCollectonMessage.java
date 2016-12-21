@@ -48,8 +48,7 @@ public class UserCollectonMessage extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Utils.flag = 3;
-                Intent intent=new Intent(UserCollectonMessage.this,BabyMainActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
 

@@ -14,6 +14,7 @@ import com.baby.babygrowthrecord.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -33,11 +34,13 @@ public class CardMessage extends AppCompatActivity {
     private ImageView img1;
     private ImageView shares;
     String[] str = new String[20];
+    public  ImageLoader imageLoader=ImageLoader.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mother_message);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(this));
 
         shares = (ImageView) findViewById(R.id.share);
         img = (ImageView) findViewById(R.id.back);
