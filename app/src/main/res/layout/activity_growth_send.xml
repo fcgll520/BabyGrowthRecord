@@ -80,14 +80,19 @@
             android:hint="记录宝贝的成长事迹"
             android:gravity="center"/>
     </LinearLayout>
-    <GridView
-        android:id="@+id/gv_growth_noScrollgridview"
-        android:layout_width="290dp"
-        android:layout_height="350dp"
-        android:layout_marginLeft="5dp"
-        android:horizontalSpacing="3dp"
-        android:numColumns="4"
-        android:scrollbars="none"
-        android:verticalSpacing="5dp" >
-    </GridView>
+    <!--<GridView-->
+        <!--android:id="@+id/gv_growth_noScrollgridview"-->
+        <!--android:layout_width="290dp"-->
+        <!--android:layout_height="350dp"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:horizontalSpacing="3dp"-->
+        <!--android:numColumns="4"-->
+        <!--android:scrollbars="none"-->
+        <!--android:verticalSpacing="5dp" >-->
+    <!--</GridView>-->
+    <ImageView
+        android:id="@+id/grow_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/load_27"/>
 </LinearLayout>

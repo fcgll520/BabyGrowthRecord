@@ -23,6 +23,7 @@
         android:id="@+id/Card_Pic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:src="@drawable/load_27"
         android:contentDescription="@string/Description"
         android:scaleType="center" />
 </LinearLayout>
