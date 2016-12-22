@@ -34,6 +34,10 @@ public class
             if (msg.arg1==1){
                 Toast.makeText(UserSettingName.this,"昵称修改成功！",Toast.LENGTH_SHORT).show();
                 finish();
+            }else if (msg.arg1==2){
+                Toast.makeText(UserSettingName.this,"用户昵称已存在！",Toast.LENGTH_SHORT).show();
+            }else if (msg.arg1==3){
+                Toast.makeText(UserSettingName.this,"这是您原来的用户名！",Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(UserSettingName.this,"昵称修改失败，请稍后再试！",Toast.LENGTH_SHORT).show();
             }
@@ -60,6 +64,7 @@ public class
                     public void run() {
                         try {
                             Message msg=new Message();
+                            msg.arg1=0;
                             msg.arg1=changeName(name);
                             handler.sendMessage(msg);
                         } catch (IOException e) {
@@ -80,6 +85,7 @@ public class
         InputStream is=connection.getInputStream();
         byte[]b=new byte[1];
         is.read(b);
+        Log.e("changeName",new String(b));
         return Integer.parseInt(new String(b));
     }
 

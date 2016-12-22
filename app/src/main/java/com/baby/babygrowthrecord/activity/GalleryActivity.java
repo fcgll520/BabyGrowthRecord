@@ -73,7 +73,7 @@ public class GalleryActivity extends AppCompatActivity {
         position = Integer.parseInt(intent.getStringExtra("position"));
         isShowOkBt();
         // 为发送按钮设置文字
-        pager = (ViewPagerFixed) findViewById(R.id.gallery01);
+        pager = (ViewPagerFixed) findViewById(Res.getWidgetID("gallery01"));
         pager.setOnPageChangeListener(pageChangeListener);
         for (int i = 0; i < Bimp.tempSelectBitmap.size(); i++) {
             initListViews( Bimp.tempSelectBitmap.get(i).getBitmap() );

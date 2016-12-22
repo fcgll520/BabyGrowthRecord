@@ -10,7 +10,7 @@ import com.baby.babygrowthrecord.R;
  */
 public class Utils {
     public static int flag = 1;
-    public static String StrUrl = "http://10.7.88.97:8080/";
+    public static String StrUrl = "http://169.254.123.77:8080/";
     //用户信息
     public static int userId;
     public static int circlrId=1;

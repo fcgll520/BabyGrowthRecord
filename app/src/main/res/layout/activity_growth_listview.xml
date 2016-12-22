@@ -13,8 +13,8 @@
             android:layout_height="wrap_content"
             android:text="成长记录"
             android:textColor="#ffffff"
-            android:textSize="23dp"
-            android:layout_margin="15dp"
+            android:textSize="@dimen/fragmentTitleTextSize"
+            android:layout_margin="@dimen/fragmentTitleTextMargin"
             android:gravity="center"/>
     </LinearLayout>
     <!--头像和姓名-->
