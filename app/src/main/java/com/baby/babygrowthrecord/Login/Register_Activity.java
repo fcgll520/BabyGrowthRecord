@@ -190,7 +190,7 @@ public class Register_Activity extends Activity {
         String pwd = csed2.getText().toString();
         String repwd = csed3.getText().toString();
         if (pwd.equals(repwd)) {
-            Toast.makeText(Register_Activity.this, "注册成功", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Register_Activity.this, "注册成功", Toast.LENGTH_SHORT).show();
             return true;
         } else {
             Toast.makeText(Register_Activity.this, "两次输入密码不一致", Toast.LENGTH_SHORT).show();
@@ -233,26 +233,14 @@ public class Register_Activity extends Activity {
         }
     };
     public void registerConfirm(){
-        String phoneStr=phone.getText().toString();
-        String pwd=pas.getText().toString();
-        String confirmPwd=repas.getText().toString();
-        if (phoneStr.equals("")){
-            Toast.makeText(Register_Activity.this,"手机号不能为空，请输入手机号！",Toast.LENGTH_SHORT).show();
-            finish();
-        } else if (pwd.equals("")){
-            Toast.makeText(Register_Activity.this,"密码不能为空，请输入密码！",Toast.LENGTH_SHORT).show();
-            finish();
-        } else if (confirmPwd.equals("")){
-            Toast.makeText(Register_Activity.this,"确认密码不能为空，请输入确认密码！",Toast.LENGTH_SHORT).show();
-            finish();
+        if (message.getText().toString().equals("")){
+            Toast.makeText(Register_Activity.this,"验证码不能为空，请确认手机号或重新获取！",Toast.LENGTH_SHORT).show();
+            return;
         }
         //匹配验证码
         SMSSDK.submitVerificationCode("86", phone.getText().toString(), message.getText().toString());
-        //匹配密码与确认密码
-        if (!confirmPwd.equals(pwd)){
-            Toast.makeText(Register_Activity.this,"确认密码与密码不一致，请重新输入！",Toast.LENGTH_SHORT).show();
-            finish();
-        }
+        String phoneStr = phone.getText().toString();// 电话phone
+        String pwd = pas.getText().toString();// 密码pwd
         //发送注册用户的请求
         sendRegisterRequest(phoneStr,pwd);
     }
@@ -263,15 +251,23 @@ public class Register_Activity extends Activity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+                Log.e("sendRegisterRequest","start");
+                Log.e("sendRegisterRequest",response.toString());
                 if (response!=null){
-                    Toast.makeText(Register_Activity.this,"注册成功！欢迎使用成长树~",Toast.LENGTH_SHORT).show();
                     try {
-                        Utils.userId=response.getInt("user_id");
+                        int id=response.getInt("user_id");
+                        if (id==-1){   //手机号已注册
+                            Toast.makeText(Register_Activity.this,"该手机号已被注册，一个手机号只能注册一个账号哦~",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        Toast.makeText(Register_Activity.this,"注册成功！欢迎使用成长树~",Toast.LENGTH_SHORT).show();
+                        Utils.userId=id;
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                     Intent intent=new Intent(Register_Activity.this, BabyMainActivity.class);
                     startActivity(intent);
+                    finish();
                 }else {
                     Toast.makeText(Register_Activity.this,"注册失败，请稍后再试！",Toast.LENGTH_SHORT).show();
                 }
