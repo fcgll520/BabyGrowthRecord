@@ -128,7 +128,7 @@ public class PublishActivity extends AppCompatActivity {
                         }
                     });
                 }
-
+                finish();
             }
         });
     }
