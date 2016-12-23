@@ -18,6 +18,8 @@ import com.baby.babygrowthrecord.user.UserInfoManage;
 import com.baby.babygrowthrecord.user.UserSetting;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.apache.http.Header;
 import org.json.JSONException;
@@ -86,11 +88,14 @@ public class PeopleFragment extends Fragment{
         }
     };
     private GrowthFragment g=new GrowthFragment();  //获取用户信息
+    public ImageLoader imageLoader=ImageLoader.getInstance();
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.activity_user, container, false);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getActivity()));
+
         init();
         return view;
     }
