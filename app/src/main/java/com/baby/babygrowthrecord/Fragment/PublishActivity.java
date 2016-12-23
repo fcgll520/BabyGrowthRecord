@@ -48,11 +48,21 @@ import com.baby.babygrowthrecord.util.ImageItem;
 import com.baby.babygrowthrecord.util.PublicWay;
 import com.baby.babygrowthrecord.util.Res;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.apache.http.Header;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @SuppressLint("HandlerLeak")
 public class PublishActivity extends AppCompatActivity {
@@ -69,6 +79,8 @@ public class PublishActivity extends AppCompatActivity {
     private PopupWindow pop = null;
     private View parentView;
     private Uri photoUri ; //得到清晰的图片
+
+    String SDPATH="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,56 +99,130 @@ public class PublishActivity extends AppCompatActivity {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                PublishActivity.this.finish();
             }
         });
+
+
         editText = (EditText)findViewById(R.id.edit_text);
         button2 = (Button)findViewById(R.id.button2);
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = editText.getText().toString();
-                if (text.equals("")){
-                    Toast.makeText(PublishActivity.this,"内容不能为空！！",Toast.LENGTH_SHORT).show();
-                }else{
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    client.get(PublishActivity.this,Utils.StrUrl+"circlr/register?cir_content="+text,new JsonHttpResponseHandler(){
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            super.onSuccess(statusCode, headers, response);
-                            if (response!=null){
-                                Toast.makeText(PublishActivity.this,"发布成功~",Toast.LENGTH_SHORT).show();
-                                try {
-                                    Utils.circlrId=response.getInt("cir_id");
-                                Utils.userName=response.getString("user_name");
-                                Utils.circleCntent=response.getString("cir_content");
-                                for(int i=0;i<PublicWay.activityList.size();i++){
-                                    if (null != PublicWay.activityList.get(i)) {
-                                        PublicWay.activityList.get(i);
-                                        Utils.circlePhoto = response.getString("cir_hphoto");
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                                Utils.flag = 1;
-                                Intent intent=new Intent(PublishActivity.this, BabyMainActivity.class);
-                                startActivity(intent);
-                            }else {
-                                Toast.makeText(PublishActivity.this,"由于网络问题发布失败，请确认后再试！",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-                finish();
+                sendInfo();
             }
         });
+    }
+
+    private void sendInfo(){
+        //先发送文字信息，再发送图片
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Message msg=new Message();
+                msg.arg1=sendGrowMessageToServer();
+                handler.sendMessage(msg);
+            }
+        }).start();
+    }
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.arg1==-1){
+                Toast.makeText(PublishActivity.this,"文字消息发送失败！图片未能发送~",Toast.LENGTH_SHORT).show();
+                Log.e("sendGrowMessageToServer","发生异常");
+            }else {
+                if (SDPATH.equals("")){
+                    Log.e("handleMessage","用户未选择图片~");
+                    Toast.makeText(PublishActivity.this,"圈子动态发布成功~",Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
+                Toast.makeText(PublishActivity.this,"文字消息发送成功~",Toast.LENGTH_SHORT).show();
+                Log.e("handleMessage","开始发送图片");
+                sendGrowPicToServer(msg.arg1);
+            }
+        }
+    };
+    private void sendGrowPicToServer(int cir_id) {
+        File file = new File(SDPATH);
+        if (file.exists()) {
+            AsyncHttpClient client = new AsyncHttpClient();
+            String url = Utils.StrUrl + "circle/getPicture";
+            RequestParams para = new RequestParams();
+            try {
+                para.put("cir_photo", file,"multipart/form-data");
+                para.put("cir_id",cir_id);
+                para.setContentEncoding("utf-8");
+                client.post(PublishActivity.this, url, para, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Header[] headers, byte[] bytes) {
+                        Log.e("sendGrowPic'onSuccess", "start");
+
+                        if (i == 200) {
+                            Log.e("grow_photo", "success");
+                            Toast.makeText(PublishActivity.this,"成长记录发布成功~",Toast.LENGTH_SHORT).show();
+                            finish();
+                        }else {
+                            Toast.makeText(PublishActivity.this,"图片上传出错！",Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e("sendGrowPic'onFailure", new String(bytes));
+                    }
+
+                    @Override
+                    public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                        Toast.makeText(PublishActivity.this,"网络连接错误,图片上传失败，请稍后再试！",Toast.LENGTH_SHORT).show();
+                        Log.e("sendPic-onFailure",throwable.toString());
+
+                        Log.e("sendGrowPic'onFailure", "start");
+                        Log.e("", throwable.toString());
+                    }
+                });
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }else {
+            Toast.makeText(PublishActivity.this,"图片文件出错，请重新选取！",Toast.LENGTH_SHORT).show();
+            Log.e("SDPATH",SDPATH);
+        }
+    }
+    private int sendGrowMessageToServer() {
+        Log.e("执行了此函数","执行了此函数");
+        String content=editText.getText().toString();
+        String url= Utils.StrUrl+"circle/fabucontent?cir_id="+Utils.cir_id+"&cir_content="+content;
+        try {
+            URL Url=new URL(url);
+            HttpURLConnection coon= (HttpURLConnection) Url.openConnection();
+            coon.setRequestMethod("GET");
+            coon.setConnectTimeout(2000);
+            coon.connect();
+            //接收反馈
+            InputStream is=coon.getInputStream();
+            byte[]b=new byte[1024];
+            is.read(b);
+            String str=new String(b);
+            JSONObject object=new JSONObject(str);
+            Log.e("sendText",str);
+            Log.e("sendText-id",object.getInt("cir_id")+"");
+            return object.getInt("cir_id");//返回cir_id
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.e("sendText","end");
+        return -1;  //发生异常
     }
     /**
      * 判断sdcard卡是否可用
      *
      * @return 布尔类型 true 可用 false 不可用
      */
+
     private boolean isSDCardCanUser() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
