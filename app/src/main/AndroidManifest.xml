@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.baby.babygrowthrecord">
-    <!--分享的权限-->
+
+    <!-- 分享的权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <!-- 蓝牙分享所需的权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!--快捷登录权限-->
+    <!-- 快捷登录权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -23,13 +24,15 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -44,13 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -66,18 +67,21 @@
             </intent-filter>
         </activity>
 
-        <!--分享所需的activity-->
+        <!-- 分享所需的activity -->
 
         <activity
             android:name="com.mob.tools.MobUIShell"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
             <!-- QQ和QQ空间分享 QQ登录的回调必须要配置的 -->
             <intent-filter>
                 <data android:scheme="tencent100371282" />
+
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -85,43 +89,45 @@
             <!-- 新浪微博客户端分享回调必须配置 -->
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <!--微信分享回调 -->
+        <!-- 微信分享回调 -->
         <activity
             android:name="cn.sharesdk.demo.wxapi.WXEntryActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
-            android:screenOrientation="portrait" />
-        <!--页面所需activity-->
-        <activity android:name=".Login.Register_Activity"/>
-        <activity android:name=".Login.RegisterConfirm"/>
-        <activity android:name=".MainActivity.BabyMainActivity"/>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 页面所需activity -->
+        <activity android:name=".Login.Register_Activity" />
+        <activity android:name=".Login.RegisterConfirm" />
+        <activity android:name=".MainActivity.BabyMainActivity" />
         <activity android:name=".user.UserActivity" />
         <activity android:name=".user.UserAlbum" />
         <activity android:name=".user.UserAlbumBigImg" />
         <activity android:name=".user.UserCollection" />
-        <activity android:name=".user.UserCollectonMessage"/>
+        <activity android:name=".user.UserCollectonMessage" />
         <activity android:name=".user.UserInfoManage" />
-        <activity android:name=".user.UserInfoManageEdit"/>
+        <activity android:name=".user.UserInfoManageEdit" />
         <activity android:name=".user.UserSetting" />
         <activity android:name=".user.UserSettingHeadPic" />
         <activity android:name=".user.UserSettingName" />
         <activity android:name=".user.UserSettingPwd" />
         <activity android:name=".Growth.Growth_Activity_Bron" />
         <activity android:name=".Growth.Growth_Activity" />
-        <activity android:name=".Mother.CardMessage"/>
+        <activity android:name=".Mother.CardMessage" />
         <activity android:name=".Circle.ImagePagerActivity" />
         <activity android:name=".Circle.CircleMainActivity" />
         <activity android:name=".Fragment.PublishActivity" />
-        <activity android:name=".activity.AlbumActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.GalleryActivity"/>
-        <activity android:name=".activity.ImageFile"/>
-        <activity android:name=".activity.ShowAllPhoto"/>
-
+        <activity
+            android:name=".activity.AlbumActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.GalleryActivity" />
+        <activity android:name=".activity.ImageFile" />
+        <activity android:name=".activity.ShowAllPhoto" />
+        <activity android:name=".Growth.Growth_SendBabyMessage"></activity>
     </application>
 
 </manifest>
