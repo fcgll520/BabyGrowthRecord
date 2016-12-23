@@ -138,11 +138,10 @@ public class GrowthFragment extends Fragment{
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 super.onSuccess(statusCode, headers, response);
                 JSONObject object;
-                growth_classes.clear();
                 if (growth_classes!=null){
                     growth_classes.clear();
                 }
-                for (int i=0;i<response.length();i++){
+                for (int i=response.length()-1;i>=0;i--){
                     try {
                         object=response.getJSONObject(i);
                         growth_classes.add(new Growth_Class(object.getLong("grow_id"),object.getString("grow_year"),
