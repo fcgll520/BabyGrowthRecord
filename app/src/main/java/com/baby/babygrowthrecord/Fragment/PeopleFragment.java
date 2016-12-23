@@ -8,18 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baby.babygrowthrecord.R;
-import com.baby.babygrowthrecord.user.UserAlbum;
+import com.baby.babygrowthrecord.user.UserAlbumAdapter;
 import com.baby.babygrowthrecord.user.UserCollection;
 import com.baby.babygrowthrecord.user.UserInfoManage;
 import com.baby.babygrowthrecord.user.UserSetting;
-import com.baby.babygrowthrecord.user.UserSettingHeadPic;
-import com.baby.babygrowthrecord.user.UserSettingName;
-import com.baby.babygrowthrecord.util.Util;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -53,7 +49,7 @@ public class PeopleFragment extends Fragment{
             Intent i=new Intent();
             switch (v.getId()){
                 case R.id.rl_user_album:
-                    i.setClass(getActivity(),UserAlbum.class);
+                    i.setClass(getActivity(),UserAlbumAdapter.UserAlbum.class);
                     startActivity(i);
                     break;
                 case R.id.rl_user_infoMange:
@@ -69,7 +65,7 @@ public class PeopleFragment extends Fragment{
                     startActivity(i);
                     break;
                 case R.id.tv_user_album:
-                    i.setClass(getActivity(),UserAlbum.class);
+                    i.setClass(getActivity(),UserAlbumAdapter.UserAlbum.class);
                     startActivity(i);
                     break;
                 case R.id.tv_user_infoMange:
