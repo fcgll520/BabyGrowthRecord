@@ -97,7 +97,6 @@
             android:screenOrientation="portrait" />
         <!--页面所需activity-->
         <activity android:name=".Login.Register_Activity"/>
-        <activity android:name=".Login.RegisterConfirm"/>
         <activity android:name=".MainActivity.BabyMainActivity"/>
         <activity android:name=".user.UserActivity" />
         <activity android:name=".user.UserAlbum" />
@@ -112,6 +111,7 @@
         <activity android:name=".user.UserSettingPwd" />
         <activity android:name=".Growth.Growth_Activity_Bron" />
         <activity android:name=".Growth.Growth_Activity" />
+        <activity android:name=".Growth.Growth_SendBabyMessage"/>
         <activity android:name=".Mother.CardMessage"/>
         <activity android:name=".Circle.ImagePagerActivity" />
         <activity android:name=".Circle.CircleMainActivity" />

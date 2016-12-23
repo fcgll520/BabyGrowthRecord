@@ -38,44 +38,22 @@
         android:background="#b4b0b0">
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_growthSend_2"
-            android:text="记录于"
-            android:textSize="20dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"/>
         <EditText
             android:id="@+id/et_grow_time"
             android:gravity="top"
-            android:hint="宝贝的年龄，例如1岁零两个月"
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_growthSend_1"
-            android:text="记录内容"
-            android:textSize="20dp"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:hint="请输入宝贝的年龄，例如1岁零两个月"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_margin="5dp"/>
         <EditText
+            android:layout_marginTop="10dp"
             android:background="@drawable/growth_send_bg"
             android:id="@+id/et_grow_content"
-            android:layout_width="0dp"
-            android:layout_weight="4"
+            android:layout_width="match_parent"
             android:layout_height="200sp"
             android:hint="记录宝贝的成长事迹"
             android:gravity="center"/>
@@ -91,8 +69,10 @@
         <!--android:verticalSpacing="5dp" >-->
     <!--</GridView>-->
     <ImageView
+        android:layout_marginTop="10dp"
         android:id="@+id/grow_img"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/load_27"/>
+        android:gravity="left"
+        android:src="@drawable/icon_addpic_unfocused"/>
 </LinearLayout>
