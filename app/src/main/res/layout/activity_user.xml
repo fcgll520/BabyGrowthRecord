@@ -132,8 +132,12 @@
                 android:layout_marginRight="50dp"
                 android:alpha="0.1"/>
         </RelativeLayout>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/user_head_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0.1sp" />
         <RelativeLayout
-            android:layout_marginTop="30dp"
             android:id="@+id/rl_user_infoMange"
             style="@style/listRLstyle">
             <ImageView
@@ -161,8 +165,12 @@
                 android:layout_marginRight="50dp"
                 android:alpha="0.1"/>
         </RelativeLayout>
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/user_head_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0.1sp" />
         <RelativeLayout
-            android:layout_marginTop="30dp"
             android:id="@+id/rl_user_setting"
             style="@style/listRLstyle">
             <ImageView

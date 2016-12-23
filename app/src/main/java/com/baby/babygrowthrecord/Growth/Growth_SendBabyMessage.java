@@ -40,6 +40,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.LineNumberReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -188,6 +189,12 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
     }
 
     private void sendInfo(){
+        time=et1.getText().toString();
+        content=et2.getText().toString();
+        if (time.equals("") && content.equals("") && imgFileName.equals("")){
+            Toast.makeText(Growth_SendBabyMessage.this,"发布内容不能为空！", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //先发送文字信息，再发送图片
         new Thread(new Runnable() {
             @Override
@@ -203,8 +210,6 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
 
     private int sendGrowMessageToServer() {
         Log.e("执行了此函数","执行了此函数");
-        time=et1.getText().toString();
-        content=et2.getText().toString();
         String url= Utils.StrUrl+"grow/InsertGrowMessage?user_id="+Utils.userId+"&grow_time="+time+"&grow_content="+content;
         try {
             URL Url=new URL(url);
@@ -308,5 +313,11 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
         if ((new File(imgFileName).exists())){
                 img.setImageBitmap(BitmapFactory.decodeFile(imgFileName));
             }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        popupWindow.dismiss();
     }
 }

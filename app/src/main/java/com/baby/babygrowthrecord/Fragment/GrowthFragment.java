@@ -139,6 +139,9 @@ public class GrowthFragment extends Fragment{
                 super.onSuccess(statusCode, headers, response);
                 JSONObject object;
                 growth_classes.clear();
+                if (growth_classes!=null){
+                    growth_classes.clear();
+                }
                 for (int i=0;i<response.length();i++){
                     try {
                         object=response.getJSONObject(i);
