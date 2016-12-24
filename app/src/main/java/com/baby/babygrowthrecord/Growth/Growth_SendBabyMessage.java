@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -285,26 +286,62 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.e("onActivityResult","start");
-        if (resultCode==RESULT_OK){
-            popupWindow.dismiss();
-            if (requestCode==0){
-                //拍照
-                showImage();
-            }else if (requestCode==1){
-                //相册
-                Uri uri=data.getData();
-                if (uri!=null){
-                    Log.e("onActivityResult-uri",uri.toString());
-                    //代码可用有效
-                    String []filePaths={MediaStore.Images.Media.DATA};
-                    Cursor cursor=getContentResolver().query(uri,filePaths,null,null,null);
-                    cursor.moveToFirst();
-                    imgFileName=cursor.getString(cursor.getColumnIndex(filePaths[0]));
-                    showImage();
-                }else {
-                    Log.e("onActivityResult","uri is null");
-                }
+//        if (resultCode==RESULT_OK){
+//            popupWindow.dismiss();
+//            if (requestCode==0){
+//                //拍照
+//                showImage();
+//            }else if (requestCode==1){
+//                //相册
+//                if (data==null){
+//                    Log.e("onActivityResult","data is null");
+//                    return;
+//                }
+//                Uri uri=data.getData();
+//                if (uri!=null){
+//                    Log.e("onActivityResult-uri",uri.toString());
+//                    //代码可用有效
+//                    String []filePaths={MediaStore.Images.Media.DATA};
+//                    Cursor cursor=getContentResolver().query(uri,filePaths,null,null,null);
+//                    if (cursor.moveToFirst()){
+//                        imgFileName=cursor.getString(cursor.getColumnIndex(filePaths[0]));
+//                        Log.e("onActivityResult","imgFileName is"+imgFileName);
+//                        showImage();
+//                    }else {
+//                        Log.e("onActivityResult","cursor.moveToFirst is null");
+//                        return;
+//                    }
+//                }else {
+//                    Log.e("onActivityResult","uri is null");
+//                }
+//            }
+//        }
+
+        if (data == null) {
+            return;
+        }
+        Uri uri = data.getData();
+        //此处为了解决android4.4 相册选择时的 选择最近图片 获取不到path问题
+        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT){//4.4及以上
+            String wholeID = DocumentsContract.getDocumentId(uri);
+            String id = wholeID.split(":")[1];
+            String[] column = { MediaStore.Images.Media.DATA };
+            String sel = MediaStore.Images.Media._ID + "=?";
+            Cursor cursor = this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
+                    sel, new String[] { id }, null);
+            int columnIndex = cursor.getColumnIndex(column[0]);
+            if (cursor.moveToFirst()) {
+                imgFileName = cursor.getString(columnIndex);
+                Log.e("onActivityResult","imgFileName is"+imgFileName);
             }
+            cursor.close();
+        }else{//4.4以下，即4.4以上获取路径的方法
+            String[] projection = { MediaStore.Images.Media.DATA };
+            Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            imgFileName = cursor.getString(column_index);
+            Log.e("onActivityResult","imgFileName is"+imgFileName);
         }
         Log.e("onActivityResult","end");
     }
