@@ -333,8 +333,10 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
             if (cursor.moveToFirst()) {
                 imgFileName = cursor.getString(columnIndex);
                 Log.e("onActivityResult","imgFileName is"+imgFileName);
+                showImage();
             }
             cursor.close();
+            Toast.makeText(Growth_SendBabyMessage.this,"未获取到图片!",Toast.LENGTH_SHORT).show();
         }else{//4.4以下，即4.4以上获取路径的方法
             String[] projection = { MediaStore.Images.Media.DATA };
             Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
@@ -342,6 +344,7 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
             cursor.moveToFirst();
             imgFileName = cursor.getString(column_index);
             Log.e("onActivityResult","imgFileName is"+imgFileName);
+            showImage();
         }
         Log.e("onActivityResult","end");
     }
