@@ -13,8 +13,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="妈妈帮"
-            android:textSize="@dimen/fragmentTitleTextSize"
-            android:layout_margin="@dimen/fragmentTitleTextMargin"
+            android:textSize="@dimen/TitleTextSize"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:textColor="#ffffff"
             android:layout_gravity="center"
             android:gravity="center"/>

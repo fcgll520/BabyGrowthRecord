@@ -10,17 +10,17 @@
         android:id="@+id/growth_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
+        android:padding="@dimen/TitleTextMargin"
         android:text="成长记录"
         android:textColor="#ffffff"
-        android:textSize="23dp"
+        android:textSize="@dimen/TitleTextSize"
         android:gravity="center"
         android:background="#63b68b"/>
     <Button
         android:id="@+id/growth_back"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_margin="10dp"
+        android:layout_width="@dimen/TitleTextSize"
+        android:layout_height="@dimen/TitleTextSize"
+        android:layout_margin="@dimen/TitleTextMargin"
         android:background="@drawable/users_back"/>
     <!--头像和姓名-->
     <LinearLayout
@@ -40,7 +40,6 @@
             android:id="@+id/growth_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="？？"
             android:textSize="@dimen/growth_title"
             android:textColor="#646161"
             android:layout_margin="@dimen/growth_title"/>

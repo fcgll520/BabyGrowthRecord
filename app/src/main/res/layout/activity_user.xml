@@ -14,8 +14,8 @@
         <TextView
             android:text="个人中心"
             android:textColor="@color/userBarBigText"
-            android:textSize="@dimen/fragmentTitleTextSize"
-            android:layout_margin="@dimen/fragmentTitleTextMargin"
+            android:textSize="@dimen/TitleTextSize"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
