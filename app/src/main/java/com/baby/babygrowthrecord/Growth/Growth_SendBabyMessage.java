@@ -313,9 +313,10 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                         imgFileName = cursor.getString(columnIndex);
                         Log.e("onActivityResult","imgFileName is"+imgFileName);
                         showImage();
+                    }else {
+                        Toast.makeText(Growth_SendBabyMessage.this,"未从相册获取到图片!",Toast.LENGTH_SHORT).show();
                     }
                     cursor.close();
-                    Toast.makeText(Growth_SendBabyMessage.this,"未从相册获取到图片!",Toast.LENGTH_SHORT).show();
                 }else{//4.4以下，即4.4以上获取路径的方法
                     String[] projection = { MediaStore.Images.Media.DATA };
                     Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
