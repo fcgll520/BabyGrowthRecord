@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baby.babygrowthrecord.R;
+import com.baby.babygrowthrecord.user.UserAlbum;
 import com.baby.babygrowthrecord.user.UserAlbumAdapter;
 import com.baby.babygrowthrecord.user.UserCollection;
 import com.baby.babygrowthrecord.user.UserInfoManage;
@@ -51,7 +52,7 @@ public class PeopleFragment extends Fragment{
             Intent i=new Intent();
             switch (v.getId()){
                 case R.id.rl_user_album:
-                    i.setClass(getActivity(),UserAlbumAdapter.UserAlbum.class);
+                    i.setClass(getActivity(),UserAlbum.class);
                     startActivity(i);
                     break;
                 case R.id.rl_user_infoMange:
@@ -67,7 +68,7 @@ public class PeopleFragment extends Fragment{
                     startActivity(i);
                     break;
                 case R.id.tv_user_album:
-                    i.setClass(getActivity(),UserAlbumAdapter.UserAlbum.class);
+                    i.setClass(getActivity(),UserAlbum.class);
                     startActivity(i);
                     break;
                 case R.id.tv_user_infoMange:
