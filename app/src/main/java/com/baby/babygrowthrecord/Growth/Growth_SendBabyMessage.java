@@ -135,7 +135,9 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                     finish();
                     return;
                 }
-                Toast.makeText(Growth_SendBabyMessage.this,"文字消息发送成功~",Toast.LENGTH_SHORT).show();
+                if (!time.equals("") || !content.equals("")){
+                    Toast.makeText(Growth_SendBabyMessage.this,"文字消息发送成功~",Toast.LENGTH_SHORT).show();
+                }
                 Log.e("handleMessage","开始发送图片");
                 sendGrowPicToServer(msg.arg1);
             }
@@ -146,8 +148,7 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_growth_send);
-
-        //获取ID
+        //获取ID以及初始化
         findById();
     }
 
@@ -205,8 +206,6 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                 handler.sendMessage(msg);
             }
         }).start();
-        //发送图片
-//        sendGrowPicToServer();
     }
 
     private int sendGrowMessageToServer() {
@@ -239,6 +238,10 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
     }
 
     private void sendGrowPicToServer(int grow_id) {
+        if (imgFileName==null){
+            Toast.makeText(Growth_SendBabyMessage.this,"获取图片失败！",Toast.LENGTH_SHORT).show();
+            return;
+        }
         File file = new File(imgFileName);
         if (file.exists()) {
             AsyncHttpClient client = new AsyncHttpClient();
@@ -259,17 +262,17 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                             finish();
                         }else {
                             Toast.makeText(Growth_SendBabyMessage.this,"图片上传出错！",Toast.LENGTH_SHORT).show();
+                            Log.e("sendGrowPic'onSuccess", new String(bytes));
+                            finish();
                         }
-                        Log.e("sendGrowPic'onFailure", new String(bytes));
+                        Log.e("sendGrowPic'onSuccess", new String(bytes));
                     }
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                         Toast.makeText(Growth_SendBabyMessage.this,"网络连接错误,图片上传失败，请稍后再试！",Toast.LENGTH_SHORT).show();
                         Log.e("sendPic-onFailure",throwable.toString());
-
-                        Log.e("sendGrowPic'onFailure", "start");
-                        Log.e("", throwable.toString());
+                        finish();
                     }
                 });
             } catch (FileNotFoundException e) {
@@ -293,27 +296,6 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                 showImage();
             }else if (requestCode==1){
                 //相册
-//                if (data==null){
-//                    Log.e("onActivityResult","data is null");
-//                    return;
-//                }
-//                Uri uri=data.getData();
-//                if (uri!=null){
-//                    Log.e("onActivityResult-uri",uri.toString());
-//                    //代码可用有效
-//                    String []filePaths={MediaStore.Images.Media.DATA};
-//                    Cursor cursor=getContentResolver().query(uri,filePaths,null,null,null);
-//                    if (cursor.moveToFirst()){
-//                        imgFileName=cursor.getString(cursor.getColumnIndex(filePaths[0]));
-//                        Log.e("onActivityResult","imgFileName is"+imgFileName);
-//                        showImage();
-//                    }else {
-//                        Log.e("onActivityResult","cursor.moveToFirst is null");
-//                        return;
-//                    }
-//                }else {
-//                    Log.e("onActivityResult","uri is null");
-//                }
                 if (data == null) {
                     return;
                 }
@@ -333,7 +315,7 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                         showImage();
                     }
                     cursor.close();
-                    Toast.makeText(Growth_SendBabyMessage.this,"未获取到图片!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Growth_SendBabyMessage.this,"未从相册获取到图片!",Toast.LENGTH_SHORT).show();
                 }else{//4.4以下，即4.4以上获取路径的方法
                     String[] projection = { MediaStore.Images.Media.DATA };
                     Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
@@ -344,11 +326,16 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
                     showImage();
                 }
             }
+        }else {
+            Log.e("onActivityResult","resultCode is "+resultCode);
         }
         Log.e("onActivityResult","end");
     }
     /*imageView显示图片*/
     private void showImage(){
+        if (imgFileName==null){
+            Toast.makeText(Growth_SendBabyMessage.this,"获取图片失败！",Toast.LENGTH_SHORT).show();
+        }
         if ((new File(imgFileName).exists())){
                 img.setImageBitmap(BitmapFactory.decodeFile(imgFileName));
             }
