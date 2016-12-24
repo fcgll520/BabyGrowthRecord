@@ -10,15 +10,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baby.babygrowthrecord.Fragment.Utils;
 import com.baby.babygrowthrecord.R;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.TextHttpResponseHandler;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,16 +34,21 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by think on 2016/11/22.
  */
 public class UserSettingPwd extends Activity {
+    private CircleImageView ivHeadPic;
     private EditText etOriginPwd;
     private EditText etPwd;
     private EditText etConfirmPwd;
-    private TextView tvSave;
     private Button btnSave;
     private Button btnCancel;
+
+    private ImageLoader imageLoader =ImageLoader.getInstance();
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -85,18 +97,19 @@ public class UserSettingPwd extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        imageLoader.init(ImageLoaderConfiguration.createDefault(UserSettingPwd.this));
         setContentView(R.layout.activity_user_setting_pwd);
         init();
+        getUserPhoto(ivHeadPic);
     }
 
     private void init() {
+        ivHeadPic=(CircleImageView) findViewById(R.id.img_circlePic);
         etOriginPwd = (EditText) findViewById(R.id.et_userSetting_originPwd);
         etPwd = (EditText) findViewById(R.id.et_userSetting_pwd);
         etConfirmPwd = (EditText) findViewById(R.id.et_userSetting_confirmPwd);
-//        tvSave=(TextView)findViewById(R.id.tv_userSetPwd_save);
         btnSave = (Button) findViewById(R.id.btn_userSetting_pwdSave);
         btnCancel = (Button) findViewById(R.id.btn_userSetting_pwdCancel);
-//        tvSave.setOnClickListener(myListener);
         btnSave.setOnClickListener(myListener);
         btnCancel.setOnClickListener(myListener);
 
@@ -104,7 +117,6 @@ public class UserSettingPwd extends Activity {
         etOriginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
         etConfirmPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
         etPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-       // etConfirmPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
     }
 
     //确认原密码是否正确
@@ -157,6 +169,35 @@ public class UserSettingPwd extends Activity {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    //获取用户头像
+    public void getUserPhoto(final CircleImageView head){
+        //获取用户名和用户头像
+        if (Utils.userId==-1){   //此时为未登录状态
+            head.setImageResource(R.drawable.empty_photo);
+            return;
+        }
+        AsyncHttpClient client=new AsyncHttpClient();
+        client.get(UserSettingPwd.this,Utils.StrUrl+"user/getUserInfoById/"+Utils.userId,new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                super.onSuccess(statusCode, headers, response);
+                try {
+                    imageLoader.displayImage(Utils.StrUrl+response.getJSONObject(0).getString("user_photo"),head);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+                Log.e("GET_PWD_INFO_ERROR",throwable.toString());
+                Toast.makeText(UserSettingPwd.this,"网络连接错误，请稍后再试！",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     public void backOnClick(View view) {
