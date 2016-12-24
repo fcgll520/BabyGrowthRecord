@@ -13,15 +13,16 @@
         android:layout_height="wrap_content">
         <ImageView
             android:onClick="backOnClick"
-            android:layout_margin="@dimen/actionBarImgMargin"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:src="@drawable/users_back"
-            android:layout_width="@dimen/actionBarImgSize"
-            android:layout_height="@dimen/actionBarImgSize" />
+            android:layout_width="@dimen/TitleTextSize"
+            android:layout_height="@dimen/TitleTextSize"
+            android:layout_gravity="center_vertical"/>
         <TextView
             android:text="更改头像"
             android:textColor="@color/userBarBigText"
-            android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarTextMargin"
+            android:textSize="@dimen/TitleTextSize"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -29,8 +30,7 @@
             android:text="保存"
             android:textColor="@color/userBarSmallText"
             android:textSize="@dimen/actionBarSmallText"
-            android:layout_marginTop="@dimen/actionBarImgMargin"
-            android:layout_marginRight="@dimen/actionBarImgMargin"
+            android:layout_marginTop="@dimen/TitleTextMargin"
             android:gravity="right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

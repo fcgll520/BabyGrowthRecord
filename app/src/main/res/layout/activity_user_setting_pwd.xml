@@ -12,27 +12,17 @@
         android:layout_height="wrap_content">
         <ImageView
             android:onClick="backOnClick"
-            android:layout_margin="@dimen/actionBarImgMargin"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:src="@drawable/users_back"
-            android:layout_width="@dimen/actionBarImgSize"
-            android:layout_height="@dimen/actionBarImgSize" />
+            android:layout_width="@dimen/TitleTextSize"
+            android:layout_height="@dimen/TitleTextSize" />
         <TextView
             android:text="修改密码"
             android:textColor="@color/userBarBigText"
-            android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarTextMargin"
+            android:textSize="@dimen/TitleTextSize"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <!--<TextView-->
-            <!--android:id="@+id/tv_userSetPwd_save"-->
-            <!--android:text="保存"-->
-            <!--android:textColor="@color/userBarSmallText"-->
-            <!--android:textSize="@dimen/actionBarSmallText"-->
-            <!--android:layout_marginTop="@dimen/actionBarImgMargin"-->
-            <!--android:layout_marginRight="@dimen/actionBarImgMargin"-->
-            <!--android:gravity="right"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
@@ -95,24 +85,25 @@
                 android:layout_margin="5dp" />
         </LinearLayout>
         <LinearLayout
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/btn_userSetting_pwdCancel"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:text="取消"
                 android:textColor="#fff"
-                android:textSize="23dp"
+                android:textSize="20dp"
                 android:background="#99BEB7"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/btn_userSetting_pwdSave"
-                android:layout_margin="10dp"
+                android:layout_margin="20dp"
                 android:text="保存"
                 android:textColor="#fff"
-                android:textSize="23dp"
+                android:textSize="20dp"
                 android:background="@color/colorPrimaryDark"
                 android:layout_width="0dp"
                 android:layout_weight="1"

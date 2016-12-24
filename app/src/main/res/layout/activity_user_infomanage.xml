@@ -11,15 +11,16 @@
         android:layout_height="wrap_content">
         <ImageView
             android:onClick="backOnClick"
-            android:layout_margin="@dimen/actionBarImgMargin"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:src="@drawable/users_back"
-            android:layout_width="@dimen/actionBarImgSize"
-            android:layout_height="@dimen/actionBarImgSize" />
+            android:layout_width="@dimen/TitleTextSize"
+            android:layout_height="@dimen/TitleTextSize"
+            android:layout_gravity="center_vertical" />
         <TextView
             android:text="宝宝信息管理"
             android:textColor="@color/userBarBigText"
-            android:textSize="@dimen/actionBarTextSize"
-            android:layout_marginTop="@dimen/actionBarTextMargin"
+            android:textSize="@dimen/TitleTextSize"
+            android:layout_margin="@dimen/TitleTextMargin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>

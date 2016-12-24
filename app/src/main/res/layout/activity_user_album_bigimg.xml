@@ -7,7 +7,7 @@
     android:background="#000">
     <ImageView
         android:id="@+id/iv_user_bigImg"
-        android:src="@drawable/user_default_child"
+        android:src="@drawable/empty_photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
