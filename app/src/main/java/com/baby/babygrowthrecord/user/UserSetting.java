@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -86,10 +87,8 @@ public class UserSetting extends Activity {
                     popupWindow.showAsDropDown(v);
                     break;
                 case R.id.rv_userSetting_name:
-                    i.setClass(UserSetting.this,Growth_SendBabyMessage.class);
-                    startActivity(i);
-//                    i.setClass(UserSetting.this,UserSettingName.class);
-//                    i.putExtra("name",tvUname.getText());
+                    i.setClass(UserSetting.this,UserSettingName.class);
+                    i.putExtra("name",tvUname.getText());
                     startActivity(i);
                     break;
                 case R.id.rv_userSetting_pwd:
@@ -97,8 +96,8 @@ public class UserSetting extends Activity {
                     startActivity(i);
                     break;
                 case R.id.tv_userSetting_pic:
-                    i.setClass(UserSetting.this,UserSettingHeadPic.class);
-                    startActivity(i);
+                    popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,0,0);
+                    popupWindow.showAsDropDown(v);
                     break;
                 case R.id.tv_userSetting_name:
                     i.setClass(UserSetting.this,UserSettingName.class);
@@ -230,8 +229,9 @@ public class UserSetting extends Activity {
             String url=Utils.StrUrl+"user/editHeadPic";
             RequestParams para=new RequestParams();
             try {
-                para.put("user_photo",file);
+                para.put("user_photo",file,"multipart/form-data");
                 para.put("user_id",Utils.userId);
+                para.setContentEncoding("utf-8");
                 client.post(UserSetting.this,url,para,new AsyncHttpResponseHandler(){
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
@@ -281,17 +281,42 @@ public class UserSetting extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode!=RESULT_OK){
+            return;
+        }
         if (requestCode==0){
             //拍照
             sendHeadPic();
         }else if (requestCode==1){
             //相册
-            Uri uri=data.getData();
-            if (uri!=null){
-                String[]filePath={MediaStore.Images.Media.DATA};
-                Cursor cursor=getContentResolver().query(uri,filePath,null,null,null);
+            if (data == null) {
+                return;
+            }
+            Uri uri = data.getData();
+            //此处为了解决android4.4 相册选择时的 选择最近图片 获取不到path问题
+            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT){//4.4及以上
+                String wholeID = DocumentsContract.getDocumentId(uri);
+                String id = wholeID.split(":")[1];
+                String[] column = { MediaStore.Images.Media.DATA };
+                String sel = MediaStore.Images.Media._ID + "=?";
+                Cursor cursor = this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
+                        sel, new String[] { id }, null);
+                int columnIndex = cursor.getColumnIndex(column[0]);
+                if (cursor.moveToFirst()) {
+                    imgFileName = cursor.getString(columnIndex);
+                    Log.e("onActivityResult","imgFileName is"+imgFileName);
+                    sendHeadPic();
+                }else {
+                    Toast.makeText(UserSetting.this,"未从相册获取到图片!",Toast.LENGTH_SHORT).show();
+                }
+                cursor.close();
+            }else{//4.4以下，即4.4以上获取路径的方法
+                String[] projection = { MediaStore.Images.Media.DATA };
+                Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
-                imgFileName=cursor.getString(cursor.getColumnIndex(filePath[0]));
+                imgFileName = cursor.getString(column_index);
+                Log.e("onActivityResult","imgFileName is"+imgFileName);
                 sendHeadPic();
             }
         }
