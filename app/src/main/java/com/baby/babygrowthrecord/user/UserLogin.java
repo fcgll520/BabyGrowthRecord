@@ -61,7 +61,7 @@ public class UserLogin extends Activity {
     }
 
     public boolean sendConfirmInfo(){
-        String url="http://10.7.88.67:8788/user/confirm";
+        String url="http://10.7.88.63:8080/user/confirm";
         sp=getSharedPreferences("uerInfo",MODE_WORLD_READABLE+MODE_WORLD_WRITEABLE);
         String name=null;
         String pwd=null;

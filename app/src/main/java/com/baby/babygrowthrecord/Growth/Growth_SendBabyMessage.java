@@ -338,8 +338,8 @@ public class Growth_SendBabyMessage extends AppCompatActivity {
             Toast.makeText(Growth_SendBabyMessage.this,"获取图片失败！",Toast.LENGTH_SHORT).show();
         }
         if ((new File(imgFileName).exists())){
-                img.setImageBitmap(BitmapFactory.decodeFile(imgFileName));
-            }
+            img.setImageBitmap(BitmapFactory.decodeFile(imgFileName));
+        }
     }
 
     @Override

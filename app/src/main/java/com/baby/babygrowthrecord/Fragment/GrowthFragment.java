@@ -16,8 +16,6 @@ import android.widget.Toast;
 import com.baby.babygrowthrecord.Growth.Growth_Activity_Bron;
 import com.baby.babygrowthrecord.Growth.Growth_Class;
 import com.baby.babygrowthrecord.Growth.Growth_MyAdapter;
-import com.baby.babygrowthrecord.Login.Login_Activity;
-import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -79,7 +77,7 @@ public class GrowthFragment extends Fragment{
                 intent.putExtra("grow_content",growth_classes.get(position-1).getContent());
                 intent.putExtra("grow_pic1",growth_classes.get(position-1).getImg_first());
                 intent.putExtra("grow_pic2",growth_classes.get(position-1).getImg_second());
-                startActivityForResult(intent,1);
+                   startActivityForResult(intent,1);
             }
         });
         //下拉刷新

@@ -39,7 +39,7 @@
         android:drawableTop="@drawable/composer_camera"
         android:gravity="center_horizontal"
         android:paddingBottom="@dimen/more_window_item_margin"
-        android:text="相册"/>
+        android:text="成长记录"/>
 
 
     <ImageView

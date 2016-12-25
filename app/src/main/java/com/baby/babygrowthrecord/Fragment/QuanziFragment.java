@@ -2,7 +2,6 @@ package com.baby.babygrowthrecord.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -21,7 +20,6 @@ import com.baby.babygrowthrecord.Circle.Circle;
 import com.baby.babygrowthrecord.Circle.FridListAdapter;
 import com.baby.babygrowthrecord.PullToRefresh.RefreshableView;
 import com.baby.babygrowthrecord.R;
-import com.baby.babygrowthrecord.util.Util;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.loopj.android.http.AsyncHttpClient;

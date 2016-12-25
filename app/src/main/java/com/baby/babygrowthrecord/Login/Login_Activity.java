@@ -24,7 +24,6 @@ import com.baby.babygrowthrecord.MainActivity.BabyMainActivity;
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.util.Util;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQAuth;
@@ -204,7 +203,6 @@ public class Login_Activity extends Activity {
         Utils.flag=1;
         Intent intent = new Intent(Login_Activity.this, BabyMainActivity.class);
         startActivity(intent);
-
         finish();
     }
 

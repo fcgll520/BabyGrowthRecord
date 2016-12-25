@@ -13,7 +13,10 @@ import android.widget.TextView;
 
 import com.baby.babygrowthrecord.R;
 import com.baby.babygrowthrecord.user.UserAlbum;
+
 import com.baby.babygrowthrecord.user.UserAlbumAdapter;
+
+
 import com.baby.babygrowthrecord.user.UserCollection;
 import com.baby.babygrowthrecord.user.UserInfoManage;
 import com.baby.babygrowthrecord.user.UserSetting;
@@ -168,6 +171,7 @@ public class PeopleFragment extends Fragment{
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 super.onSuccess(statusCode, headers, response);
+
                 try {
                     babyName.setText(response.getString("baby_name"));
                 } catch (JSONException e) {

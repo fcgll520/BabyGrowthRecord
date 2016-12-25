@@ -25,6 +25,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.baby.babygrowthrecord.Fragment.PublishActivity;
+import com.baby.babygrowthrecord.Growth.Growth_SendBabyMessage;
 import com.baby.babygrowthrecord.R;
 
 
@@ -246,7 +247,7 @@ public class MoreWindow extends PopupWindow implements View.OnClickListener {
                 break;
             case R.id.more_window_online:
                 Intent intent1 = new Intent();
-                intent1.setClass(mContext,PublishActivity.class);
+                intent1.setClass(mContext,Growth_SendBabyMessage.class);
                 mContext.startActivity(intent1);
                 break;
             default:

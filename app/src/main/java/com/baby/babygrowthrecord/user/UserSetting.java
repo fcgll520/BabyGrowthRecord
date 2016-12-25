@@ -1,3 +1,6 @@
+
+
+
 package com.baby.babygrowthrecord.user;
 
 import android.app.Activity;
@@ -75,37 +78,37 @@ public class UserSetting extends Activity {
     private Button btnExist;
 
     private PopupWindow popupWindow;
-    private String imgFileName="";
+    private String imgFileName = "";
 
-    private View.OnClickListener myClickListener=new View.OnClickListener() {
+    private View.OnClickListener myClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent i=new Intent();
-            switch (v.getId()){
+            Intent i = new Intent();
+            switch (v.getId()) {
                 case R.id.rv_userSetting_pic:
-                    popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,0,0);
+                    popupWindow.showAtLocation(v, Gravity.NO_GRAVITY, 0, 0);
                     popupWindow.showAsDropDown(v);
                     break;
                 case R.id.rv_userSetting_name:
-                    i.setClass(UserSetting.this,UserSettingName.class);
-                    i.putExtra("name",tvUname.getText());
+                    i.setClass(UserSetting.this, UserSettingName.class);
+                    i.putExtra("name", tvUname.getText());
                     startActivity(i);
                     break;
                 case R.id.rv_userSetting_pwd:
-                    i.setClass(UserSetting.this,UserSettingPwd.class);
+                    i.setClass(UserSetting.this, UserSettingPwd.class);
                     startActivity(i);
                     break;
                 case R.id.tv_userSetting_pic:
-                    popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,0,0);
+                    popupWindow.showAtLocation(v, Gravity.NO_GRAVITY, 0, 0);
                     popupWindow.showAsDropDown(v);
                     break;
                 case R.id.tv_userSetting_name:
-                    i.setClass(UserSetting.this,UserSettingName.class);
-                    i.putExtra("name",tvUname.getText());
+                    i.setClass(UserSetting.this, UserSettingName.class);
+                    i.putExtra("name", tvUname.getText());
                     startActivity(i);
                     break;
                 case R.id.tv_userSetting_pwd:
-                    i.setClass(UserSetting.this,UserSettingPwd.class);
+                    i.setClass(UserSetting.this, UserSettingPwd.class);
                     startActivity(i);
                     break;
                 case R.id.btn_userSetting_exist:
@@ -117,25 +120,25 @@ public class UserSetting extends Activity {
         }
     };
 
-    View.OnClickListener picClickLisener=new View.OnClickListener() {
+    View.OnClickListener picClickLisener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 //拍照
                 case R.id.item_popupwindows_camera:
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     long time = Calendar.getInstance().getTimeInMillis();
-                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){  //sd卡是否可用
-                        imgFileName=Environment.getExternalStorageDirectory().getAbsolutePath() + "/baby_record" + time + ".jpg";
+                    if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {  //sd卡是否可用
+                        imgFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/baby_record" + time + ".jpg";
                         i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(imgFileName)));
                         startActivityForResult(i, 0);
-                    }else {
-                        Toast.makeText(UserSetting.this,"无可用sd卡,更改头像失败！",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(UserSetting.this, "无可用sd卡,更改头像失败！", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 //相册
                 case R.id.item_popupwindows_Photo:
-                    Intent getImage=new Intent(Intent.ACTION_GET_CONTENT);
+                    Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);
                     getImage.addCategory(Intent.CATEGORY_OPENABLE);
                     getImage.setType("image/*");
                     startActivityForResult(getImage, 1);
@@ -153,12 +156,12 @@ public class UserSetting extends Activity {
     //退出登录
     private void existLogin() {
         //
-        Login_Activity login=new Login_Activity();
-        SharedPreferences sharedPreferences=login.initSharedPreferences(UserSetting.this);
-        sharedPreferences.edit().putString("isAutoLogin","false").commit();
+        Login_Activity login = new Login_Activity();
+        SharedPreferences sharedPreferences = login.initSharedPreferences(UserSetting.this);
+        sharedPreferences.edit().putString("isAutoLogin", "false").commit();
         //
-        Utils.userId=-1;
-        Toast.makeText(UserSetting.this,"退出登录成功",Toast.LENGTH_SHORT).show();
+        Utils.userId = -1;
+        Toast.makeText(UserSetting.this, "退出登录成功", Toast.LENGTH_SHORT).show();
         finish();
     }
 
@@ -170,15 +173,15 @@ public class UserSetting extends Activity {
     }
 
     private void init() {
-        rvHeadPic=(RelativeLayout)findViewById(R.id.rv_userSetting_pic);
-        rvName=(RelativeLayout)findViewById(R.id.rv_userSetting_name);
-        rvPwd=(RelativeLayout)findViewById(R.id.rv_userSetting_pwd);
-        tvHeadPic=(TextView)findViewById(R.id.tv_userSetting_pic);
-        ivHeadPic=(CircleImageView)findViewById(R.id.iv_userSet_headPic);
-        tvName=(TextView)findViewById(R.id.tv_userSetting_name);
-        tvUname=(TextView)findViewById(R.id.tv_userSetting_uName);
-        tvPwd=(TextView)findViewById(R.id.tv_userSetting_pwd);
-        btnExist=(Button)findViewById(R.id.btn_userSetting_exist);
+        rvHeadPic = (RelativeLayout) findViewById(R.id.rv_userSetting_pic);
+        rvName = (RelativeLayout) findViewById(R.id.rv_userSetting_name);
+        rvPwd = (RelativeLayout) findViewById(R.id.rv_userSetting_pwd);
+        tvHeadPic = (TextView) findViewById(R.id.tv_userSetting_pic);
+        ivHeadPic = (CircleImageView) findViewById(R.id.iv_userSet_headPic);
+        tvName = (TextView) findViewById(R.id.tv_userSetting_name);
+        tvUname = (TextView) findViewById(R.id.tv_userSetting_uName);
+        tvPwd = (TextView) findViewById(R.id.tv_userSetting_pwd);
+        btnExist = (Button) findViewById(R.id.btn_userSetting_exist);
 
         //设置监听器
         rvHeadPic.setOnClickListener(myClickListener);
@@ -198,9 +201,9 @@ public class UserSetting extends Activity {
 
     private void initPopupWindow() {
         //初始化popupWindow
-        popview = LayoutInflater.from(UserSetting.this).inflate(R.layout.item_user_popupwindow,null);
+        popview = LayoutInflater.from(UserSetting.this).inflate(R.layout.item_user_popupwindow, null);
         //创建popupwindow对象
-        popupWindow=new PopupWindow(popview, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,false);
+        popupWindow = new PopupWindow(popview, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, false);
         //设置参数实现点击外面消失
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         //设置点击窗口外边消失
@@ -208,9 +211,9 @@ public class UserSetting extends Activity {
         //设置此参数获得焦点，否则无法点击
         popupWindow.setFocusable(true);
 
-        TextView tvPhotos=(TextView) popview.findViewById(R.id.item_popupwindows_Photo);
-        TextView tvCamera=(TextView) popview.findViewById(R.id.item_popupwindows_camera);
-        TextView tvCancel=(TextView) popview.findViewById(R.id.item_popupwindows_cancel);
+        TextView tvPhotos = (TextView) popview.findViewById(R.id.item_popupwindows_Photo);
+        TextView tvCamera = (TextView) popview.findViewById(R.id.item_popupwindows_camera);
+        TextView tvCancel = (TextView) popview.findViewById(R.id.item_popupwindows_cancel);
 
         tvCamera.setOnClickListener(picClickLisener);
         tvPhotos.setOnClickListener(picClickLisener);
@@ -218,46 +221,46 @@ public class UserSetting extends Activity {
     }
 
     //更改头像
-    private void sendHeadPic(){
-        if (imgFileName.equals("")){
-            Log.e("sendHeadPic","用户没有选择图片文件");
+    private void sendHeadPic() {
+        if (imgFileName.equals("")) {
+            Log.e("sendHeadPic", "用户没有选择图片文件");
             return;
         }
-        File file=new File(imgFileName);
-        if (file.exists()){
-            AsyncHttpClient client=new AsyncHttpClient();
-            String url=Utils.StrUrl+"user/editHeadPic";
-            RequestParams para=new RequestParams();
+        File file = new File(imgFileName);
+        if (file.exists()) {
+            AsyncHttpClient client = new AsyncHttpClient();
+            String url = Utils.StrUrl + "user/editHeadPic";
+            RequestParams para = new RequestParams();
             try {
-                para.put("user_photo",file,"multipart/form-data");
-                para.put("user_id",Utils.userId);
+                para.put("user_photo", file, "multipart/form-data");
+                para.put("user_id", Utils.userId);
                 para.setContentEncoding("utf-8");
-                client.post(UserSetting.this,url,para,new AsyncHttpResponseHandler(){
+                client.post(UserSetting.this, url, para, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                        Log.e("user_photo'onSuccess","start");
-                        if (i==200){
-                            Log.e("user_photo","success");
+                        Log.e("user_photo'onSuccess", "start");
+                        if (i == 200) {
+                            Log.e("user_photo", "success");
                             Glide.with(UserSetting.this)
-                                    .load(Utils.StrUrl+new String(bytes))
+                                    .load(Utils.StrUrl + new String(bytes))
                                     .into(ivHeadPic);
-                            Toast.makeText(UserSetting.this,"更改头像成功！",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserSetting.this, "更改头像成功！", Toast.LENGTH_SHORT).show();
                         }
-                        Log.e("sendPic-onSuccess",new String(bytes));
+                        Log.e("sendPic-onSuccess", new String(bytes));
                     }
 
                     @Override
                     public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                        Log.e("user_photo'onFailure","start");
-                        Toast.makeText(UserSetting.this,"网络连接错误，更改头像失败，请稍后再试！",Toast.LENGTH_SHORT).show();
-                        Log.e("",throwable.toString());
+                        Log.e("user_photo'onFailure", "start");
+                        Toast.makeText(UserSetting.this, "网络连接错误，更改头像失败，请稍后再试！", Toast.LENGTH_SHORT).show();
+                        Log.e("", throwable.toString());
                     }
                 });
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-        }else {
-            Toast.makeText(UserSetting.this,"图片文件出错，请重新选取！",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(UserSetting.this, "图片文件出错，请重新选取！", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -269,54 +272,54 @@ public class UserSetting extends Activity {
     }
 
     //获取用户信息
-    public void getUserInfo(){
-        GrowthFragment g=new GrowthFragment();
-        g.getUserInfo(ivHeadPic,tvUname);
+    public void getUserInfo() {
+        GrowthFragment g = new GrowthFragment();
+        g.getUserInfo(ivHeadPic, tvUname);
     }
 
-    public void backOnClick(View view){
+    public void backOnClick(View view) {
         finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode!=RESULT_OK){
+        if (resultCode != RESULT_OK) {
             return;
         }
-        if (requestCode==0){
+        if (requestCode == 0) {
             //拍照
             sendHeadPic();
-        }else if (requestCode==1){
+        } else if (requestCode == 1) {
             //相册
             if (data == null) {
                 return;
             }
             Uri uri = data.getData();
             //此处为了解决android4.4 相册选择时的 选择最近图片 获取不到path问题
-            if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT){//4.4及以上
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {//4.4及以上
                 String wholeID = DocumentsContract.getDocumentId(uri);
                 String id = wholeID.split(":")[1];
-                String[] column = { MediaStore.Images.Media.DATA };
+                String[] column = {MediaStore.Images.Media.DATA};
                 String sel = MediaStore.Images.Media._ID + "=?";
                 Cursor cursor = this.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, column,
-                        sel, new String[] { id }, null);
+                        sel, new String[]{id}, null);
                 int columnIndex = cursor.getColumnIndex(column[0]);
                 if (cursor.moveToFirst()) {
                     imgFileName = cursor.getString(columnIndex);
-                    Log.e("onActivityResult","imgFileName is"+imgFileName);
+                    Log.e("onActivityResult", "imgFileName is" + imgFileName);
                     sendHeadPic();
-                }else {
-                    Toast.makeText(UserSetting.this,"未从相册获取到图片!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(UserSetting.this, "未从相册获取到图片!", Toast.LENGTH_SHORT).show();
                 }
                 cursor.close();
-            }else{//4.4以下，即4.4以上获取路径的方法
-                String[] projection = { MediaStore.Images.Media.DATA };
+            } else {//4.4以下，即4.4以上获取路径的方法
+                String[] projection = {MediaStore.Images.Media.DATA};
                 Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
                 int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
                 imgFileName = cursor.getString(column_index);
-                Log.e("onActivityResult","imgFileName is"+imgFileName);
+                Log.e("onActivityResult", "imgFileName is" + imgFileName);
                 sendHeadPic();
             }
         }
